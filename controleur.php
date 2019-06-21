@@ -13,20 +13,26 @@ if ($action = valider("action"))
 
     switch($action)
     {
-        case 'accueil' :
+        case "accueil" :
             $qs = "?view=accueil";
         break;
         case "join":
             $qs = "?view=join";
         break;
-        case 'lobby' :
+        case "lobby" :
             $qs = "?view=lobby";
             break;
         case "step":
             $qs = "?view=step";
         break;
-        case 'step_final' :
+        case "step_final" :
             $qs = "?view=step_final";
+        break;
+        case "header_brainsto":
+            $qs = "?view=header_brainsto";
+            break;
+        case "chat" :
+            $qs = "?view=chat";
         break;
     }
 
