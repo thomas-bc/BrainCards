@@ -1,6 +1,7 @@
 <?php
 
-include_once("libs/maLibSQL.pdo.php");
+include_once("maLibSQL.pdo.php");
+include_once("config.php");
 
 /**
  * Vérifie l'identité d'un utilisateur dont les identifiants sont passés en paramètres.
@@ -9,7 +10,8 @@ include_once("libs/maLibSQL.pdo.php");
  * @param $pass
  */
 function verifUserBDD($login, $pass){
-
+    $SQL = "SELECT USER_id FROM USER WHERE USER_USERNAME = '$login' && USER_PASSWORD = '$pass' ";
+    return SQLGetChamp($SQL);
 }
 
 /**
@@ -19,7 +21,8 @@ function verifUserBDD($login, $pass){
  * @param $pass
  */
 function inscrireUser($login, $pass){
-
+    $SQL ="INSERT INTO USER(USER_USERNAME, USER_PASSWORD) VALUES('$login', '$pass')";
+    SQLInsert($SQL);
 }
 
 /**
