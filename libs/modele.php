@@ -36,6 +36,8 @@ function inscrireUser($login, $pass){
 function createBrainstorm($idUserMaster, $titre, $description){
     // le code informatique qui crée le code du brainsto (genre #E45R1) qui est envoyé dans la requete SQL
     // A REVOIR COMMENT ON CREE LE CODE
+    $SQL ="INSERT INTO BRAINSTORM(BR_CODE, BR_MASTER_ID, BR_titre, br_description) VALUES((SELECT FLOOR(rand() * 90000 + 10000)), '$idUserMaster', '$titre', '$description')";
+    SQLInsert($SQL);
 }
 
 /**
@@ -44,25 +46,28 @@ function createBrainstorm($idUserMaster, $titre, $description){
  * @param $code
  */
 function getBrainstormFromCode($code){
-
+    $SQL = "SELECT * from BRAINSTORM WHERE BR_CODE='$code' ";
+    return parcoursRs(SQLSelect($SQL));
 }
 
 /**
- * Met à jour l'attribut ready en le mettant $ready à de l'utilisateur d'id $userId.
+ * Met à jour l'attribut ready en le mettant $ready (1 = ready, 0=not ready) à de l'utilisateur d'id $userId.
  * @param $userId
  * @param $ready
  */
-function setUserReady($userId, $ready){
-
+function setUserReady($userId, $ready){ //pb on utilise 0 et 1 au lieu de true false car BOOLEAN devient tinyInt sur phpmyadmin... du coup on peut mettre 12....
+    $SQL = "UPDATE user SET user_ready = '$ready' WHERE user_id='$userId'";
+    SQLUpdate($SQL);
 }
 
 /**
- * Met à jour l'id du brainsto à $idBrainsto de l'utilisateur $idUser.
+ * Met à jour l'id du brainsto courant à $idBrainsto de l'utilisateur $idUser.
  * @param $idBrainsto
  * @param $idUser
  */
-function setUserBrainsto($idBrainsto, $idUser){
-
+function setUserBrainsto($idBrainsto, $userId){
+    $SQL = "UPDATE user SET user_brainsto_courant_id = '$idBrainsto' WHERE user_id='$userId'";
+    SQLUpdate($SQL);
 }
 
 /**

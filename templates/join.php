@@ -9,8 +9,8 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 }
 
 //test des fonctions du modele.php
-$res=inscrireUser('ajout', 'deux');
-echo "$res";
+setUserBrainsto(1020,1);
+//echo print_r($res);
 //
 
 ?>
