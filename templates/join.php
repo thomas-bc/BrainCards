@@ -9,8 +9,10 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 }
 
 //test des fonctions du modele.php
-setUserBrainsto(1020,1);
-//echo print_r($res);
+$res = getMessages(1);
+//echo $res;
+
+echo print_r($res);
 //
 
 ?>
