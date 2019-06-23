@@ -8,12 +8,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
     die("");
 }
 
-//test des fonctions du modele.php
-$res = getMessages(1);
-//echo $res;
-
-echo print_r($res);
-//
 
 ?>
 
