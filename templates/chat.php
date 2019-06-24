@@ -27,7 +27,11 @@ foreach($messages as $dataMessage) {
     echo $dataMessage["msg_contenu"];
     echo "</div>\n";
 }
-
+echo '<form action="controleur.php" method="GET" >';
+echo '<input type="text" name="nouveauMessage" >';
+echo '<input type="hidden" name="idBrainsto" value="$idBrainsto" > ';
+echo '<input type="submit" name="action" value="Poster" >';
+echo '</form>';
 ?>
 
 

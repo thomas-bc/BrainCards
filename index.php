@@ -16,6 +16,8 @@ if (!$view) $view = "accueil";
 
 switch($view)
 {
+    case "join":
+        include("templates/chat.php");
 
 //		case "accueil" :
 //			include("templates/accueil.php");
