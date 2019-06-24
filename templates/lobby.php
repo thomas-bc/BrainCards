@@ -10,3 +10,14 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 
 <h1>Lobby</h1>
+
+<p id="codeBrainsto"></p>
+
+<h1 id="titreBrainsto"></h1>
+
+<p id="nomMaster"></p>
+
+
+
+
+
