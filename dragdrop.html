@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">
+  <meta name="dcterms.created" content="Fri, 27 Jun 2014 21:02:23 GMT">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <title></title>
+
+  <!--[if IE]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <style>
+    .draggable_idee
+    {
+      position:  absolute;
+      height: 50px;
+      left : 40px;
+      top : 40px;
+      width: 80px;
+      display:table;
+      vertical-align: middle;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      border-radius: 4px;
+      color:white;
+      background-color: blue;
+    }
+    .draggable_img
+    {
+      left : 40px;
+      top : 40px;
+      position:  absolute;
+      height: 50px;
+      width: 80px;
+      display:table;
+      vertical-align: middle;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      color:white;
+      background-color: yellow;
+    }
+    .draggable_url
+    {
+      left : 40px;
+      top : 40px;
+      position:  absolute;
+      height: 50px;
+      width: 80px;
+      display:table;
+      vertical-align: middle;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      color:white;
+      background-color: green;
+    }
+    #container{
+      width: 600px;
+      height: 400px;
+      border-radius: 30px;
+      display:inline-block;
+      background-color: white;
+    }
+    body{
+      display: block;
+      margin: 0px;
+      background-color:orangered;
+    }
+    #container_elements{
+      height: 300px;
+      width: 120px;
+      display: table;
+      margin-left: 30px;
+      border-radius: 10px;
+      background-color: white;
+    }
+    .wrapper{
+      align-items: center;
+      display: flex;
+      height: 100%;
+      width: 100%;
+      margin: 30px;
+    }
+    .menu_item{
+      height: 50px;
+      width: 80px;
+      display:table;
+      vertical-align: middle;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      color:white;
+    }
+    #Idée{
+      background-color: blue;
+    }
+    #Image{
+      background-color: yellow;
+    }
+    #URL{
+      background-color: green;
+    }
+    .titre{
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      color: orangered;
+    }
+  </style>
+  <script>
+    var container;
+    var nb_elements = 0;
+    function init(){
+      container = document.getElementById("container");
+    }
+    function drag_start(event) {
+      var style = window.getComputedStyle(event.target, null);
+      var str = (parseInt(style.getPropertyValue("left")) - event.clientX) + ',' + (parseInt(style.getPropertyValue("top")) - event.clientY) + ',' + event.target.id;
+      event.dataTransfer.setData("Text", str);
+    }
+
+    function drop(event) {
+      var offset = event.dataTransfer.getData("Text").split(',');
+      var dm = document.getElementById(offset[2]);
+      dm.style.left = (event.clientX + parseInt(offset[0], 10)) + 'px';
+      dm.style.top = (event.clientY + parseInt(offset[1], 10)) + 'px';
+      if(parseInt(dm.style.left, 10)>540)dm.style.left="540px";
+      if(parseInt(dm.style.top, 10)>370)dm.style.top="370px";
+      if(parseInt(dm.style.left, 10)<40)dm.style.left="40px";
+      if(parseInt(dm.style.top, 10)<40)dm.style.top="40px";
+      event.preventDefault();
+      return false;
+    }
+
+    function drag_over(event) {
+      event.preventDefault();
+      return false;
+    }
+    function create(event){
+      if(event.target.id=="Idée" || event.target.innerText=="Idée"){
+      container.innerHTML+= "<div class=\"draggable_idee\" id=\""+nb_elements+"\" draggable=\"true\" ondragstart=\"drag_start(event)\"><p>"+nb_elements+"</p></div>";
+      nb_elements++;}
+      else if(event.target.id=="Image" || event.target.innerText=="Image") {
+        container.innerHTML += "<div class=\"draggable_img\" id=\"" + nb_elements + "\" draggable=\"true\" ondragstart=\"drag_start(event)\"><p>"+nb_elements+"</p></div>";
+        nb_elements++;
+      }
+      else if(event.target.id=="URL" || event.target.innerText=="URL") {
+        container.innerHTML += "<div class=\"draggable_url\" id=\"" + nb_elements + "\" draggable=\"true\" ondragstart=\"drag_start(event)\"><p>"+nb_elements+"</p></div>";
+        nb_elements++;
+      }
+    }
+  </script>
+</head>
+<body >
+<div class="wrapper">
+  <div id="container" ondragover="drag_over(event)" ondrop="drop(event)">
+
+
+
+
+  </div>
+  <div id="container_elements">
+    <div class="titre"><h1>Outils</h1></div>
+    <div class="menu_item" id="Idée" onclick="create(event)"><p>Idée</p></div>
+    <div class="menu_item" id="Image" onclick="create(event)"><p>Image</p></div>
+    <div class="menu_item" id="URL" onclick="create(event)"><p>URL</p></div>
+  </div>
+</div>
+</body>
+<script type="application/javascript">
+  init();
+</script>
+</html>
