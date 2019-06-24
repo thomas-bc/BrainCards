@@ -61,6 +61,14 @@ if ($action = valider("action"))
 
         case "Lancer le Brainsto":
             break;
+
+        case "Poster":
+            if($idBrainsto=valider($idBrainsto
+                && $idUser = valider("idUser","SESSION")
+                    && $message = valider("message"))){
+                envoyerMessage($idBrainsto, $idUser, $message);
+            }
+            break;
     }
 
 }
