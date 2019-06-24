@@ -10,9 +10,8 @@ include_once("libs/modele.php");
 include_once("libs/maLibUtils.php");
 
 // On récupère l'id de la conversation à afficher, dans idConv
-//$idBrainsto = getValue("BR_id");
+$idBrainsto = getValue("BR_id");
 
-$idBrainsto=1;
 if (!$idBrainsto)
 {
     die("idBrainsto manquant");
@@ -28,7 +27,7 @@ foreach($messages as $dataMessage) {
     echo "</div>\n";
 }
 echo '<form action="controleur.php" method="GET" >';
-echo '<input type="text" name="nouveauMessage" >';
+echo '<input type="text" name="message" >';
 echo '<input type="hidden" name="idBrainsto" value="$idBrainsto" > ';
 echo '<input type="submit" name="action" value="Poster" >';
 echo '</form>';
