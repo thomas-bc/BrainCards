@@ -24,3 +24,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         <input type="submit" name="action" value="Connexion" />
     </form>
 </div>
+
+
+<p>Pas encore inscrit ?</p>
+<a href="index.php?view=join">Cliquez ici</a>
