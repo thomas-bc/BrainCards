@@ -21,16 +21,25 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 <div id="formJoin">
     <form action="controleur.php" method="GET">
-    Code Brainsto : <input type="text" name="code" /><br />
+    Code Brainsto : <input type="text" name="codeBrainsto" /><br />
     <input type="submit" name="action" value="Rejoindre" />
     </form>
 </div>
 
 <p id="mauvaisCode"> Veuillez rentrer un code Brainsto valide</p>
 
-<div id="btnNouveauBrainsto">
+
+<div id="divNouveauBrainsto">
+    <button id="btnNouveauBrainsto">+</button>
+</div>
+
+<div id="formAjoutBrainsto">
     <form action="controleur.php" method="GET">
-        <input type="submit" name="action" value="+" />
+        Titre du Brainsto : <input type="text" name="titreBrainsto" /><br />
+        Nombre de participants : <input type="text" name="nombreParticipantsBrainsto" /><br />
+        Description : <input type="text" name="descriptionBrainsto" /><br />
+        <input type="submit" name="action" value="Créer le Brainsto" />
     </form>
+
 </div>
 
