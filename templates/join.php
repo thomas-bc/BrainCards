@@ -36,10 +36,9 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 <div id="formAjoutBrainsto">
     <form action="controleur.php" method="GET">
         Titre du Brainsto : <input type="text" name="titreBrainsto" /><br />
-        Nombre de participants : <input type="text" name="nombreParticipantsBrainsto" /><br />
+        Nombre de participants : <input type="number" name="nombreParticipantsBrainsto" /><br />
         Description : <input type="text" name="descriptionBrainsto" /><br />
         <input type="submit" name="action" value="Créer le Brainsto" />
     </form>
-
 </div>
 
