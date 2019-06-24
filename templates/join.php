@@ -25,3 +25,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         <input type="submit" name="action" value="Créer un compte" />
     </form>
 </div>
+
+<p id="mauvaiseCorrespondance">Les deux mots de passe ne correspondent pas</p>
+<p id="pseudoDejaExistant">Le pseudo est déjà pris</p>
+<p id="reussi">Votre comtpe a bien été crée ! Vous pouvez désormais vous connecter.</p>
