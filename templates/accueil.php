@@ -26,5 +26,19 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 </div>
 
 
+<div id="formLoginJoin">
+    <form action="controleur.php" method="GET">
+        Login : <input type="text" name="login" /><br />
+        Passe : <input type="password" name="passe" /><br />
+        Passe à nouveau : <input type="password" name="passe2" /><br />
+        <input type="submit" name="action" value="Créer un compte" />
+    </form>
+</div>
+
+<p id="mauvaiseCorrespondance">Les deux mots de passe ne correspondent pas</p>
+<p id="pseudoDejaExistant">Le pseudo est déjà pris</p>
+<p id="reussi">Votre comtpe a bien été crée ! Vous pouvez désormais vous connecter.</p>
+
+
 <p>Pas encore inscrit ?</p>
 <a href="index.php?view=join">Cliquez ici</a>
