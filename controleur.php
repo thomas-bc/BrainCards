@@ -15,25 +15,60 @@ if ($action = valider("action"))
     {
         case "accueil" :
             $qs = "?view=accueil";
-        break;
+            break;
+
         case "join":
             $qs = "?view=join";
-        break;
+            break;
+
         case "lobby" :
             $qs = "?view=lobby";
             break;
+
         case "step":
             $qs = "?view=step";
-        break;
+            break;
+
         case "step_final" :
             $qs = "?view=step_final";
-        break;
+            break;
+
         case "header_brainsto":
             $qs = "?view=header_brainsto";
             break;
+
         case "chat" :
             $qs = "?view=chat";
-        break;
+            break;
+
+        case "Connexion":
+            break;
+
+        case "Créer un compte":
+            break;
+
+        case "Mes Brainsto's":
+            break;
+
+        case "Rejoindre":
+            break;
+
+        case "Créer le Brainsto":
+            break;
+
+        case "I'm Ready !":
+            break;
+
+        case "Lancer le Brainsto":
+            break;
+
+        case "Poster":
+            if($idBrainsto=valider($idBrainsto
+                && $idUser = valider("idUser","SESSION")
+                    && $message = valider("message"))){
+                envoyerMessage($idBrainsto, $idUser, $message);
+            }
+            break;
     }
 
 }

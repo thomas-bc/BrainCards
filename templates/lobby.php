@@ -10,3 +10,20 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 
 <h1>Lobby</h1>
+
+<p id="nomMaster"></p>
+
+
+<ul id="participants">
+</ul>
+
+
+<div id="formBtn">
+    <form action="controleur.php" method="GET">
+        <input type="submit" name="action" value="I'm Ready !" />
+        <input type="submit" name="action" value="Lancer le Brainsto" />
+    </form>
+</div>
+
+
+
