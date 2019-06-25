@@ -11,6 +11,14 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 ?>
 
+<script>
+
+
+
+
+
+    
+</script>
 
 <!-- PARTIE HEADER -->
 
