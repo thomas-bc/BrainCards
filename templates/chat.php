@@ -52,7 +52,7 @@ foreach($messages as $dataMessage) {
         color:#ED7D31;
     }
 
-    form{
+    #chat form{
         position:absolute;
         bottom:10px;
         right:40px;
