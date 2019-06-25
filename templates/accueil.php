@@ -20,53 +20,12 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         margin:0;
     }
 
+    /************************************************************/
+
+
     h1{
         text-align: center;
         font-size: 5em;
-    }
-
-    #descriptionSite{
-        display:block;
-    }
-
-    img{
-        width:100%;
-        padding-right:5%;
-        padding-left:5%;
-    }
-
-
-    #accueilGauche{
-
-        float:left;
-        width:55%;
-        height: 360px;
-        min-width:550px;
-        padding-right:4%;
-        border-right:1px solid white;
-        margin-bottom:50px;
-
-    }
-
-
-    #formLogin{
-        float:left;
-        width:40%;
-        min-width:450px;
-        /*background-color: yellow;*/
-        text-align: center;
-        margin-left:4%;
-    }
-
-    #formLoginCreate{
-
-        margin-auto;
-        /*background-color: yellow;*/
-        text-align: center;
-        padding-bottom:150px;
-        padding-top:50px;
-        background-color: #444;
-
     }
 
     h3{
@@ -90,6 +49,9 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         cursor:pointer;
     }
 
+
+    /************************************************************/
+
     #hautPage{
         border-bottom:1px solid white;
         padding-left:4%;
@@ -105,6 +67,43 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         display: table;
     }
 
+    #descriptionSite{
+
+        float:left;
+        width:55%;
+        height: 360px;
+        min-width:550px;
+        padding-right:4%;
+        border-right:1px solid white;
+        margin-bottom:50px;
+    }
+
+    img{
+        width:100%;
+        padding-right:5%;
+        padding-left:5%;
+    }
+
+
+    #formLogin{
+        float:left;
+        width:40%;
+        min-width:450px;
+        /*background-color: yellow;*/
+        text-align: center;
+        margin-left:4%;
+    }
+
+    #formLoginCreate{
+
+        margin-auto;
+        /*background-color: yellow;*/
+        text-align: center;
+        padding-bottom:150px;
+        padding-top:100px;
+        background-color: #444;
+
+    }
 
 </style>
 
@@ -116,9 +115,9 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 <div id="hautPage">
 
 
-    <div id="accueilGauche" class="column">
+    <div id="descriptionSite" class="column">
 
-        <p id="descriptionSite">BrainCards est un site de Brainstorming à Distance. Il permet à l’organisateur du Brainstorming (le
+        <p>BrainCards est un site de Brainstorming à Distance. Il permet à l’organisateur du Brainstorming (le
             « Master » ) de faire respecter les différents temps du Brainstorming. Il permet également d’afficher les
             traditionnels « Post-it » sous une forme différente, plus complète et plus à même d’alimenter
             l’imagination des différents participant.</p>
