@@ -67,6 +67,7 @@
       height: 400px;
       border-radius: 30px;
       display:inline-block;
+      background-color: white;
 
     }
     body{
@@ -117,10 +118,8 @@
       color: orangered;
     }
     #canvas{
-      background-color: white;
       border-radius: inherit;
-      height: 400px;
-      width: 600px;
+      background-color: #b3d4fc;
     }
     #suppress{
       display:none;
@@ -147,21 +146,42 @@
     var ctx;
     var selected = -1;
     var state_suppress=false;
+    var link = -1;
+    var tableLink=[];
+    var state_link = false;
+  function init(){
+    container = document.getElementById("container");
+    canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+  }
+  function maj(){
+
+    console.log(tableLink);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    tableLink.forEach(function(item){
+        ctx.beginPath();
+        ctx.moveTo(parseInt(document.getElementById(item[0]).style.left,10),
+                   parseInt(document.getElementById(item[0]).style.top,10));
+        ctx.lineTo(parseInt(document.getElementById(item[1]).style.left,10),
+                   parseInt(document.getElementById(item[1]).style.top,10));
+        ctx.stroke();
+    });
+  }
     function click_canvas(event) {
       if(event.target.id=="canvas"){
-        if(selected!=-1){document.getElementById(selected).children[1].style.display="none";
-        document.getElementById(selected).children[2].style.display="none";}
+        if(selected!=-1){
+          document.getElementById(selected).children[1].style.display="none";
+          document.getElementById(selected).children[2].style.display="none";
+          document.getElementById(selected).children[3].style.display="none";
+        }
         selected = -1;
+        console.log("click");
+        if(link!=-1){link=-1;container.style.cursor="auto";}
       }
+
     }
-    function init(){
-      container = document.getElementById("container");
-      canvas = document.getElementById("canvas");
-      ctx = canvas.getContext("2d");
-      //ctx.moveTo(10, 10);
-      //ctx.lineTo(200, 200);
-      //ctx.stroke();
-    }
+
     function drag_start(event) {
       var style = window.getComputedStyle(event.target, null);
       var str = (parseInt(style.getPropertyValue("left")) - event.clientX) + ',' + (parseInt(style.getPropertyValue("top")) - event.clientY) + ',' + event.target.id;
@@ -179,12 +199,14 @@
       if(parseInt(dm.style.left, 10)<40)dm.style.left="40px";
       if(parseInt(dm.style.top, 10)<40)dm.style.top="40px";
       event.preventDefault();
+      maj();
       return false;
     }
     function select(){
-      console.log(selected);
+      if(link==-1){
       if(selected!=-1){document.getElementById(""+selected).children[1].style.display="none";
-        document.getElementById(""+selected).children[2].style.display="none";}
+        document.getElementById(""+selected).children[2].style.display="none";
+        document.getElementById(""+selected).children[3].style.display="none";}
 
       selected = this.id;
       if(state_suppress){
@@ -193,14 +215,32 @@
       }
       this.children[1].style.display="inline-block";
       this.children[2].style.display="inline-block";
+      this.children[3].style.display="inline-block";
+    }
+      else{
+        if(!state_link){
+        container.style.cursor="auto";
+        tableLink.push([link,this.id]);
+        link = -1;
+        maj();
+        }
+        else{
+          state_link = false;
+
+        }
+      }
     }
     function drag_over(event) {
       event.preventDefault();
       return false;
     }
+    function del_links(id){
+      
+    }
     function del(){
       var parent = this.parentElement;
       selected = -1;
+      del_links(this.parentElement.id);
       state_suppress=true;
       parent.parentElement.removeChild(parent);
     }
@@ -219,8 +259,18 @@
         this.parentNode.children[0].children[0].innerHTML="link";
       }
     }
+    function setLink(){
+      container.style.cursor = "pointer";
+      link=this.parentElement.id;
+      console.log(link);
+      state_link = true;
+    }
     function create(event){
       g = document.createElement('div');
+      g.style.top="40px";
+      g.style.left="40px";
+      g.style.width="80px";
+      g.style.height="50px";
       if(event.target.id=="Idée" || event.target.innerText=="Idée"){
         g.className="draggable_idee";
         g.innerHTML="<p></p>";
@@ -237,6 +287,7 @@
       g.draggable=true;
       g.ondragstart=drag_start;
       g.onclick=select;
+
       b = document.createElement('button');
       b.style.position="absolute";
       b.style.right="-10px";
@@ -245,6 +296,7 @@
       b.onclick=del;
       b.innerHTML="X";
       b.style.borderRadius="50%";
+
       be = document.createElement('button');
       be.style.position="absolute";
       be.style.left="-10px";
@@ -253,6 +305,17 @@
       be.onclick=edit;
       be.innerHTML="<i class=\"fa fa-pencil\"></i>";
       be.style.borderRadius="50%";
+
+      bl = document.createElement('button');
+      bl.style.position="absolute";
+      bl.style.left="-10px";
+      bl.style.bottom = "-10px";
+      bl.style.display = "none";
+      bl.onclick=setLink;
+      bl.innerHTML="--";
+      bl.style.borderRadius="50%";
+
+      g.appendChild(bl);
       g.appendChild(be);
       g.appendChild(b);
       container.appendChild(g);
@@ -264,7 +327,7 @@
 <body >
 <div class="wrapper">
   <div id="container" ondragover="drag_over(event)" ondrop="drop(event)" onclick="click_canvas(event)">
-      <canvas id="canvas"></canvas>
+      <canvas id="canvas" width="600" height="400"></canvas>
       <button id="suppress">btn</button>
   </div>
   <div id="container_elements">
