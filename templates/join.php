@@ -11,32 +11,17 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 ?>
 
+<link rel="stylesheet" href="cssCommun.css">
+
 <style>
 
 
-
     body{
-        background-color:#ED7D31;
-        color:#ffffff;
-        margin:0;
         text-align: center;
-
     }
-
-    /************************************************************/
-
 
     h1{
-        text-align: center;
-        font-size: 5em;
-        margin-bottom:25px;
-    }
-
-
-
-    h2{
-        font-size: 2.5em;
-        margin-top:0;
+        margin-bottom:30px;
     }
 
     #bienvenue{
@@ -111,20 +96,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         border:none;
     }
 
-    .button {
-        color: #ED7D31;
-        padding:5px 10px;
-        background-color: white;
-        border:none;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-
-    .button:hover{
-        cursor:pointer;
-        background-color:#e5e5e5;
-    }
-
     #btnNouveauBrainsto{
         background-color: white;
         color: #ED7D31;
@@ -148,15 +119,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         display:block;
     }
 
-    .textInput{
-        border:none;
-        border-bottom:1px solid white;
-        outline:none ! important;
-        background-color: transparent;
-        color:white;
-        resize:none;
-        padding:5px;
-    }
 
     #formAjoutBrainsto textarea{
         height:50px;

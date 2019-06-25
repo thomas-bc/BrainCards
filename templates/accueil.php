@@ -7,6 +7,8 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 }
 
 ?>
+<link rel="stylesheet" href="cssCommun.css">
+
 
 <style>
 
@@ -14,28 +16,12 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         box-sizing: border-box;
     }
 
-    body{
-        background-color:#ED7D31;
-        color:#ffffff;
-        margin:0;
-    }
-
     /************************************************************/
-
-
-    h1{
-        text-align: center;
-        font-size: 5em;
-    }
 
     h3{
         display: inline-block;
     }
 
-    h2{
-        font-size: 2.5em;
-        margin-top:0;
-    }
 
     p{
         display:inline-block;
@@ -49,30 +35,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         cursor:pointer;
     }
 
-    .textInput{
-        border:none;
-        border-bottom:1px solid white;
-        outline:none ! important;
-        background-color: transparent;
-        color:white;
-        resize:none;
-        padding-right:5px;
-        padding-left:5px;
-    }
-
-    .button {
-        color: #ED7D31;
-        padding:5px 10px;
-        background-color: white;
-        border:none;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-
-    .button:hover{
-        cursor:pointer;
-        background-color:#e5e5e5;
-    }
 
     /************************************************************/
 
