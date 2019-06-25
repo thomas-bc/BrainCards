@@ -7,6 +7,8 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 }
 
 ?>
+<link rel="stylesheet" href="cssCommun.css">
+
 
 <style>
 
@@ -14,28 +16,12 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         box-sizing: border-box;
     }
 
-    body{
-        background-color:#ED7D31;
-        color:#ffffff;
-        margin:0;
-    }
-
     /************************************************************/
-
-
-    h1{
-        text-align: center;
-        font-size: 5em;
-    }
 
     h3{
         display: inline-block;
     }
 
-    h2{
-        font-size: 2.5em;
-        margin-top:0;
-    }
 
     p{
         display:inline-block;
@@ -93,12 +79,9 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         margin-left:4%;
     }
 
-    #errone{
-        margin-top:30px;
-        color: #444444;
-        display:block;
+    #formLogin .button{
+        margin-top:20px;
     }
-
 
     #formLoginCreate{
 
@@ -111,16 +94,13 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
     }
 
+    #formLoginCreate .button{
+        margin-top:20px;
+        color:#444444;
+    }
+
 </style>
 
-
-
-<script>
-
-    $("#liencreerUser")
-        .onclick()
-
-</script>
 
 
 
@@ -152,16 +132,14 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
             <form action="controleur.php" method="GET">
 
                 <h3>Pseudo :</h3>
-                <input type="text" name="login" /><br />
+                <input class="textInput" type="text" name="login" /><br />
 
                 <h3>Password :</h3>
-                <input type="password" name="passe" /><br />
+                <input class="textInput" type="password" name="passe" /><br />
 
-                <input type="submit" name="action" value="connexion" />
+                <input class="button" type="submit" name="action" value="connexion" />
             </form>
         </div>
-
-        <p id="errone">Pseudo ou Mot de passe erroné</p>
 
         <p>Pas encore inscrit ? </p>
 
@@ -185,15 +163,15 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         <form action="controleur.php" method="GET">
 
             <h3>Pseudo :</h3>
-            <input type="text" name="login" /><br />
+            <input class="textInput" type="text" name="login" /><br />
 
             <h3>Password :</h3>
-            <input type="password" name="passe" /><br />
+            <input class="textInput"  type="password" name="passe" /><br />
 
             <h3>Confirmation du password :</h3>
-            <input type="password" name="passe2" /><br />
+            <input class="textInput"  type="password" name="passe2" /><br />
 
-            <input type="submit" name="action" value="creationCompte" />
+            <input class="button" type="submit" name="action" value="creationCompte" />
         </form>
     </div>
 
