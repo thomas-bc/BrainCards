@@ -7,7 +7,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 }
 
 ?>
-<link rel="stylesheet" href="cssCommun.css">
+<link rel="stylesheet" href="css/cssCommun.css">
 
 
 <style>
@@ -83,14 +83,20 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         margin-top:20px;
     }
 
+    #errone{
+        color:#444444;
+        font-weight: bold;
+        display:none;
+    }
+
     #formLoginCreate{
 
         margin-auto;
         text-align: center;
         padding-bottom:150px;
-        padding-top:100px;
+        padding-top:120px;
         background-color: #444;
-        /*display:none;*/
+        display:none;
 
     }
 
@@ -99,12 +105,37 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         color:#444444;
     }
 
+    #pseudoDejaExistant{
+        display:none
+    }
+
+    #mauvaiseCorrespondance{
+        display:none;
+    }
+
+    #reussi{
+        display:none;
+    }
+
 </style>
 
+<script src="js/jquery-3.4.1.js"></script>
+
+<script>
+
+    function showLoginForm() {
+        $("#formLoginCreate").css("display","block");
+        $('html, body').animate({
+            scrollTop: $("#formLoginCreate").offset().top
+        }, 1500);
+
+    }
 
 
+</script>
 
-<h1>BrainCards</h1>
+
+<h1 id="titre">BrainCards</h1>
 
 
 <div id="hautPage">
@@ -145,7 +176,11 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
         <!-- Cliquez ici n'est en fait pas un lien, on va juste afficher ou non le form
         de création d'un utilisateur. Le lien n'est d'ailleurs pas join du coup-->
-        <p id="lienCreerUser">Cliquez ici</p>
+        <p id="lienCreerUser" onclick="showLoginForm();">Cliquez ici</p>
+
+        <br>
+
+        <p id="errone">Pseudo ou mot de passe non valide</p>
 
     </div>
 

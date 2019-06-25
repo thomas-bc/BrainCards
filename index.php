@@ -16,9 +16,7 @@ if (!$view) $view = "accueil";
 
 switch($view)
 {
-    case "join":
-        include("templates/join.php");
-        break;
+
 //		case "accueil" :
 //			include("templates/accueil.php");
 //		break;

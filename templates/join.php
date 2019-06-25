@@ -11,7 +11,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 ?>
 
-<link rel="stylesheet" href="cssCommun.css">
+<link rel="stylesheet" href="css/cssCommun.css">
 
 <style>
 
@@ -59,7 +59,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         min-width:500px;
         max-height:325px;
         overflow:auto;
-        display:block;
+        display:none;
 
         border-radius: 10px;
     }
