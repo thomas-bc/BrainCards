@@ -153,13 +153,28 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
         $("#menuMesBrainstos").click(function(){
 
-            $("#mesBrainstos").show("slow");
+            if ($("#mesBrainstos").css("display")!=="block"){
+                $("#mesBrainstos").slideDown(500);
+
+            }
+            else{
+                $("#mesBrainstos").slideUp(500);
+
+            }
+
         })
 
 
         $("#btnNouveauBrainsto").click(function(){
 
-            $("#formAjoutBrainsto").show("slow");
+            if ($("#formAjoutBrainsto").css("display")!=="block"){
+                $("#formAjoutBrainsto").fadeIn(500);
+
+            }
+            else{
+                $("#formAjoutBrainsto").fadeOut(500);
+
+            }
         })
 
 
@@ -233,9 +248,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
         <h3>Description :</h3>
 
-        <textarea class="textInput" form="formAjoutBrainsto" name="descriptionBrainsto">
-
-        </textarea>
+        <textarea class="textInput" form="formAjoutBrainsto" name="descriptionBrainsto"></textarea>
 
         <br>
 
