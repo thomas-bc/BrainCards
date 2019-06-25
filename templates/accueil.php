@@ -49,6 +49,30 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         cursor:pointer;
     }
 
+    .textInput{
+        border:none;
+        border-bottom:1px solid white;
+        outline:none ! important;
+        background-color: transparent;
+        color:white;
+        resize:none;
+        padding-right:5px;
+        padding-left:5px;
+    }
+
+    .button {
+        color: #ED7D31;
+        padding:5px 10px;
+        background-color: white;
+        border:none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .button:hover{
+        cursor:pointer;
+        background-color:#e5e5e5;
+    }
 
     /************************************************************/
 
@@ -93,6 +117,10 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         margin-left:4%;
     }
 
+    #formLogin .button{
+        margin-top:20px;
+    }
+
     #formLoginCreate{
 
         margin-auto;
@@ -104,16 +132,13 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
     }
 
+    #formLoginCreate .button{
+        margin-top:20px;
+        color:#444444;
+    }
+
 </style>
 
-
-
-<script>
-
-    $("#liencreerUser")
-        .onclick()
-
-</script>
 
 
 
@@ -145,12 +170,12 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
             <form action="controleur.php" method="GET">
 
                 <h3>Pseudo :</h3>
-                <input type="text" name="login" /><br />
+                <input class="textInput" type="text" name="login" /><br />
 
                 <h3>Password :</h3>
-                <input type="password" name="passe" /><br />
+                <input class="textInput" type="password" name="passe" /><br />
 
-                <input type="submit" name="action" value="connexion" />
+                <input class="button" type="submit" name="action" value="connexion" />
             </form>
         </div>
 
@@ -176,15 +201,15 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         <form action="controleur.php" method="GET">
 
             <h3>Pseudo :</h3>
-            <input type="text" name="login" /><br />
+            <input class="textInput" type="text" name="login" /><br />
 
             <h3>Password :</h3>
-            <input type="password" name="passe" /><br />
+            <input class="textInput"  type="password" name="passe" /><br />
 
             <h3>Confirmation du password :</h3>
-            <input type="password" name="passe2" /><br />
+            <input class="textInput"  type="password" name="passe2" /><br />
 
-            <input type="submit" name="action" value="creationCompte" />
+            <input class="button" type="submit" name="action" value="creationCompte" />
         </form>
     </div>
 
