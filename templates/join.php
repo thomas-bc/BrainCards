@@ -11,26 +11,50 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 ?>
 
-<hr/>
-<h1>Join</h1>
+<!-- PARTIE HEADER -->
+
+<h1>Braincards</h1>
 
 <p id="bienvenue"></p>
 
-<div id="formMesBrainsto"
-    <form action="controleur.php" method="GET">
-    <input type="submit" name="action" value="Mes Brainsto's" />
-    </form>
+<!-- FIN PARTIE HEADER -->
+
+
+
+<!-- PARTIE "MES BRAINSTOS" -->
+
+<div id="menuMesBrainstos">Mes Brainstos </div>
+
+<div id="mesBrainstos">
+
+    <h1>Mes Brainstos</h1>
+    <ul id="listeMesBrainstos">
+    </ul>
+    <!-- Ici on ajoutera tous les brainstormings liés à un utilisateur -->
+
 </div>
+
+<!-- FIN PARTIE "MES BRAINSTOS" -->
+
+
+
+<!-- PARTIE REJOINDRE UN BRAINSTO GRACE AU CODE BRAINSTO -->
 
 <div id="formJoin">
     <form action="controleur.php" method="GET">
-    Code Brainsto : <input type="text" name="codeBrainsto" /><br />
-    <input type="submit" name="action" value="Rejoindre" />
+        <h3>Code Brainsto :</h3>
+        <input type="text" name="codeBrainsto" /><br />
+        <input type="submit" name="action" value="Rejoindre" />
     </form>
 </div>
 
 <p id="mauvaisCode"> Veuillez rentrer un code Brainsto valide</p>
 
+<!-- FIN PARTIE REJOINDRE UN BRAINSTO GRACE AU CODE -->
+
+
+
+<!-- PARTIE CREER UN BRAINSTO -->
 
 <div id="divNouveauBrainsto">
     <button id="btnNouveauBrainsto">+</button>
@@ -38,10 +62,17 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 <div id="formAjoutBrainsto">
     <form action="controleur.php" method="GET">
-        Titre du Brainsto : <input type="text" name="titreBrainsto" /><br />
-        Nombre de participants : <input type="number" name="nombreParticipantsBrainsto" /><br />
-        Description : <input type="text" name="descriptionBrainsto" /><br />
+
+        <h3>Titre du Brainsto :</h3>
+        <input type="text" name="titreBrainsto" /><br />
+
+        <h3>Description :</h3>
+        <input type="text" name="descriptionBrainsto" /><br />
+
         <input type="submit" name="action" value="Créer le Brainsto" />
+
     </form>
 </div>
+
+<!-- FIN PARTIE CREER UN BRAINSTO -->
 
