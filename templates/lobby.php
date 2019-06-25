@@ -31,8 +31,8 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         <h3>Temps de relecture :</h3>
         <input type="text" name="tpsRelecture" /><br />
 
-        <input type="submit" name="action" value="ready" />
-        <input id="launchBrainsto" type="submit" name="action" value="lancer_brainsto" />
+        <input type="submit" name="action" value="I'm Ready !" />
+        <input id="launchBrainsto" type="submit" name="action" value="Lancer le Brainsto" />
     </form>
 </div>
 

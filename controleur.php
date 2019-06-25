@@ -24,6 +24,7 @@ if ($action = valider("action"))
         case "lobby" :
             $qs = "?view=lobby";
             break;
+
         case "step":
             $qs = "?view=step";
             break;
@@ -40,28 +41,28 @@ if ($action = valider("action"))
             $qs = "?view=chat";
             break;
 
-        case "connexion":
+        case "Connexion":
             break;
 
-        case "creation_compte":
+        case "creationCompte":
             break;
 
-        case "mes_brainstos":
+        case "Mes Brainsto's":
             break;
 
-        case "rejoindre":
+        case "Rejoindre":
             break;
 
-        case "creer_brainsto":
+        case "Créer le Brainsto":
             break;
 
-        case "ready":
+        case "I'm Ready !":
             break;
 
-        case "lancer_brainsto":
+        case "Lancer le Brainsto":
             break;
 
-        case "poster":
+        case "Poster":
             if($idBrainsto=valider($idBrainsto
                 && $idUser = valider("idUser","SESSION")
                     && $message = valider("message"))){
