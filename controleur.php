@@ -44,7 +44,7 @@ if ($action = valider("action"))
         case "Connexion":
             break;
 
-        case "Créer un compte":
+        case "creationCompte":
             break;
 
         case "Mes Brainsto's":

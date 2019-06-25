@@ -56,7 +56,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         border-bottom:1px solid white;
         padding-left:4%;
         padding-right:4%;
-        padding-bottom:75px
+        padding-bottom:25px
 
     }
 
@@ -89,7 +89,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         float:left;
         width:40%;
         min-width:450px;
-        /*background-color: yellow;*/
         text-align: center;
         margin-left:4%;
     }
@@ -97,15 +96,24 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
     #formLoginCreate{
 
         margin-auto;
-        /*background-color: yellow;*/
         text-align: center;
         padding-bottom:150px;
         padding-top:100px;
         background-color: #444;
+        /*display:none;*/
 
     }
 
 </style>
+
+
+
+<script>
+
+    $("#liencreerUser")
+        .onclick()
+
+</script>
 
 
 
@@ -142,7 +150,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
                 <h3>Password :</h3>
                 <input type="password" name="passe" /><br />
 
-                <input type="submit" name="action" value="Connexion" />
+                <input type="submit" name="action" value="connexion" />
             </form>
         </div>
 
@@ -176,13 +184,13 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
             <h3>Confirmation du password :</h3>
             <input type="password" name="passe2" /><br />
 
-            <input type="submit" name="action" value="Créer un compte" />
+            <input type="submit" name="action" value="creationCompte" />
         </form>
     </div>
 
     <p id="mauvaiseCorrespondance">Les deux mots de passe ne correspondent pas</p>
     <p id="pseudoDejaExistant">Le pseudo est déjà pris</p>
-    <p id="reussi">Votre comtpe a bien été créé ! Vous pouvez désormais vous connecter.</p>
+    <p id="reussi">Votre compte a bien été créé ! Vous pouvez désormais vous connecter.</p>
 
 
 </div>

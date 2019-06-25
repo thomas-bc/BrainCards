@@ -17,7 +17,7 @@ if (!$view) $view = "accueil";
 switch($view)
 {
     case "join":
-        include("templates/chat.php");
+        include("templates/join.php");
 
 //		case "accueil" :
 //			include("templates/accueil.php");
@@ -29,4 +29,4 @@ switch($view)
 }
 
 // si besoin on met un footer
-//include("templates/z_footer_provisoire.php");
+include("templates/z_footer_provisoire.php");
