@@ -108,15 +108,20 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         border-radius: 30px;
     }
 
-    #btnNouveauBrainsto{
+    #btnNouveauBrainsto:hover{
         cursor:pointer;
         background-color:#e5e5e5;
     }
 
+    #mauvaisCode{
+        color:#444444;
+        font-weight: bold;
+        display:none;
+    }
 
 
     #formAjoutBrainsto{
-        display:block;
+        display:none;
     }
 
 
@@ -139,6 +144,31 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
     }
 
 </style>
+
+<script src="js/jquery-3.4.1.js"></script>
+
+<script>
+
+    $(document).ready(function(){
+
+        $("#menuMesBrainstos").click(function(){
+
+            $("#mesBrainstos").show("slow");
+        })
+
+
+        $("#btnNouveauBrainsto").click(function(){
+
+            $("#formAjoutBrainsto").show("slow");
+        })
+
+
+    })
+
+
+
+
+</script>
 
 <!-- PARTIE HEADER -->
 
@@ -190,7 +220,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 <!-- PARTIE CREER UN BRAINSTO -->
 
-<div id="btnNouveauBrainsto">+
+<div class="button"  id="btnNouveauBrainsto">+
 </div>
 
 <div id="formAjoutBrainsto">

@@ -123,19 +123,24 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 <script>
 
-    function showLoginForm() {
-        $("#formLoginCreate").css("display","block");
-        $('html, body').animate({
-            scrollTop: $("#formLoginCreate").offset().top
-        }, 1500);
+    $(document).ready(function(){
 
-    }
+        $("#lienCreerUser").click(function(){
+            $("#formLoginCreate").css("display","block");
+            $('html, body').animate({
+                scrollTop: $("#formLoginCreate").offset().top
+            }, 1500);
+        })
+
+    })
+
+
 
 
 </script>
 
 
-<h1 id="titre">BrainCards</h1>
+<h1 id="tite">BrainCards</h1>
 
 
 <div id="hautPage">
@@ -176,7 +181,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
         <!-- Cliquez ici n'est en fait pas un lien, on va juste afficher ou non le form
         de création d'un utilisateur. Le lien n'est d'ailleurs pas join du coup-->
-        <p id="lienCreerUser" onclick="showLoginForm();">Cliquez ici</p>
+        <p id="lienCreerUser">Cliquez ici</p>
 
         <br>
 
