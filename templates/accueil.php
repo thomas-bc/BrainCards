@@ -93,6 +93,13 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         margin-left:4%;
     }
 
+    #errone{
+        margin-top:30px;
+        color: #444444;
+        display:block;
+    }
+
+
     #formLoginCreate{
 
         margin-auto;
@@ -153,6 +160,8 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
                 <input type="submit" name="action" value="connexion" />
             </form>
         </div>
+
+        <p id="errone">Pseudo ou Mot de passe erroné</p>
 
         <p>Pas encore inscrit ? </p>
 
