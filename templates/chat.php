@@ -20,16 +20,16 @@ if (!$idBrainsto)
 // Les messages
 $messages = getMessages($idBrainsto);
 
-echo '<div id="recupChat">';
+
+$recupChat = "";
 
 foreach($messages as $dataMessage) {
-    echo '<li>';
-    echo "[" . $dataMessage["msg_auteur_id"] . "] " ;
-    echo $dataMessage["msg_contenu"];
-    echo "</li>\n";
+    $recupChat.='<li>';
+    $recupChat.="[" . $dataMessage["msg_auteur_id"] . "] " ;
+    $recupChat.=$dataMessage["msg_contenu"];
+    $recupChat.="</li>";
 }
 
-echo '</div>';
 ?>
 
 <link rel="stylesheet" href="css/cssCommun.css">
@@ -40,10 +40,6 @@ echo '</div>';
         color:#ED7D31;
         margin-top:20px;
         text-align:center;
-    }
-
-    li{
-        color:#ED7D31;
     }
 
     #chat{
@@ -72,7 +68,7 @@ echo '</div>';
         color:#ED7D31;
     }
 
-    #recupChat li{
+    #affichageChat li{
         display:block;
         margin-left:15px;
     }
@@ -86,7 +82,10 @@ echo '</div>';
 
     $(document).ready(function(){
 
-        $("#affichageChat").append($("#recupChat"));
+        var recupChat= "<?php echo $recupChat; ?>";
+
+
+        $("#affichageChat").append(recupChat);
 
 
     })
