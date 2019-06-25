@@ -45,7 +45,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
     <form action="controleur.php" method="GET">
         <h3>Code Brainsto :</h3>
         <input type="text" name="codeBrainsto" /><br />
-        <input type="submit" name="action" value="Rejoindre" />
+        <input type="submit" name="action" value="rejoindre" />
     </form>
 </div>
 
@@ -70,7 +70,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         <h3>Description :</h3>
         <input type="text" name="descriptionBrainsto" /><br />
 
-        <input type="submit" name="action" value="Créer le Brainsto" />
+        <input type="submit" name="action" value="creer_brainsto" />
 
     </form>
 </div>
