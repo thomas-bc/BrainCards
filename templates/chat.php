@@ -37,39 +37,47 @@ foreach($messages as $dataMessage) {
 
 <style>
 
-    h2{
+    #chat h2{
         color:#ED7D31;
         margin-top:20px;
         text-align:center;
     }
 
     #chat{
-        position:absolute;
+        position:fixed;
         background-color: white ;
         width:300px;
         right:0;
-        top:0;
-        bottom:0;
+        height:100%;
         color:#ED7D31;
     }
 
     #chat form{
         position:absolute;
-        bottom:10px;
+        bottom:5px;
         right:40px;
     }
 
 
-    .button {
+    #chat .button {
         color: #ED7D31;
     }
 
-    .textInput{
+    #chat .textInput{
         border-bottom:1px solid #ED7D31;
         color:#ED7D31;
     }
 
-    #affichageChat li{
+    #chat #affichageChat{
+        position:absolute;
+        top:75px;
+        bottom:75px;
+        right:0;
+        left:0;
+        overflow:auto;
+    }
+
+    #chat #affichageChat li{
         display:block;
         margin-left:15px;
     }
