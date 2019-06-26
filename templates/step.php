@@ -8,5 +8,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 ?>
 
+<link rel="stylesheet" href="css/cssCommun.css">
+
 
 <h1>step</h1>

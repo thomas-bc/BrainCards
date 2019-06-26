@@ -7,97 +7,191 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 }
 
     include("templates/chat.php");
+    include("header_brainsto.php");
 ?>
 
 <link rel="stylesheet" href="css/cssCommun.css">
 
 
-
 <style>
 
-    *{
+
+    /************************* CSS DU LOBBY *************************************/
+
+    #lobby *{
         box-sizing: border-box;
     }
-
-    h2{
-        color:#ED7D31;
-        margin-top:20px;
-        text-align:center;
-    }
-
-    #chat{
-        position:absolute;
-        background-color: white ;
-        width:300px;
-        right:0;
-        top:0;
-        bottom:0;
-        color:#ED7D31;
-    }
-
-    #chat form{
-        position:absolute;
-        bottom:10px;
-        right:40px;
-    }
-
-
-    .button {
-        color: #ED7D31;
-    }
-
-    .textInput{
-        border-bottom:1px solid #ED7D31;
-        color:#ED7D31;
-    }
-
-    #affichageChat li{
-        display:block;
-        margin-left:15px;
-    }
-
 
     #lobby{
         position:absolute;
         right:300px;
         left:0px;
-        z-index:-1;
-        background-color: yellow;
         margin:10px;
-
+        top:120px;
     }
+
+    #lobby h3{
+        display:inline-block;
+        margin:5px;
+        vertical-align: top;
+    }
+
+    #lobby p{
+        display:inline-block;
+        margin:5px;
+        vertical-align: top;
+    }
+
+    #lobby #hautLobby::after{
+        content: "";
+        clear: both;
+        display: table;
+       }
+
+    #lobby #infoBrainsto{
+        width:60%;
+        /*background-color: yellow;*/
+    }
+
+    #lobby .column{
+        float:left;
+    }
+
+    #lobby + div{
+        width:40%;
+    }
+    #lobby #formMaster{
+        border-radius: 10px;
+        border:1px solid white;
+        padding:10px;
+    }
+
+
+    /* This is to remove the arrow of select element in IE */
+    select{
+        color: #ED7D31;
+        padding:5px 10px;
+        background-color: white;
+        border:none;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: center;
+        text-align-last:center;
+    }
+
+    #lobby .selectList:hover{
+        cursor:pointer;
+    }
+
+    #lobby #divLaunchBrainsto{
+        margin-top:15px;
+        margin-bottom:10px;
+        width: 100%;
+        text-align:center;
+    }
+
+
+    #lobby #divParticipants{
+        text-align:center;
+    }
+
 
 </style>
 
 
-<div id="lobby"> <br><br>
+<div id="lobby">
 
-    <p id="nomMaster"></p>
+    <div id="hautLobby">
 
-    <p id="descriptionBrainsto"></p>
+        <div id="infoBrainsto" class="column">
+
+            <h3> Nom du Master : </h3>
+            <p id="nomMaster">NathanBoisard</p>
+
+            <br>
+
+            <h3>Description du Brainsto :</h3>
+
+            <br>
 
 
+            <p id="descriptionBrainsto">
+                Description du Brainsto
+                Description du BrainstoDescription du BrainstoDescription du BrainstoDescription du BrainstoDescription du Brainsto
+            </p>
 
-    <ul id="participants">
-    </ul>
+        </div>
 
 
-    <div id="formBtn">
         <form action="controleur.php" method="GET">
 
-            <h3>Nombre de tours :</h3>
-            <input type="text" name="nbTours" /><br />
+            <div class="column">
 
-            <h3>Temps par tour :</h3>
-            <input type="text" name="tpsTour" /><br />
+                <div id="formMaster" >
 
-            <h3>Temps de relecture :</h3>
-            <input type="text" name="tpsRelecture" /><br />
+                    <h3>Nombre de tours :</h3>
+                    <select class="selectList" size="1" name="nbTours" >
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
 
-            <input type="submit" name="action" value="I'm Ready !" />
-            <input id="launchBrainsto" type="submit" name="action" value="Lancer le Brainsto" />
+                    <br />
+
+                    <h3>Temps par tour (min):</h3>
+                    <select class="selectList" size="1" name="tpsTour" >
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>10</option>
+
+                    </select>
+
+                    <br />
+
+                    <h3>Temps de relecture (min):</h3>
+                    <select class="selectList " size="1" name="tpsRelecture">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>10</option>
+                    </select>
+
+                    <br />
+
+
+
+                </div>
+
+                <div id="divLaunchBrainsto">
+                    <input id="launchBrainsto" class="button" type="submit" name="action" value="Lancer le Brainsto" />
+                </div>
+
+            </div>
+
         </form>
+
     </div>
+
+
+    <div id="divParticipants">
+
+
+
+        <ul id="participants">
+        </ul>
+
+
+
+        <div id="formBtn">
+            <form action="controleur.php" method="GET">
+
+                <input id="ready" class="button" type="submit" name="action" value="I'm Ready !" />
+            </form>
+        </div>
+
+    </div>
+
 
 </div>
 
