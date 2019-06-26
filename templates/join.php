@@ -1,9 +1,6 @@
 <?php
 
 include_once ("libs/modele.php");
-
-deb("basename : " . basename($_SERVER["PHP_SELF"]));
-
 // Si la page est appelée directement par son adresse, on redirige en passant pas la page index
 if (basename($_SERVER["PHP_SELF"]) != "index.php")
 {
@@ -19,6 +16,8 @@ if( !($idUser = estConnecte()) ){
     die("");
 }
 
+//on clean les dernières sessions de brainsto
+$_SESSION["idBrainstoCourant"] = null;
 
 ?>
 
@@ -173,7 +172,7 @@ if( !($idUser = estConnecte()) ){
 
             }
 
-        })
+        });
 
 
         $("#btnNouveauBrainsto").click(function(){
@@ -186,9 +185,7 @@ if( !($idUser = estConnecte()) ){
                 $("#formAjoutBrainsto").fadeOut(500);
 
             }
-        })
-
-
+        });
     })
 
 
@@ -215,11 +212,16 @@ if( !($idUser = estConnecte()) ){
         vous n'avez participé à aucun brainsto</p>
 
     <ul id="listeMesBrainstos">
-        <li>brainsto 1</li>
-        <li>brainsto 2</li>
+        <?php
+        $tab_brainsto = getMesBrainstorms($_SESSION["idUser"]); //On récupère les brainstorms de l'user courant dans une table $tab_brainsto
+        foreach ($tab_brainsto as $brainsto){
+                echo "<li> <a href='controleur.php?action=versStep'>" . $brainsto["br_titre"] . "</a>
+                <p>" . "code (" . $brainsto["br_code"] . ")" . "</p></li>"; //on affiche les brainsto de l'utilisateur
+            }
+        ?>
 
     </ul>
-    <!-- Ici on ajoutera tous les brainstormings liés à un utilisateur -->
+    <!-- Ici on a ajouté tous les brainstormings liés à un utilisateur -->
 
 </div>
 
@@ -233,7 +235,7 @@ if( !($idUser = estConnecte()) ){
 <div id="formJoin">
     <form action="controleur.php" method="GET">
         <h3>Code Brainsto :</h3>
-        <input id="textInputCodeBrainsto"type="text" name="codeBrainsto" />
+        <input id="textInputCodeBrainsto" type="text" name="codeBrainsto" />
         <input class="button" id="btnInputCodeBrainsto" type="submit" name="action" value="Rejoindre" />
     </form>
 </div>
@@ -259,11 +261,11 @@ if( !($idUser = estConnecte()) ){
 
         <h3>Description :</h3>
 
-        <textarea class="textInput" form="formAjoutBrainsto" name="descriptionBrainsto"></textarea>
+        <textarea class="textInput" name="descriptionBrainsto"></textarea>
 
         <br>
 
-        <input class="button" type="submit" name="action" value="Créer le Brainsto" />
+        <input class="button" type="submit" name="action" value="Creer le Brainsto" />
 
     </form>
 </div>

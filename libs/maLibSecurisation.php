@@ -5,6 +5,8 @@ include_once "modele.php";	// Car on utilise la fonction connecterUtilisateur()
 
 
 
+
+
 /**
  * Cette fonction vérifie si le login/passe passés en paramètre sont légaux
  * Elle stocke les informations sur la personne dans des variables de session : session_start doit avoir été appelé...
@@ -50,7 +52,6 @@ function createUser($login,$password){
     return false;
 }
 
-
 /**
  * Indique si le client est un utilisateur qui s'est connecté à son compte.
  * Renvoie l'id de l'user s'il est connecté.
@@ -70,5 +71,37 @@ function estConnecte(){
 function deconnexion(){
     unset($_SESSION["idUser"]);
 }
+
+
+/** Crée une variable de session idBrainstoCourant ainsi que master=0
+ * @param $idUser
+ * @param $codeBrainstoCourant
+ */
+function rejoindreBrainsto($idUser, $codeBrainstoCourant){
+    $idBrainstoCourant=getChamp('br_id','brainstorm','br_code', $codeBrainstoCourant);
+
+    $_SESSION["idBrainstoCourant"] = $idBrainstoCourant;
+    $_SESSION["master"]=0;
+    setUserBrainsto($idBrainstoCourant, $idUser);
+}
+
+/** Créé un brainsto dans la base ainsi qu'affecte une variable de session idBrainstoCourant et master=1
+ * @param $idMaster
+ * @param $titre
+ * @param $description
+ * @return Renvoie
+ */
+function creerBrainsto($idMaster, $titre, $description){
+    $idBrainstoCourant = createBrainstorm($idMaster, $titre, $description);
+
+    $_SESSION["idBrainstoCourant"] = $idBrainstoCourant;
+    $_SESSION["master"]=1;
+    setUserBrainsto($idBrainstoCourant, $idMaster);
+
+    return $idBrainstoCourant;
+}
+
+
+
 
 

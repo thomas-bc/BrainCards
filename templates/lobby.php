@@ -167,6 +167,16 @@ $idBrainstoCourant = 2;
 
 </style>
 
+<!-- RECUPARATION DES INFOS DU BRAINSTO DANS LA SESSION -->
+<?php //on récupère les infos du brainsto par la session
+$idBrainsto = $_SESSION["idBrainstoCourant"];
+
+$titreBrainsto = getChamp('br_titre', 'brainstorm', 'br_id', $idBrainsto);
+$descriptionBrainsto = getChamp('br_description', 'brainstorm', 'br_id', $idBrainsto);
+$idMasterBrainsto = getChamp('br_master_id', 'brainstorm', 'br_id', $idBrainsto);
+$nomMaster = getChamp('user_username', 'user', 'user_id', $idMasterBrainsto);
+?>
+<!-- ------------ FIN --------- -->
 <script>
 
 
@@ -208,7 +218,7 @@ $idBrainstoCourant = 2;
         <div id="infoBrainsto" class="column">
 
             <h3> Nom du Master : </h3>
-            <p id="nomMaster">NathanBoisard</p>
+            <p id="nomMaster"><?php echo $nomMaster ?></p>
 
             <br>
 
@@ -218,11 +228,20 @@ $idBrainstoCourant = 2;
 
 
             <p id="descriptionBrainsto">
-                Description du Brainsto
-                Description du BrainstoDescription du BrainstoDescription du BrainstoDescription du BrainstoDescription du Brainsto
+                <?php echo $descriptionBrainsto ?>
             </p>
 
         </div>
+
+        <!-- A FINIR ######## Desactivation des submit pour un non master ## A FINIR ##-->
+        <script src="js/jquery-3.4.1.js"></script>
+        <script>//on désactive les fonctionnalités du master si on est pas master
+            $(document).ready(function() {
+                $("#launchBrainsto").prop('disabled', true);
+                $(".selectList").prop('disabled', true);
+            });
+        </script>
+        <!-- A FINIR ######## Desactivation des submit pour un non master ## A FINIR ##-->
 
 
         <form action="controleur.php" method="GET">
@@ -298,7 +317,6 @@ $idBrainstoCourant = 2;
             <input id="btnReady" class="button" type="submit" name="action" value="I'm Ready !" />
         </form>
     </div>
-
 
 </div>
 

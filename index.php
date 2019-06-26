@@ -7,6 +7,9 @@ include_once "libs/maLibSecurisation.php";
 
 
 
+
+
+
 // on récupère le paramètre view éventuel
 $view = valider("view");
 
@@ -25,5 +28,5 @@ switch($view)
 
 }
 
-// header pour debug le code php, appeler la fonction deb($trace) pour debug
-include("templates/header_debug_php.php");
+// si besoin on met un footer
+include("templates/z_footer_provisoire.php");

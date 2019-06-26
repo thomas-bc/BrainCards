@@ -52,15 +52,22 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 </style>
 
+
+
 <div id="headerBrainsto">
 
+    <?php //on récupère le code et le titre du brainsto grace aux variables de session
+    $idBrainsto = $_SESSION["idBrainstoCourant"];
+    $code = getChamp('br_code', 'brainstorm', 'br_id', $idBrainsto);
+    $titre = getChamp('br_titre', 'brainstorm', 'br_id', $idBrainsto);
+    ?>
 
-<div id="codeBrainsto">#10258</div>
+<div id="codeBrainsto"><?php echo $code?></div>
+
+<h2 id="titreBrainsto"><?php echo $titre?></h2>
 
 
-<h2 id="titreBrainsto">Titre du Brainsto</h2>
-
-<h3 id="sousTitreBrainsto">Sous-titre brainsto</h3>
+<h3 id="sousTitreBrainsto">Accueil du Brainstorm</h3>
 
 </div>
 
