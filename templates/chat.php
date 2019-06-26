@@ -5,69 +5,58 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
     header("Location:../index.php");
     die("");
 }
-
 include_once("libs/modele.php");
 include_once("libs/maLibUtils.php");
-
 // On récupère l'id de la conversation à afficher, dans idConv
 $idBrainsto = getValue("BR_id");
 $idBrainsto = 1;
-
 if (!$idBrainsto)
 {
     die("idBrainsto manquant");
 }
-
 // Les messages
 $messages = getMessages($idBrainsto);
-
-
 $recupChat = "";
-
 foreach($messages as $dataMessage) {
     $recupChat.='<li>';
     $recupChat.="[" . $dataMessage["user_username"] . "] " ;
     $recupChat.=$dataMessage["msg_contenu"];
     $recupChat.="</li>";
 }
-
 ?>
 
 <link rel="stylesheet" href="css/cssCommun.css">
 
 <style>
-
     #chat h2{
         color:#ED7D31;
         margin-top:20px;
         text-align:center;
     }
-
     #chat{
         position:fixed;
         background-color: white ;
-        width:300px;
+        width:25%;
         right:0;
         height:100%;
         color:#ED7D31;
     }
-
     #chat form{
         position:absolute;
         bottom:5px;
-        right:40px;
+        width:100%;
+        margin-left:5%;
     }
-
-
     #chat .button {
-        color: #ED7D31;
+        color: white;
+        background-color: #ED7D31;
+        margin-top:10px;
     }
-
     #chat .textInput{
         border-bottom:1px solid #ED7D31;
         color:#ED7D31;
+        width:60%;
     }
-
     #chat #affichageChat{
         position:absolute;
         top:75px;
@@ -76,45 +65,26 @@ foreach($messages as $dataMessage) {
         left:0;
         overflow:auto;
     }
-
     #chat #affichageChat li{
         display:block;
         margin-left:15px;
     }
-
 </style>
 
 <script src="js/jquery-3.4.1.js"></script>
 
 
 <script>
-
     $(document).ready(function(){
-
         var recupChat= "<?php echo $recupChat; ?>";
-
-
         $("#affichageChat").append(recupChat);
-
-
     })
-
-
-
-
-
-
     // DANS 10 SECONDES, Raffraichir la page
-        window.setTimeout(fnReload,10000);
-
-        function fnReload(){
-            document.location.reload();
-        }
+    window.setTimeout(fnReload,10000);
+    function fnReload(){
+        document.location.reload();
+    }
 </script>
-
-
-
-
 
 
 <div id="chat">
@@ -128,8 +98,7 @@ foreach($messages as $dataMessage) {
         <input type="hidden" name="idBrainsto" value="$idBrainsto" >
         <input class="button" type="submit" name="action" value="Poster" >
 
-        </form>
+    </form>
 
 
 </div>
-

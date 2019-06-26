@@ -5,58 +5,50 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
     header("Location:../index.php?view=lobby");
     die("");
 }
-
-    include("templates/chat.php");
-    include("header_brainsto.php");
+include("templates/chat.php");
+include("header_brainsto.php");
 ?>
 
 <link rel="stylesheet" href="css/cssCommun.css">
 
 
 <style>
-
-
     /************************* CSS DU LOBBY *************************************/
-
     #lobby *{
         box-sizing: border-box;
     }
-
     #lobby{
         position:absolute;
         right:300px;
         left:0px;
-        margin:10px;
+        margin:0px;
         top:120px;
     }
-
     #lobby h3{
         display:inline-block;
         margin:5px;
         vertical-align: top;
     }
-
     #lobby p{
         display:inline-block;
         margin:5px;
         vertical-align: top;
     }
-
     #lobby #hautLobby::after{
         content: "";
         clear: both;
         display: table;
-       }
-
+    }
+    #lobby #hautLobby{
+        margin:10px;
+    }
     #lobby #infoBrainsto{
         width:60%;
         /*background-color: yellow;*/
     }
-
     #lobby .column{
         float:left;
     }
-
     #lobby + div{
         width:40%;
     }
@@ -64,9 +56,8 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         border-radius: 10px;
         border:1px solid white;
         padding:10px;
+        margin-left:20px;
     }
-
-
     /* This is to remove the arrow of select element in IE */
     select{
         color: #ED7D31;
@@ -78,24 +69,57 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         text-align: center;
         text-align-last:center;
     }
-
     #lobby .selectList:hover{
         cursor:pointer;
     }
-
     #lobby #divLaunchBrainsto{
         margin-top:15px;
         margin-bottom:10px;
         width: 100%;
         text-align:center;
     }
-
-
     #lobby #divParticipants{
         text-align:center;
+        margin:10px auto 0 auto;
+        /*border:1px solid white;*/
+        /*border-radius:10px;*/
+        width:70%;
+        /*border-top:1px solid white;*/
     }
-
-
+    #lobby #divParticipants h3{
+        font-size:1.5em;
+        margin-top:20px;
+    }
+    #lobby #divParticipants ul {
+        padding:0;
+    }
+    #lobby #divParticipants li{
+        margin:10px;
+        display:inline-block;
+        padding:5px 10px;
+        border:1px solid white;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    #lobby #divParticipants p {
+        float:left;
+    }
+    #lobby #divParticipants div{
+        float:left;
+        display:inline-block;
+        background-color: darkred;
+        color: #ED7D31;
+        width:20px;
+        height: 20px;
+        border-radius: 30px;
+        border:2px solid white;
+        position:relative;
+        top:3px;
+    }
+    #lobby #ready{
+        margin-top:20px;
+        text-align:center;
+    }
 </style>
 
 
@@ -176,22 +200,25 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
     <div id="divParticipants">
 
-
+        <h3>Participants</h3>
 
         <ul id="participants">
+            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
+            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
+            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
+            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
+            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
+            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
+
         </ul>
-
-
-
-        <div id="formBtn">
-            <form action="controleur.php" method="GET">
-
-                <input id="ready" class="button" type="submit" name="action" value="I'm Ready !" />
-            </form>
-        </div>
 
     </div>
 
+    <div id="ready">
+        <form action="controleur.php" method="GET">
+
+            <input id="btnReady" class="button" type="submit" name="action" value="I'm Ready !" />
+        </form>
+    </div>
 
 </div>
-
