@@ -88,6 +88,18 @@ foreach($messages as $dataMessage) {
 
 
 <script>
+    function timeout(){
+        setTimeout(function (){
+            $.ajax({"url":"dataProvider.php",
+                "data":{"message":1},
+                "type":"GET",
+                "callback":function pourCallback(donnees){
+                    $("#affichageChat").html(JSON.parse(donnees));
+                }});
+            timeout();
+        },1000);
+    }
+
 
     $(document).ready(function(){
 
@@ -97,20 +109,16 @@ foreach($messages as $dataMessage) {
         $("#affichageChat").append(recupChat);
 
 
+        // toutes les 10 SECONDES, Raffraichir le div avec les messages
+
+
+        timeout();
+
     })
 
 
-
-
-
-
-    // DANS 10 SECONDES, Raffraichir la page
-        window.setTimeout(fnReload,10000);
-
-        function fnReload(){
-            document.location.reload();
-        }
 </script>
+
 
 
 

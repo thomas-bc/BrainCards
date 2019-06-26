@@ -24,3 +24,29 @@ if ($ma_valeur_associe_a_mon_mon_cle = valider("mon_mot_cle")) { // si mon mot c
     */
     // on envoie des données au format JSON
 }
+
+if($message = valider("message")){
+    // On récupère l'id de la conversation à afficher, dans idConv
+    $idBrainsto = getValue("BR_id");
+    $idBrainsto = 1;
+
+    if (!$idBrainsto)
+    {
+        die("idBrainsto manquant");
+    }
+
+// Les messages
+    $messages = getMessages($idBrainsto);
+
+
+    $recupChat = "";
+
+    foreach($messages as $dataMessage) {
+        $recupChat.='<li>';
+        $recupChat.="[" . $dataMessage["user_username"] . "] " ;
+        $recupChat.=$dataMessage["msg_contenu"];
+        $recupChat.="</li>";
+    }
+
+    echo json_encode($recupChat);
+}
