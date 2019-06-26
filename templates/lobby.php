@@ -7,6 +7,21 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 }
 include("templates/chat.php");
 include("header_brainsto.php");
+
+
+// seul les utilisateurs connectés peuvent se rendre sur join
+if( !($idUser = estConnecte()) ){
+    header("Location:".dirname($_SERVER[PHP_SELF])."/index.php?view=accueil");
+    die("");
+}
+
+
+//$idBrainstoCourant = valider("$idBrainstoCourant");
+$idBrainstoCourant = 2;
+
+
+
+
 ?>
 
 <link rel="stylesheet" href="css/cssCommun.css">
@@ -121,6 +136,39 @@ include("header_brainsto.php");
         text-align:center;
     }
 </style>
+
+<script>
+
+
+
+
+    //$(document).ready(function(){
+    //
+    //
+    //
+    //})
+    //
+    //
+    //function getBrainsto(idBrainstorm){
+    //    $.ajax({"url":"dataProvider.php",
+    //            "data" :
+    //            {
+    //                idBrainsto : idBrainstorm
+    //            }
+    //            "callback":integrer2
+    //    });
+    //}
+    //
+    //
+    //function afficherBrainsto(){
+    //    var idBrainsto = "<?php //echo $idBrainstoCourant; ?>//";
+    //
+    //
+    //}
+
+
+
+</script>
 
 
 <div id="lobby">
