@@ -13,7 +13,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
     #headerBrainsto{
         position:absolute;
-        right:300px;
+        right:25%;
         left:0;
         top:0;
         text-align:center;
