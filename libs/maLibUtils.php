@@ -2,6 +2,43 @@
 
 // V1.0 du 18 mai 2018
 
+
+
+/**
+ * Fonction pour laisser des traces dans la console de développement à partir du code php
+ * @param $trace string
+ */
+function deb($trace){
+
+	if(gettype($trace)=="boolean")
+		$trace = intval($trace);
+
+	if($contenu = valider("debug", "SESSION")){
+		$_SESSION["debug"] = $contenu . "#" . strval($trace);
+	}
+	else{
+		$_SESSION["debug"] = strval($trace);
+	}
+}
+
+function afficheDebug(){
+	if($contenu = valider("debug", "SESSION")){
+		$_SESSION["debug"] = "DEBUG :" . "#" . $contenu;
+		$tab = preg_split("/[#]/", $contenu);
+
+		echo "<script>";
+		echo "console.log('$_SESSION[debug]');";
+		foreach ($tab as $value){
+			echo "console.log('$value');";
+		}
+		echo "</script>";
+		$_SESSION["debug"] = "";
+	}
+}
+
+
+
+
 /**
  * @file maLibUtils.php
  * Ce fichier définit des fonctions d'accès ou d'affichage pour les tableaux superglobaux
