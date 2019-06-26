@@ -164,7 +164,7 @@ $_SESSION["idBrainstoCourant"] = null; //on clean les dernières sessions de bra
 
             }
 
-        })
+        });
 
 
         $("#btnNouveauBrainsto").click(function(){
@@ -177,9 +177,7 @@ $_SESSION["idBrainstoCourant"] = null; //on clean les dernières sessions de bra
                 $("#formAjoutBrainsto").fadeOut(500);
 
             }
-        })
-
-
+        });
     })
 
 
@@ -208,8 +206,8 @@ $_SESSION["idBrainstoCourant"] = null; //on clean les dernières sessions de bra
         <?php
         $tab_brainsto = getMesBrainstorms($_SESSION["idUser"]); //On récupère les brainstorms de l'user courant dans une table $tab_brainsto
         foreach ($tab_brainsto as $brainsto){
-                echo "<li> <h3>" . $brainsto["br_titre"] . "</h3> <br> 
-                      <p>(Code : " . $brainsto["br_code"]  . ")</p></li>"; //on affiche les brainsto de l'utilisateur
+                echo "<li> <a href='controleur.php?action=versStep'>" . $brainsto["br_titre"] . "</a>
+                <p>" . "code (" . $brainsto["br_code"] . ")" . "</p></li>"; //on affiche les brainsto de l'utilisateur
             }
         ?>
 

@@ -13,6 +13,9 @@ if ($action = valider("action"))
 
     switch($action)
     {
+        case "versStep":
+            $qs= "?view=step";
+            break;
         case "accueil" :
             $qs = "?view=accueil";
             break;
