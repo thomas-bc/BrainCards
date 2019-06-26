@@ -82,10 +82,18 @@ if ($action = valider("action"))
             break;
 
         case "Rejoindre":
+            if($idUser=valider("idUser","SESSION"
+                                 &&  $codeBrainstoCourant=valider("codeBrainsto"))){
+                rejoindreBrainsto($idUser, $codeBrainstoCourant);
+                $qs = "?view=lobby";
 
+            }
             break;
 
         case "Créer le Brainsto":
+            if($idUser=valider("idUser","SESSION")){
+
+            };
             break;
 
         case "I'm Ready !":

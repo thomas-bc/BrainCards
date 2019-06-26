@@ -51,3 +51,8 @@ function createUser($login,$password){
     }
     return false;
 }
+
+function rejoindreBrainsto($idUser, $codeBrainstoCourant){
+    $_SESSION["idBrainstoCourant"] = getChamp('br_id','brainstorm','br_code', $codeBrainstoCourant);
+    setUserReady($idUser, 1);
+}

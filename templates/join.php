@@ -193,7 +193,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 <!-- FIN PARTIE HEADER -->
 
 
-
 <!-- PARTIE "MES BRAINSTOS" -->
 
 <div id="menuMesBrainstos">Mes Brainstos </div>
@@ -204,11 +203,16 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         vous n'avez participé à aucun brainsto</p>
 
     <ul id="listeMesBrainstos">
-        <li>brainsto 1</li>
-        <li>brainsto 2</li>
+        <?php
+        $tab_brainsto = getMesBrainstorms($_SESSION["idUser"]); //On récupère les brainstorms de l'user courant dans une table $tab_brainsto
+        foreach ($tab_brainsto as $brainsto){
+                echo "<li> <h3>" . $brainsto["br_titre"] . "</h3> <br> 
+                      <p>(Code : " . $brainsto["br_code"]  . ")</p></li>"; //on affiche les brainsto de l'utilisateur
+            }
+        ?>
 
     </ul>
-    <!-- Ici on ajoutera tous les brainstormings liés à un utilisateur -->
+    <!-- Ici on a ajouté tous les brainstormings liés à un utilisateur -->
 
 </div>
 
@@ -222,7 +226,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 <div id="formJoin">
     <form action="controleur.php" method="GET">
         <h3>Code Brainsto :</h3>
-        <input id="textInputCodeBrainsto"type="text" name="codeBrainsto" />
+        <input id="textInputCodeBrainsto" type="text" name="codeBrainsto" />
         <input class="button" id="btnInputCodeBrainsto" type="submit" name="action" value="Rejoindre" />
     </form>
 </div>

@@ -8,7 +8,7 @@ include_once("config.php");
  * Renvoie l'id de l'user s'il existe dans la base de donnée, false sinon
  * @param $login
  * @param $pass
- * @return false|string
+ * @return false|Int
  */
 function verifUserBDD($login, $pass){
     $SQL = "SELECT USER_id FROM USER WHERE USER_USERNAME = '$login' && USER_PASSWORD = '$pass' ";
@@ -43,6 +43,18 @@ function createBrainstorm($idUserMaster, $titre, $description){
     return SQLInsert($SQL);
 }
 
+
+/** REQUETE SQL : SELECT $champ FROM $table WHERE $champ_val = $val
+ * @param $champ
+ * @param $table
+ * @param $champ_val
+ * @param $val
+ * @return false|string
+ */
+function getChamp($champ, $table, $champ_val, $val){
+    $SQL = "SELECT $champ from $table where $champ_val = $val";
+    return SQLGetChamp($SQL);
+}
 /**
  * Récupère le brainsto dont l'id est celui spécifié en paramètre.
  * Renvoie le brainsto sous forme de tableau associatif s'il existe, false sinon.
@@ -65,6 +77,14 @@ function getBrainstormFromCode($code){
     return parcoursRs(SQLSelect($SQL));
 }
 
+/** Renvoie la liste (id, code et titre) des brainstorms où $idUser a participé
+ * @param $idUser
+ * @return array
+ */
+function getMesBrainstorms($idUser){
+    $SQL = "SELECT br_id, br_code, br_titre from brainstorm join card on card_brainsto_id = br_id where card_auteur_id='$idUser'";
+    return parcoursRs(SQLSelect($SQL));
+}
 /**
  * Met à jour l'attribut ready en le mettant $ready (1 = ready, 0=not ready) à de l'utilisateur d'id $userId.
  * @param $userId
