@@ -38,6 +38,7 @@ include("header_brainsto.php");
         margin:0;
         color:#ED7D31;
         font-size:1.75em;
+        margin-top:20px;
         margin-bottom:20px;
     }
 
