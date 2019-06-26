@@ -173,7 +173,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
                 <h3>Password :</h3>
                 <input class="textInput" type="password" name="passe" /><br />
 
-                <input class="button" type="submit" name="action" value="connexion" />
+                <input class="button" type="submit" name="action" value="Connexion" />
             </form>
         </div>
 
