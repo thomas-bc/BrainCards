@@ -89,17 +89,25 @@ if ($action = valider("action"))
             };
             break;
 
-        case "Créer le Brainsto":
-            if($idUser=valider("idUser","SESSION")){
-
-            };
+        case "Creer le Brainsto":
+            if($idUser=valider("idUser","SESSION")) {
+                if ($titreBrainsto = valider("titreBrainsto")) {
+                    if ($descriptionBrainsto = valider("descriptionBrainsto")){
+                        $idBrainsto = creerBrainsto($idUser, $titreBrainsto, $descriptionBrainsto);
+                        $qs = "?view=lobby";
+                    }
+                }
+            }
             break;
+
 
         case "I'm Ready !":
             break;
 
+
         case "Lancer le Brainsto":
             break;
+
 
         case "Poster":
             if($idBrainsto=valider($idBrainsto

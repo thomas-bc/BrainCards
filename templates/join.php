@@ -9,6 +9,8 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 }
 
 
+$_SESSION["idBrainstoCourant"] = null; //on clean les dernières sessions de brainsto
+
 ?>
 
 <link rel="stylesheet" href="css/cssCommun.css">
@@ -252,11 +254,11 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
         <h3>Description :</h3>
 
-        <textarea class="textInput" form="formAjoutBrainsto" name="descriptionBrainsto"></textarea>
+        <textarea class="textInput" name="descriptionBrainsto"></textarea>
 
         <br>
 
-        <input class="button" type="submit" name="action" value="Créer le Brainsto" />
+        <input class="button" type="submit" name="action" value="Creer le Brainsto" />
 
     </form>
 </div>

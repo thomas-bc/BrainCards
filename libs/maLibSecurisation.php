@@ -57,3 +57,12 @@ function rejoindreBrainsto($idUser, $codeBrainstoCourant){
     $_SESSION["idBrainstoCourant"] = $idBrainstoCourant;
     setUserBrainsto($idBrainstoCourant, $idUser);
 }
+
+function creerBrainsto($idMaster, $titre, $description){
+    $idBrainstoCourant = createBrainstorm($idMaster, $titre, $description);
+
+    $_SESSION["idBrainstoCourant"] = $idBrainstoCourant;
+    setUserBrainsto($idBrainstoCourant, $idMaster);
+
+    return $idBrainstoCourant;
+}

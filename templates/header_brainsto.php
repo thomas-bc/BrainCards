@@ -67,7 +67,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 <h2 id="titreBrainsto"><?php echo $titre?></h2>
 
 
-<h3 id="sousTitreBrainsto">Sous-titre brainsto</h3>
+<h3 id="sousTitreBrainsto">Accueil du Brainstorm</h3>
 
 </div>
 
