@@ -119,7 +119,7 @@
     }
     #canvas{
       border-radius: inherit;
-      background-color: #b3d4fc;
+      background-color: white;
     }
     #suppress{
       display:none;
@@ -156,7 +156,6 @@
   }
   function maj(){
 
-    console.log(tableLink);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     tableLink.forEach(function(item){
@@ -235,7 +234,13 @@
       return false;
     }
     function del_links(id){
-      
+      temp = [];
+      for(i=0;i<tableLink.length;i++){
+        if(tableLink[i][0]!=id && tableLink[i][1]!=id)
+          temp.push(tableLink[i]);
+      }
+      tableLink = temp;
+      maj();
     }
     function del(){
       var parent = this.parentElement;
