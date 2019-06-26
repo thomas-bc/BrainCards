@@ -55,6 +55,7 @@ if ($action = valider("action"))
         break;
 
         case "Inscription":
+            deb("inscription");
             $qs = "?view=accueil";
             if ($login = valider("login"))
             if ($pass = valider("pass"))
