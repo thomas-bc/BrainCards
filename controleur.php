@@ -7,6 +7,7 @@ include_once "libs/maLibSecurisation.php";
 include_once "libs/modele.php";
 
 
+
 if ($action = valider("action"))
 {
     ob_start();
@@ -42,15 +43,45 @@ if ($action = valider("action"))
             break;
 
         case "Connexion":
-            break;
+            $qs = "?view=accueil";
+            if ($login = valider("login"))
+                if ($passe = valider("passe"))
+                {
+                    // On verifie l'utilisateur, et on crée des variables de session si tout est OK
+                    // Cf. maLibSecurisation
+                    if(verifUser($login,$passe))
+                        $qs = "?view=join";
+                }
+        break;
 
-        case "creationCompte":
-            break;
+        case "Inscription":
+            $qs = "?view=accueil";
+            if ($login = valider("login"))
+            if ($pass = valider("pass"))
+            if ($pass2 = valider("pass2"))
+            {
+                if($pass == $pass2){
+                    if(createUser($login, $pass)){
+                        deb("user " . $login. " créée");
+                        $qs = "?view=join";
+                    }
+                    else{
+                        deb("user " . $login. " existe deja");
+                    }
+                }
+                else{
+                    deb("password non identique");
+                }
+
+            }
+
+        break;
 
         case "Mes Brainsto's":
             break;
 
         case "Rejoindre":
+
             break;
 
         case "Créer le Brainsto":
