@@ -51,3 +51,18 @@ function createUser($login,$password){
     }
     return false;
 }
+
+function rejoindreBrainsto($idUser, $codeBrainstoCourant){
+    $idBrainstoCourant=getChamp('br_id','brainstorm','br_code', $codeBrainstoCourant);
+    $_SESSION["idBrainstoCourant"] = $idBrainstoCourant;
+    setUserBrainsto($idBrainstoCourant, $idUser);
+}
+
+function creerBrainsto($idMaster, $titre, $description){
+    $idBrainstoCourant = createBrainstorm($idMaster, $titre, $description);
+
+    $_SESSION["idBrainstoCourant"] = $idBrainstoCourant;
+    setUserBrainsto($idBrainstoCourant, $idMaster);
+
+    return $idBrainstoCourant;
+}

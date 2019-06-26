@@ -7,13 +7,15 @@ include_once "libs/maLibSecurisation.php";
 include_once "libs/modele.php";
 
 
-
 if ($action = valider("action"))
 {
     ob_start();
 
     switch($action)
     {
+        case "versStep":
+            $qs= "?view=step";
+            break;
         case "accueil" :
             $qs = "?view=accueil";
             break;
@@ -82,17 +84,33 @@ if ($action = valider("action"))
             break;
 
         case "Rejoindre":
-
+            if($idUser=valider("idUser","SESSION")){
+                if ($codeBrainstoCourant = valider("codeBrainsto")) {
+                    rejoindreBrainsto($idUser, $codeBrainstoCourant);
+                    $qs = "?view=lobby";
+                }
+            };
             break;
 
-        case "Créer le Brainsto":
+        case "Creer le Brainsto":
+            if($idUser=valider("idUser","SESSION")) {
+                if ($titreBrainsto = valider("titreBrainsto")) {
+                    if ($descriptionBrainsto = valider("descriptionBrainsto")){
+                        $idBrainsto = creerBrainsto($idUser, $titreBrainsto, $descriptionBrainsto);
+                        $qs = "?view=lobby";
+                    }
+                }
+            }
             break;
+
 
         case "I'm Ready !":
             break;
 
+
         case "Lancer le Brainsto":
             break;
+
 
         case "Poster":
             if($idBrainsto=valider($idBrainsto

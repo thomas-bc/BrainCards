@@ -8,6 +8,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
     include("templates/chat.php");
     include("header_brainsto.php");
+    include("header_debug_php.php");
 ?>
 
 <link rel="stylesheet" href="css/cssCommun.css">
@@ -98,6 +99,14 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 </style>
 
+<?php //on récupère les infos du brainsto par la session
+$idBrainsto = $_SESSION["idBrainstoCourant"];
+
+$titreBrainsto = getChamp('br_titre', 'brainstorm', 'br_id', $idBrainsto);
+$descriptionBrainsto = getChamp('br_description', 'brainstorm', 'br_id', $idBrainsto);
+$idMasterBrainsto = getChamp('br_master_id', 'brainstorm', 'br_id', $idBrainsto);
+$nomMaster = getChamp('user_username', 'user', 'user_id', $idMasterBrainsto);
+?>
 
 <div id="lobby">
 
@@ -106,7 +115,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         <div id="infoBrainsto" class="column">
 
             <h3> Nom du Master : </h3>
-            <p id="nomMaster">NathanBoisard</p>
+            <p id="nomMaster"><?php echo $nomMaster ?></p>
 
             <br>
 
@@ -116,11 +125,11 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 
             <p id="descriptionBrainsto">
-                Description du Brainsto
-                Description du BrainstoDescription du BrainstoDescription du BrainstoDescription du BrainstoDescription du Brainsto
+                <?php echo $descriptionBrainsto ?>
             </p>
 
         </div>
+
 
 
         <form action="controleur.php" method="GET">
