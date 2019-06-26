@@ -117,7 +117,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
             <p id="descriptionBrainsto">
                 Description du Brainsto
-                Description du BrainstoDescription du BrainstoDescription du BrainstoDescription du BrainstoDescription du Brainsto
             </p>
 
         </div>
