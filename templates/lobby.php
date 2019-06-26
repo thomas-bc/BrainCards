@@ -146,7 +146,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 
     #lobby #ready{
-        margin-top:30px;
+        margin-top:20px;
         text-align:center;
     }
 
