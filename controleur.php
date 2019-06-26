@@ -12,6 +12,7 @@ if ($action = valider("action"))
 {
     ob_start();
 
+
     switch($action)
     {
         case "accueil" :
@@ -51,6 +52,8 @@ if ($action = valider("action"))
                     // Cf. maLibSecurisation
                     if(verifUser($login,$passe))
                         $qs = "?view=join";
+                    else
+                        $qs .= "&tentative=wrongUserPass";
                 }
         break;
 
@@ -62,16 +65,19 @@ if ($action = valider("action"))
             if ($pass2 = valider("pass2"))
             {
                 if($pass == $pass2){
+                    deb("identique");
                     if(createUser($login, $pass)){
                         deb("user " . $login. " créée");
-                        $qs = "?view=join";
+                        $qs .= "&tentative=createUser";
                     }
                     else{
                         deb("user " . $login. " existe deja");
+                        $qs .= "&tentative=createUserEchec";
                     }
                 }
                 else{
                     deb("password non identique");
+                    $qs .= "&tentative=passwordIdentique";
                 }
 
             }

@@ -5,9 +5,23 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
     header("Location:../index.php?view=lobby");
     die("");
 }
+include("templates/chat.php");
+include("header_brainsto.php");
 
-    include("templates/chat.php");
-    include("header_brainsto.php");
+
+// seul les utilisateurs connectés peuvent se rendre sur join
+if( !($idUser = estConnecte()) ){
+    header("Location:".dirname($_SERVER[PHP_SELF])."/index.php?view=accueil");
+    die("");
+}
+
+
+//$idBrainstoCourant = valider("$idBrainstoCourant");
+$idBrainstoCourant = 2;
+
+
+
+
 ?>
 
 <link rel="stylesheet" href="css/cssCommun.css">
@@ -153,6 +167,39 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 </style>
 
+<script>
+
+
+
+
+    //$(document).ready(function(){
+    //
+    //
+    //
+    //})
+    //
+    //
+    //function getBrainsto(idBrainstorm){
+    //    $.ajax({"url":"dataProvider.php",
+    //            "data" :
+    //            {
+    //                idBrainsto : idBrainstorm
+    //            }
+    //            "callback":integrer2
+    //    });
+    //}
+    //
+    //
+    //function afficherBrainsto(){
+    //    var idBrainsto = "<?php //echo $idBrainstoCourant; ?>//";
+    //
+    //
+    //}
+
+
+
+</script>
+
 
 <div id="lobby">
 
@@ -251,6 +298,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
             <input id="btnReady" class="button" type="submit" name="action" value="I'm Ready !" />
         </form>
     </div>
+
 
 </div>
 
