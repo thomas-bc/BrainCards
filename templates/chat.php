@@ -11,6 +11,7 @@ include_once("libs/maLibUtils.php");
 
 // On récupère l'id de la conversation à afficher, dans idConv
 $idBrainsto = getValue("BR_id");
+$idBrainsto = 1;
 
 if (!$idBrainsto)
 {
@@ -25,7 +26,7 @@ $recupChat = "";
 
 foreach($messages as $dataMessage) {
     $recupChat.='<li>';
-    $recupChat.="[" . $dataMessage["msg_auteur_id"] . "] " ;
+    $recupChat.="[" . $dataMessage["user_username"] . "] " ;
     $recupChat.=$dataMessage["msg_contenu"];
     $recupChat.="</li>";
 }
