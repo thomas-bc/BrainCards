@@ -4,8 +4,11 @@ session_start();
 include_once "libs/maLibUtils.php";
 
 
-// si besoin on met un header
-//include("templates/header.php");
+
+
+// header pour debug le code php, appeler la fonction deb($trace) pour debug
+include("templates/header_debug_php.php");
+
 
 
 // on récupère le paramètre view éventuel

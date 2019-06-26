@@ -110,8 +110,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 <script>
 
-    $("#liencreerUser")
-        .onclick()
+
 
 </script>
 
@@ -150,7 +149,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
                 <h3>Password :</h3>
                 <input type="password" name="passe" /><br />
 
-                <input type="submit" name="action" value="connexion" />
+                <input type="submit" name="action" value="Connexion" />
             </form>
         </div>
 
@@ -176,15 +175,15 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         <form action="controleur.php" method="GET">
 
             <h3>Pseudo :</h3>
-            <input type="text" name="login" /><br />
+            <input type="text" name="login"/> <br/>
 
             <h3>Password :</h3>
-            <input type="password" name="passe" /><br />
+            <input type="password" name="pass"/> <br/>
 
             <h3>Confirmation du password :</h3>
-            <input type="password" name="passe2" /><br />
+            <input type="password" name="pass2"/> <br/>
 
-            <input type="submit" name="action" value="creationCompte" />
+            <input type="submit" name="action" value="Inscription" />
         </form>
     </div>
 
