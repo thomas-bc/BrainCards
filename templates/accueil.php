@@ -7,9 +7,10 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 }
 
 // permet de déconnecter l'utilisateur
-deconnexion();
+// A DECOMMENTER A LA FIN
+//deconnexion();
 
-$tentative = "";
+
 $tentative = valider("tentative");
 
 
