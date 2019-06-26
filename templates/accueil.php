@@ -7,6 +7,8 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 }
 
 ?>
+<link rel="stylesheet" href="css/cssCommun.css">
+
 
 <style>
 
@@ -14,28 +16,12 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         box-sizing: border-box;
     }
 
-    body{
-        background-color:#ED7D31;
-        color:#ffffff;
-        margin:0;
-    }
-
     /************************************************************/
-
-
-    h1{
-        text-align: center;
-        font-size: 5em;
-    }
 
     h3{
         display: inline-block;
     }
 
-    h2{
-        font-size: 2.5em;
-        margin-top:0;
-    }
 
     p{
         display:inline-block;
@@ -93,31 +79,68 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         margin-left:4%;
     }
 
+    #formLogin .button{
+        margin-top:20px;
+    }
+
+    #errone{
+        color:#444444;
+        font-weight: bold;
+        display:none;
+    }
+
     #formLoginCreate{
 
         margin-auto;
         text-align: center;
         padding-bottom:150px;
-        padding-top:100px;
+        padding-top:120px;
         background-color: #444;
-        /*display:none;*/
+        display:none;
 
+    }
+
+    #formLoginCreate .button{
+        margin-top:20px;
+        color:#444444;
+    }
+
+    #pseudoDejaExistant{
+        display:none
+    }
+
+    #mauvaiseCorrespondance{
+        display:none;
+    }
+
+    #reussi{
+        display:none;
     }
 
 </style>
 
-
+<script src="js/jquery-3.4.1.js"></script>
 
 <script>
 
-    $("#liencreerUser")
-        .onclick()
+    $(document).ready(function(){
+
+        $("#lienCreerUser").click(function(){
+            $("#formLoginCreate").css("display","block");
+            $('html, body').animate({
+                scrollTop: $("#formLoginCreate").offset().top
+            }, 1500);
+        })
+
+    })
+
+
+
 
 </script>
 
 
-
-<h1>BrainCards</h1>
+<h1 id="tite">BrainCards</h1>
 
 
 <div id="hautPage">
@@ -145,12 +168,12 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
             <form action="controleur.php" method="GET">
 
                 <h3>Pseudo :</h3>
-                <input type="text" name="login" /><br />
+                <input class="textInput" type="text" name="login" /><br />
 
                 <h3>Password :</h3>
-                <input type="password" name="passe" /><br />
+                <input class="textInput" type="password" name="passe" /><br />
 
-                <input type="submit" name="action" value="connexion" />
+                <input class="button" type="submit" name="action" value="connexion" />
             </form>
         </div>
 
@@ -159,6 +182,10 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         <!-- Cliquez ici n'est en fait pas un lien, on va juste afficher ou non le form
         de création d'un utilisateur. Le lien n'est d'ailleurs pas join du coup-->
         <p id="lienCreerUser">Cliquez ici</p>
+
+        <br>
+
+        <p id="errone">Pseudo ou mot de passe non valide</p>
 
     </div>
 
@@ -176,15 +203,15 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         <form action="controleur.php" method="GET">
 
             <h3>Pseudo :</h3>
-            <input type="text" name="login" /><br />
+            <input class="textInput" type="text" name="login" /><br />
 
             <h3>Password :</h3>
-            <input type="password" name="passe" /><br />
+            <input class="textInput"  type="password" name="passe" /><br />
 
             <h3>Confirmation du password :</h3>
-            <input type="password" name="passe2" /><br />
+            <input class="textInput"  type="password" name="passe2" /><br />
 
-            <input type="submit" name="action" value="creationCompte" />
+            <input class="button" type="submit" name="action" value="creationCompte" />
         </form>
     </div>
 

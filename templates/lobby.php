@@ -6,7 +6,10 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
     die("");
 }
 
+    include("templates/chat.php");
 ?>
+
+<link rel="stylesheet" href="css/cssCommun.css">
 
 
 <p id="nomMaster"></p>
