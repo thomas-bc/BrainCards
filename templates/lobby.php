@@ -26,7 +26,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         position:absolute;
         right:300px;
         left:0px;
-        margin:10px;
+        margin:0px;
         top:120px;
     }
 
@@ -48,6 +48,10 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         display: table;
        }
 
+    #lobby #hautLobby{
+        margin:10px;
+    }
+
     #lobby #infoBrainsto{
         width:60%;
         /*background-color: yellow;*/
@@ -64,6 +68,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         border-radius: 10px;
         border:1px solid white;
         padding:10px;
+        margin-left:20px;
     }
 
 
@@ -92,6 +97,56 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 
     #lobby #divParticipants{
+        text-align:center;
+        margin:10px auto 0 auto;
+        /*border:1px solid white;*/
+        /*border-radius:10px;*/
+        width:70%;
+
+        /*border-top:1px solid white;*/
+    }
+
+    #lobby #divParticipants h3{
+        font-size:1.5em;
+        margin-top:20px;
+    }
+
+    #lobby #divParticipants ul {
+        padding:0;
+    }
+
+    #lobby #divParticipants li{
+        margin:10px;
+        display:inline-block;
+
+        padding:5px 10px;
+        border:1px solid white;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    #lobby #divParticipants p {
+        float:left;
+    }
+
+    #lobby #divParticipants div{
+        float:left;
+        display:inline-block;
+        background-color: darkred;
+        color: #ED7D31;
+        width:20px;
+        height: 20px;
+        border-radius: 30px;
+
+        border:2px solid white;
+
+        position:relative;
+        top:3px;
+    }
+
+
+    #lobby #ready{
+        margin-top:20px;
         text-align:center;
     }
 
@@ -176,22 +231,26 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
     <div id="divParticipants">
 
-
+        <h3>Participants</h3>
 
         <ul id="participants">
+            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
+            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
+            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
+            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
+            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
+            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
+
         </ul>
-
-
-
-        <div id="formBtn">
-            <form action="controleur.php" method="GET">
-
-                <input id="ready" class="button" type="submit" name="action" value="I'm Ready !" />
-            </form>
-        </div>
 
     </div>
 
+    <div id="ready">
+        <form action="controleur.php" method="GET">
+
+            <input id="btnReady" class="button" type="submit" name="action" value="I'm Ready !" />
+        </form>
+    </div>
 
 </div>
 

@@ -46,7 +46,7 @@ foreach($messages as $dataMessage) {
     #chat{
         position:fixed;
         background-color: white ;
-        width:300px;
+        width:25%;
         right:0;
         height:100%;
         color:#ED7D31;
@@ -55,17 +55,23 @@ foreach($messages as $dataMessage) {
     #chat form{
         position:absolute;
         bottom:5px;
-        right:40px;
+        width:100%;
+        margin-left:5%;
     }
 
 
     #chat .button {
-        color: #ED7D31;
+        color: white;
+        background-color: #ED7D31;
+        margin-top:10px;
+
     }
 
     #chat .textInput{
         border-bottom:1px solid #ED7D31;
         color:#ED7D31;
+        width:60%;
+
     }
 
     #chat #affichageChat{
@@ -111,10 +117,6 @@ foreach($messages as $dataMessage) {
             document.location.reload();
         }
 </script>
-
-
-
-
 
 
 <div id="chat">
