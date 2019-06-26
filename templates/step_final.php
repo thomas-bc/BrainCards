@@ -43,6 +43,10 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         font-size:1.5em;
     }
 
+    #stepFinal ul li:hover{
+        cursor:pointer;
+    }
+
     #bigView{
         display:none;
         position:fixed;
