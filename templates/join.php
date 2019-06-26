@@ -1,10 +1,21 @@
 <?php
 
 include_once ("libs/modele.php");
+
+deb("basename : " . basename($_SERVER["PHP_SELF"]));
+
 // Si la page est appelée directement par son adresse, on redirige en passant pas la page index
 if (basename($_SERVER["PHP_SELF"]) != "index.php")
 {
     header("Location:../index.php?view=join");
+    die("");
+}
+
+
+
+// seul les utilisateurs connectés peuvent se rendre sur join
+if( !($idUser = estConnecte()) ){
+    header("Location:".dirname($_SERVER[PHP_SELF])."/index.php?view=accueil");
     die("");
 }
 

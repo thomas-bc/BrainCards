@@ -2,12 +2,8 @@
 session_start();
 
 include_once "libs/maLibUtils.php";
+include_once "libs/maLibSecurisation.php";
 
-
-
-
-// header pour debug le code php, appeler la fonction deb($trace) pour debug
-include("templates/header_debug_php.php");
 
 
 
@@ -29,5 +25,5 @@ switch($view)
 
 }
 
-// si besoin on met un footer
-//include("templates/z_footer_provisoire.php");
+// header pour debug le code php, appeler la fonction deb($trace) pour debug
+include("templates/header_debug_php.php");

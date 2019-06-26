@@ -6,6 +6,13 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
     die("");
 }
 
+// permet de déconnecter l'utilisateur
+deconnexion();
+
+$tentative = "";
+$tentative = valider("tentative");
+
+
 ?>
 <link rel="stylesheet" href="css/cssCommun.css">
 
@@ -83,11 +90,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         margin-top:20px;
     }
 
-    #errone{
-        color:#444444;
-        font-weight: bold;
-        display:none;
-    }
+
 
     #formLoginCreate{
 
@@ -105,17 +108,12 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         color:#444444;
     }
 
-    #pseudoDejaExistant{
-        display:none
-    }
-
-    #mauvaiseCorrespondance{
+    .messageErreur p{
+        color:#444444;
+        font-weight: bold;
         display:none;
     }
 
-    #reussi{
-        display:none;
-    }
 
 </style>
 
@@ -130,9 +128,26 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
             $('html, body').animate({
                 scrollTop: $("#formLoginCreate").offset().top
             }, 1500);
-        })
+        });
+        afficheMessageAide();
+    });
 
-    })
+    // fonction pour afficher ou non un message lors d'une connexion raté ou de la création d'un compte
+    function afficheMessageAide(){
+        var tentative = "<?php echo $tentative; ?>";
+        if(tentative=="createUser"){
+            $("#reussi").css("display", "block");
+        }
+        if(tentative=="createUserEchec"){
+            $("#pseudoDejaExistant").css("display", "block");
+        }
+        if(tentative=="passwordIdentique"){
+            $("#mauvaiseCorrespondance").css("display", "block");
+        }
+        if(tentative=="wrongUserPass"){
+            $("#errone").css("display", "block");
+        }
+    }
 
 
 
@@ -177,6 +192,12 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
             </form>
         </div>
 
+        <div class="messageErreur">
+            <p id="errone">Pseudo ou mot de passe non valide</p>
+            <p id="mauvaiseCorrespondance">Attention ! Les deux mots de passe ne correspondent pas !</p>
+            <p id="pseudoDejaExistant">Attention ! Le pseudo est déjà pris !</p>
+            <p id="reussi">Votre compte a bien été créé ! Vous pouvez désormais vous connecter.</p>
+        </div>
         <p>Pas encore inscrit ? </p>
 
         <!-- Cliquez ici n'est en fait pas un lien, on va juste afficher ou non le form
@@ -185,7 +206,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
         <br>
 
-        <p id="errone">Pseudo ou mot de passe non valide</p>
+
 
     </div>
 
@@ -206,18 +227,15 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
             <input class="textInput" type="text" name="login" /><br />
 
             <h3>Password :</h3>
-            <input class="textInput"  type="password" name="passe" /><br />
+            <input class="textInput"  type="password" name="pass" /><br />
 
             <h3>Confirmation du password :</h3>
-            <input class="textInput"  type="password" name="passe2" /><br />
+            <input class="textInput"  type="password" name="pass2" /><br />
 
             <input class="button" type="submit" name="action" value="Inscription" />
         </form>
     </div>
 
-    <p id="mauvaiseCorrespondance">Les deux mots de passe ne correspondent pas</p>
-    <p id="pseudoDejaExistant">Le pseudo est déjà pris</p>
-    <p id="reussi">Votre compte a bien été créé ! Vous pouvez désormais vous connecter.</p>
 
 
 </div>

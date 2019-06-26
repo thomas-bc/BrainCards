@@ -24,10 +24,10 @@ function deb($trace){
 function afficheDebug(){
 	if($contenu = valider("debug", "SESSION")){
 		$_SESSION["debug"] = "DEBUG :" . "#" . $contenu;
-		$tab = preg_split("/[#]/", $contenu);
+		$tab = preg_split("/[#]/", $_SESSION["debug"]);
 
 		echo "<script>";
-		echo "console.log('$_SESSION[debug]');";
+//		echo "console.log('$_SESSION[debug]');";
 		foreach ($tab as $value){
 			echo "console.log('$value');";
 		}

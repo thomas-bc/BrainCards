@@ -5,8 +5,6 @@ include_once "modele.php";	// Car on utilise la fonction connecterUtilisateur()
 
 
 
-
-
 /**
  * Cette fonction vérifie si le login/passe passés en paramètre sont légaux
  * Elle stocke les informations sur la personne dans des variables de session : session_start doit avoir été appelé...
@@ -51,3 +49,26 @@ function createUser($login,$password){
     }
     return false;
 }
+
+
+/**
+ * Indique si le client est un utilisateur qui s'est connecté à son compte.
+ * Renvoie l'id de l'user s'il est connecté.
+ * @return bool|int
+ */
+function estConnecte(){
+    $idUser = valider("idUser", "SESSION");
+    if($idUser)
+        return $idUser;
+    else
+        return false;
+}
+
+/**
+ * Deconnecte l'utilisateur
+ */
+function deconnexion(){
+    unset($_SESSION["idUser"]);
+}
+
+
