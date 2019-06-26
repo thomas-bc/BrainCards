@@ -55,26 +55,18 @@ if ($action = valider("action"))
         break;
 
         case "Inscription":
-
-            deb("inscription");
             $qs = "?view=accueil";
             if ($login = valider("login"))
             if ($pass = valider("pass"))
             if ($pass2 = valider("pass2"))
             {
-
-                deb("entree valide");
-                deb("login : " .$login);
-                deb("pass : " . $pass);
-                deb("pass2 : " . $pass2);
-
                 if($pass == $pass2){
-                    deb("entree pass identique");
                     if(createUser($login, $pass)){
-                        deb("user créée");
+                        deb("user " . $login. " créée");
+                        $qs = "?view=join";
                     }
                     else{
-                        deb("user existe deja");
+                        deb("user " . $login. " existe deja");
                     }
                 }
                 else{
