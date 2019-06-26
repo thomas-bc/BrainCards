@@ -183,6 +183,6 @@ function envoyerMessage($idBrainsto, $idUser, $message){
  * @param $idBrainsto
  */
 function getMessages($idBrainsto){
-    $SQL = "SELECT msg_auteur_id, msg_contenu FROM message WHERE msg_brainsto_id='$idBrainsto'";
+    $SQL = "SELECT user_username, msg_contenu FROM message JOIN user ON msg_auteur_id=user_id WHERE msg_brainsto_id='$idBrainsto'";
     return parcoursRs(SQLSelect($SQL));
 }
