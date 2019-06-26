@@ -162,15 +162,17 @@ function setParametres($idBrainsto, $parametre, $valeur){
 }
 
 /**
- * Crée une card pour le brainsto $idBrainstorm pour l'utilisateur $idUser.
+ * Si elle n'existe pas, crée une card pour le brainsto $idBrainstorm pour l'utilisateur $idUser.
  * Renvoie l'id de la card créée.
  * @param $idBrainstorm
  * @param $idUser
  * @return Renvoie
  */
 function createCard($idBrainsto, $idUser){
-    $SQL = "INSERT INTO card(card_auteur_id, card_brainsto_id) VALUES('$idUser','$idBrainsto')";
-    return SQLInsert($SQL);
+    if(SQLGetChamp("SELECT card_id from card where card_auteur_id='$idUser' AND card_brainsto_id='$idBrainsto'")==false) {
+        $SQL = "INSERT INTO card(card_auteur_id, card_brainsto_id) VALUES('$idUser','$idBrainsto')";
+        return SQLInsert($SQL);
+    }
 }
 
 /**

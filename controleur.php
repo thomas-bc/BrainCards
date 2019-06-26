@@ -80,13 +80,13 @@ if ($action = valider("action"))
 
         break;
 
-        case "Mes Brainsto's":
-            break;
-
         case "Rejoindre":
             if($idUser=valider("idUser","SESSION")){
                 if ($codeBrainstoCourant = valider("codeBrainsto")) {
-                    rejoindreBrainsto($idUser, $codeBrainstoCourant);
+                    rejoindreBrainsto($idUser, $codeBrainstoCourant); //on crée le brainsto
+                    $idBrainsto = getChamp('br_id', 'brainstorm', 'br_code', $codeBrainstoCourant);
+                    createCard($idBrainsto, $idUser); //on crée la card de l'utilisateur
+
                     $qs = "?view=lobby";
                 }
             };
@@ -96,7 +96,9 @@ if ($action = valider("action"))
             if($idUser=valider("idUser","SESSION")) {
                 if ($titreBrainsto = valider("titreBrainsto")) {
                     if ($descriptionBrainsto = valider("descriptionBrainsto")){
-                        $idBrainsto = creerBrainsto($idUser, $titreBrainsto, $descriptionBrainsto);
+                        $idBrainsto = creerBrainsto($idUser, $titreBrainsto, $descriptionBrainsto); //on crée le brainsto
+                        createCard($idBrainsto, $idUser); //on crée la card pour le master
+
                         $qs = "?view=lobby";
                     }
                 }

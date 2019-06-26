@@ -52,16 +52,29 @@ function createUser($login,$password){
     return false;
 }
 
+/** Crée une variable de session idBrainstoCourant ainsi que master=0
+ * @param $idUser
+ * @param $codeBrainstoCourant
+ */
 function rejoindreBrainsto($idUser, $codeBrainstoCourant){
     $idBrainstoCourant=getChamp('br_id','brainstorm','br_code', $codeBrainstoCourant);
+
     $_SESSION["idBrainstoCourant"] = $idBrainstoCourant;
+    $_SESSION["master"]=0;
     setUserBrainsto($idBrainstoCourant, $idUser);
 }
 
+/** Créé un brainsto dans la base ainsi qu'affecte une variable de session idBrainstoCourant et master=1
+ * @param $idMaster
+ * @param $titre
+ * @param $description
+ * @return Renvoie
+ */
 function creerBrainsto($idMaster, $titre, $description){
     $idBrainstoCourant = createBrainstorm($idMaster, $titre, $description);
 
     $_SESSION["idBrainstoCourant"] = $idBrainstoCourant;
+    $_SESSION["master"]=1;
     setUserBrainsto($idBrainstoCourant, $idMaster);
 
     return $idBrainstoCourant;

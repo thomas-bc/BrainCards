@@ -154,6 +154,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 </style>
 
+<!-- RECUPARATION DES INFOS DU BRAINSTO DANS LA SESSION -->
 <?php //on récupère les infos du brainsto par la session
 $idBrainsto = $_SESSION["idBrainstoCourant"];
 
@@ -162,6 +163,7 @@ $descriptionBrainsto = getChamp('br_description', 'brainstorm', 'br_id', $idBrai
 $idMasterBrainsto = getChamp('br_master_id', 'brainstorm', 'br_id', $idBrainsto);
 $nomMaster = getChamp('user_username', 'user', 'user_id', $idMasterBrainsto);
 ?>
+<!-- ------------ FIN --------- -->
 
 <div id="lobby">
 
@@ -185,6 +187,15 @@ $nomMaster = getChamp('user_username', 'user', 'user_id', $idMasterBrainsto);
 
         </div>
 
+        <!-- A FINIR ######## Desactivation des submit pour un non master ## A FINIR ##-->
+        <script src="js/jquery-3.4.1.js"></script>
+        <script>//on désactive les fonctionnalités du master si on est pas master
+            $(document).ready(function() {
+                $("#launchBrainsto").prop('disabled', true);
+                $(".selectList").prop('disabled', true);
+            });
+        </script>
+        <!-- A FINIR ######## Desactivation des submit pour un non master ## A FINIR ##-->
 
 
         <form action="controleur.php" method="GET">
