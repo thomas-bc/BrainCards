@@ -10,8 +10,7 @@ include_once("libs/modele.php");
 include_once("libs/maLibUtils.php");
 
 // On récupère l'id de la conversation à afficher, dans idConv
-$idBrainsto = getValue("BR_id");
-$idBrainsto = 1;
+$idBrainsto = getValue("idBrainstoCourant");
 
 if (!$idBrainsto)
 {
