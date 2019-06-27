@@ -171,6 +171,16 @@ function setParametres($idBrainsto, $parametre, $valeur){
 }
 
 /**
+ * récupere le paramètre $parametre du brainsto d'id $idBrainsto
+ * @param $idBrainsto
+ * @param $parametre (etat, titre, description, nb_tours, timer_tour, relecture_timer)
+ */
+function getParametres($idBrainsto,$parametre){
+    $SQL="SELECT $parametre FROM brainstorm WHERE br_id='$idBrainsto'";
+    return parcoursRs(SQLSelect($SQL));
+}
+
+/**
  * Si elle n'existe pas, crée une card pour le brainsto $idBrainstorm pour l'utilisateur $idUser.
  * Renvoie l'id de la card créée.
  * @param $idBrainstorm

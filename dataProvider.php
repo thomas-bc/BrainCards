@@ -29,12 +29,12 @@ if ($ma_valeur_associe_a_mon_mon_cle = valider("mon_mot_cle")) { // si mon mot c
 
 
 
-
 if ($variable = valider("variable"))
 {
     ob_start();
 
     switch($variable) {
+
 
         case "ready":
             if($idUser=valider("idUser", "SESSION")) {
@@ -54,6 +54,20 @@ if ($variable = valider("variable"))
 
             $recupParticipant="";
 
+            $nbTourNv=1;
+            $tpsTourNv=1;
+            $tpsRelectureNv=1;
+
+            $isMaster=valider("isMaster");
+            if($isMaster){
+                setParametres($idBrainsto, "nb_tours",$nbTour=valider("nbTour") );
+                setParametres($idBrainsto, "timer_tour" ,$tpsTour=valider("tpsTour") );
+                setParametres($idBrainsto, "relecture_timer",$tpsRelecture=valider("tpsRelecture") );
+            }
+            $nbTourNv=getChamp('br_nb_tours', 'brainstorm', 'br_id', $idBrainsto);
+            $tpsTourNv=getChamp('br_timer_tour', 'brainstorm', 'br_id', $idBrainsto);
+            $tpsRelectureNv=getChamp('br_relecture_timer', 'brainstorm', 'br_id', $idBrainsto);
+
             foreach($lesParticipants as $user){
                 $userId=$user["user_id"];
                 $userUsername=$user["user_username"];
@@ -67,7 +81,8 @@ if ($variable = valider("variable"))
                 $recupParticipant .= "<li><p id='pseudoParticipant'>". $userUsername . "</p><div id='btnViewReady' style='background-color:" . $couleur . "' ></div></li>";
             }
 
-            echo json_encode($recupParticipant);
+            $retour = array ('recupParticipant' => $recupParticipant, 'nbTour' => intval($nbTourNv), 'tpsTour' => intval($tpsTourNv), 'tpsRelecture' => intval($tpsRelectureNv));
+            echo json_encode($retour);
             break;
 
 

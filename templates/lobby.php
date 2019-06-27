@@ -185,25 +185,26 @@ $isMaster = isMaster($idBrainsto, $idUser);
     function timeoutLobby(){
         setTimeout(function (){
             $.ajax({"url":"dataProvider.php",
-                "data":{variable:"majLobby"},
+                "data":{variable:"majLobby",isMaster:$isMaster,nbTour:$("#nbTour").val(),tpsTour:$("#tpsTour").val(),tpsRelecture:$("#tpsRelecture").val()},
                 "type":"GET",
                 "success":function(donnees){
-                    console.log(JSON.parse(donnees));
-
-                    $("#participants").html(JSON.parse(donnees));
+                    $("#participants").html(oRep.recupParticipant);
+                    $("#nbTour").val(oRep.nbTour);
+                    $("#tpsTour").val(oRep.tpsTour);
+                    $("#tpsRelecture").val(oRep.tpsRelecture);
                 },
                 "error":function(){
                     console.log("erreur lors du chargement des infos dans lobby");
-                }
-            });
+                    }
+                });
             timeoutLobby();
         },2000);
     }
 
     $(document).ready(function() {
 
-        var isMaster = <?php echo $isMaster ?>;
-        console.log("is master : " + isMaster);
+        $isMaster = <?php echo $isMaster ?>;
+        console.log("is master : " + $isMaster);
         if(!<?php echo $isMaster ?>){
             $("#launchBrainsto").css('display', 'none');
             $(".selectList").prop('disabled', true);
@@ -267,7 +268,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
                 <div id="formMaster" >
 
                     <h3>Nombre de tours :</h3>
-                    <select class="selectList" size="1" name="nbTours" >
+                    <select id="nbTour" class="selectList" size="1" name="nbTours" >
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -276,7 +277,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
                     <br />
 
                     <h3>Temps par tour (min):</h3>
-                    <select class="selectList" size="1" name="tpsTour" >
+                    <select id="tpsTour" class="selectList" size="1" name="tpsTour" >
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -287,7 +288,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
                     <br />
 
                     <h3>Temps de relecture (min):</h3>
-                    <select class="selectList " size="1" name="tpsRelecture">
+                    <select id="tpsRelecture" class="selectList " size="1" name="tpsRelecture">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
