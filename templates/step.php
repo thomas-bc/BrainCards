@@ -162,6 +162,41 @@ include("header_brainsto.php");
       bottom: 10px;
   }
 </style>
+
+
+<script src="js/jquery-3.4.1.js"></script>
+
+<script>
+
+    function timeoutStep(){
+        setTimeout(function (){
+            if($("#chrono").val()>0){
+                $("#chrono").html(temp-1);
+                timeoutStep();
+            }
+        },1000);
+    }
+
+    function start(counter){
+        if(counter > 0){
+            setTimeout(function(){
+                counter--;
+                $("#chrono").html(counter);
+                start(counter);
+            }, 1000);
+        }
+        else {
+            //mettre l'ajax
+        }
+    }
+    $(document).ready(function() {
+        start(11);
+    });
+</script>
+
+
+
+
 <script>
     var container;
     var nb_elements = 0;
@@ -350,9 +385,12 @@ include("header_brainsto.php");
         container.appendChild(g);
         nb_elements++;
 
+
     }
 </script>
 
+
+<div id="chrono"></div>
 
 
 <div id="divCard">
