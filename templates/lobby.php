@@ -16,11 +16,6 @@ if( !($idUser = estConnecte()) ){
 }
 
 
-//$idBrainstoCourant = valider("$idBrainstoCourant");
-$idBrainstoCourant = 2;
-
-
-
 
 ?>
 
