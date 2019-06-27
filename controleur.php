@@ -11,10 +11,9 @@ if ($action = valider("action"))
 {
     ob_start();
 
-    switch($action)
-    {
+    switch($action) {
         case "versStep":
-            $qs= "?view=step";
+            $qs = "?view=step";
             break;
         case "accueil" :
             $qs = "?view=accueil";
@@ -47,44 +46,40 @@ if ($action = valider("action"))
         case "Connexion":
             $qs = "?view=accueil";
             if ($login = valider("login"))
-                if ($passe = valider("passe"))
-                {
+                if ($passe = valider("passe")) {
                     // On verifie l'utilisateur, et on crée des variables de session si tout est OK
                     // Cf. maLibSecurisation
-                    if(verifUser($login,$passe))
+                    if (verifUser($login, $passe))
                         $qs = "?view=join";
                 }
-        break;
+            break;
 
         case "Inscription":
             deb("inscription");
             $qs = "?view=accueil";
             if ($login = valider("login"))
-            if ($pass = valider("pass"))
-            if ($pass2 = valider("pass2"))
-            {
-                if($pass == $pass2){
-                    if(createUser($login, $pass)){
-                        deb("user " . $login. " créée");
-                        $qs = "?view=join";
-                    }
-                    else{
-                        deb("user " . $login. " existe deja");
-                    }
-                }
-                else{
-                    deb("password non identique");
-                }
+                if ($pass = valider("pass"))
+                    if ($pass2 = valider("pass2")) {
+                        if ($pass == $pass2) {
+                            if (createUser($login, $pass)) {
+                                deb("user " . $login . " créée");
+                                $qs = "?view=join";
+                            } else {
+                                deb("user " . $login . " existe deja");
+                            }
+                        } else {
+                            deb("password non identique");
+                        }
 
-            }
+                    }
 
-        break;
+            break;
 
         case "Mes Brainsto's":
             break;
 
         case "Rejoindre":
-            if($idUser=valider("idUser","SESSION")){
+            if ($idUser = valider("idUser", "SESSION")) {
                 if ($codeBrainstoCourant = valider("codeBrainsto")) {
                     rejoindreBrainsto($idUser, $codeBrainstoCourant);
                     $qs = "?view=lobby";
@@ -93,9 +88,9 @@ if ($action = valider("action"))
             break;
 
         case "Creer le Brainsto":
-            if($idUser=valider("idUser","SESSION")) {
+            if ($idUser = valider("idUser", "SESSION")) {
                 if ($titreBrainsto = valider("titreBrainsto")) {
-                    if ($descriptionBrainsto = valider("descriptionBrainsto")){
+                    if ($descriptionBrainsto = valider("descriptionBrainsto")) {
                         $idBrainsto = creerBrainsto($idUser, $titreBrainsto, $descriptionBrainsto);
                         $qs = "?view=lobby";
                     }
@@ -111,14 +106,6 @@ if ($action = valider("action"))
         case "Lancer le Brainsto":
             break;
 
-
-        case "Poster":
-            if($idBrainsto=valider($idBrainsto
-                && $idUser = valider("idUser","SESSION")
-                    && $message = valider("message"))){
-                envoyerMessage($idBrainsto, $idUser, $message);
-            }
-            break;
     }
 
 }
@@ -135,4 +122,5 @@ header("Location:" . $urlBase . $qs);
 
 // On écrit seulement après cette entête
 ob_end_flush();
+
 

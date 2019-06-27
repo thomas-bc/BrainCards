@@ -10,7 +10,7 @@ include_once("libs/modele.php");
 include_once("libs/maLibUtils.php");
 
 // On récupère l'id de la conversation à afficher, dans idConv
-$idBrainsto = getValue("idBrainstoCourant");
+$idBrainsto = $_SESSION["idBrainstoCourant"];
 
 if (!$idBrainsto)
 {
@@ -19,13 +19,12 @@ if (!$idBrainsto)
 
 // Les messages
 $messages = getMessages($idBrainsto);
+$recupChat = " ";
 
-
-$recupChat = "";
 
 foreach($messages as $dataMessage) {
-    $recupChat.='<li>';
-    $recupChat.="[" . $dataMessage["user_username"] . "] " ;
+    $recupChat.="<li> [";
+    $recupChat.= $dataMessage["user_username"] . "] " ;
     $recupChat.=$dataMessage["msg_contenu"];
     $recupChat.="</li>";
 }
@@ -57,6 +56,13 @@ foreach($messages as $dataMessage) {
         right:40px;
     }
 
+    #chat input{
+        position:absolute;
+        bottom:5px;
+        right:40px;
+    }
+
+
 
     #chat .button {
         color: #ED7D31;
@@ -87,13 +93,18 @@ foreach($messages as $dataMessage) {
 
 
 <script>
+
+
+
     function timeout(){
         setTimeout(function (){
             $.ajax({"url":"dataProvider.php",
-                "data":{"message":1},
+                "data":{"variable":"majMessage"},
                 "type":"GET",
-                "callback":function pourCallback(donnees){
-                    $("#affichageChat").html(JSON.parse(donnees));
+                "success":function(donnees){
+                console.log("successs");
+                console.log(JSON.parse(donnees));
+                $("#affichageChat").html(JSON.parse(donnees));
                 }});
             timeout();
         },1000);
@@ -104,7 +115,6 @@ foreach($messages as $dataMessage) {
 
         var recupChat= "<?php echo $recupChat; ?>";
 
-
         $("#affichageChat").append(recupChat);
 
 
@@ -112,6 +122,19 @@ foreach($messages as $dataMessage) {
 
 
         timeout();
+
+        $("#btnPoster").click(function() {
+            console.log("click");
+            $.ajax({
+                "url": "dataProvider.php",
+                "data": {"variable": "posterMessage"},
+                "type": "GET",
+                "callback": function (donnee) {
+                    console.log("click2");
+                }
+            });
+        }
+    );
 
     })
 
@@ -129,13 +152,9 @@ foreach($messages as $dataMessage) {
 
     <div id="affichageChat"></div>
 
-    <form action="controleur.php" method="GET" >
+        <input class="textInput" type="text" name="majMessage">
+        <input id="btnPoster" class="button" type="submit" name="nouveauMessage" value="Poster" >
 
-        <input class="textInput" type="text" name="message" >
-        <input type="hidden" name="idBrainsto" value="$idBrainsto" >
-        <input class="button" type="submit" name="action" value="Poster" >
-
-        </form>
 
 
 </div>

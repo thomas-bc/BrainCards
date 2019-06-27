@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include_once("libs/maLibUtils.php");
 include_once("libs/maLibSQL.pdo.php");
 include_once("libs/modele.php");
@@ -25,28 +27,56 @@ if ($ma_valeur_associe_a_mon_mon_cle = valider("mon_mot_cle")) { // si mon mot c
     // on envoie des données au format JSON
 }
 
-if($message = valider("message")){
-    // On récupère l'id de la conversation à afficher, dans idConv
-    $idBrainsto = getValue("BR_id");
-    $idBrainsto = 1;
 
-    if (!$idBrainsto)
-    {
-        die("idBrainsto manquant");
-    }
+
+
+if ($variable = valider("variable"))
+{
+    ob_start();
+
+    switch($variable) {
+        case "majMessage":
+            // On récupère l'id de la conversation à afficher, dans idConv
+            $idBrainsto = $_SESSION["idBrainstoCourant"];
+
+            if (!$idBrainsto)
+            {
+                die("idBrainsto manquant");
+            }
 
 // Les messages
-    $messages = getMessages($idBrainsto);
+            $messages = getMessages($idBrainsto);
+
+            $recupChat = " ";
+
+            foreach($messages as $dataMessage) {
+                $recupChat .= "<li>";
+                $recupChat .= "[" . $dataMessage["user_username"] . "] " ;
+                $recupChat .= $dataMessage["msg_contenu"];
+                $recupChat .= "</li>";
+            }
 
 
-    $recupChat = "";
+            echo json_encode($recupChat);
+            break;
 
-    foreach($messages as $dataMessage) {
-        $recupChat.='<li>';
-        $recupChat.="[" . $dataMessage["user_username"] . "] " ;
-        $recupChat.=$dataMessage["msg_contenu"];
-        $recupChat.="</li>";
+
+        case "posterMessage":
+            deb('ok');
+            if($idBrainsto = valider("idBrainstoCourant","SESSION")){
+                deb("ok1");
+                if ($idUser = valider("idUser", "SESSION")) {
+                    deb("ok2");
+                    if ($message = valider("message")) {
+                        deb("ok3");
+                        envoyerMessage($idBrainsto, $idUser, $message);
+                    }
+                }
+            }
+            echo "";
+
     }
-
-    echo json_encode($recupChat);
 }
+// On écrit seulement après cette entête
+ob_end_flush();
+?>
