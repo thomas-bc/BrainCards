@@ -172,6 +172,7 @@ $descriptionBrainsto = getChamp('br_description', 'brainstorm', 'br_id', $idBrai
 $idMasterBrainsto = getChamp('br_master_id', 'brainstorm', 'br_id', $idBrainsto);
 $nomMaster = getChamp('user_username', 'user', 'user_id', $idMasterBrainsto);
 $isMaster = isMaster($idBrainsto, $idUser);
+
 ?>
 <!-- ------------ FIN --------- -->
 
@@ -181,7 +182,23 @@ $isMaster = isMaster($idBrainsto, $idUser);
 
 <script>//on désactive les fonctionnalités du master si on est pas master
 
+    function timeoutLobby(){
+        setTimeout(function (){
+            $.ajax({"url":"dataProvider.php",
+                "data":{variable:"majLobby"},
+                "type":"GET",
+                "success":function(donnees){
+                    console.log(JSON.parse(donnees));
 
+                    $("#participants").html(JSON.parse(donnees));
+                },
+                "error":function(){
+                    console.log("erreur lors du chargement des infos dans lobby");
+                }
+            });
+            timeoutLobby();
+        },2000);
+    }
 
     $(document).ready(function() {
 
@@ -192,8 +209,24 @@ $isMaster = isMaster($idBrainsto, $idUser);
             $(".selectList").prop('disabled', true);
         }
 
+        timeoutLobby();
 
-
+        $("#btnReady").click(function() {
+                console.log("click");
+                $.ajax({
+                    "url": "dataProvider.php",
+                    "data": {variable:"ready"},
+                    "type": "GET",
+                    "success": function(){
+                        console.log("ok j'ai cliqué sur ready");
+                    },
+                    "error": function () {
+                        console.log("erreur lors de la maj de ready");
+                    }
+                });
+                $("#contenuMessage").val("");
+            }
+        );
     });
 
 
@@ -301,22 +334,12 @@ $isMaster = isMaster($idBrainsto, $idUser);
         <h3>Participants</h3>
 
         <ul id="participants">
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-
         </ul>
 
     </div>
 
     <div id="ready">
-        <form action="controleur.php" method="GET">
-
-            <input id="btnReady" class="button" type="submit" name="action" value="I'm Ready !" />
-        </form>
+            <button id="btnReady" class="button">I'm Ready !</button>
     </div>
 
 

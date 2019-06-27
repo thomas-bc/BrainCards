@@ -96,6 +96,15 @@ function setUserReady($userId, $ready){ //pb on utilise 0 et 1 au lieu de true f
 }
 
 /**
+ * renvoie la valeur pour savoir si l'utilisateur est déjà ready ou pas
+ * @param $userId
+ */
+function getUserReady($userId){
+    $SQL = "SELECT user_ready FROM user WHERE user_id='$userId'";
+    return parcoursRs(SQLSelect($SQL));
+}
+
+/**
  * Met à jour l'id du brainsto courant à $idBrainsto de l'utilisateur $idUser.
  * @param $idBrainsto
  * @param $userId

@@ -110,9 +110,6 @@ if ($action = valider("action"))
             break;
 
 
-        case "I'm Ready !":
-            break;
-
 
     }
 

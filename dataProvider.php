@@ -35,6 +35,42 @@ if ($variable = valider("variable"))
     ob_start();
 
     switch($variable) {
+
+        case "ready":
+            if($idUser=valider("idUser", "SESSION")) {
+                deb("je suis dans ready dans le dataprovider");
+                $ready = getUserReady($idUser);
+                if($ready["user_ready"]==1) {
+                    setUserReady($idUser, $ready["user_ready"]-1);
+                }
+                else { setUserReady($idUser, $ready["user_ready "]+1); }
+            }
+            break;
+
+
+        case "majLobby":
+            $idBrainsto = $_SESSION["idBrainstoCourant"];
+            $lesParticipants=getListUser($idBrainsto);
+
+            $recupParticipant="";
+
+            foreach($lesParticipants as $user){
+                $userId=$user["user_id"];
+                $userUsername=$user["user_username"];
+                $userReady=$user["user_ready"];
+
+                if($userReady==1){
+                    $couleur="green";
+                }
+                else{ $couleur="darkred"; }
+
+                $recupParticipant .= "<li><p id='pseudoParticipant'>". $userUsername . "</p><div id='btnViewReady' style='background-color:" . $couleur . "' ></div></li>";
+            }
+
+            echo json_encode($recupParticipant);
+            break;
+
+
         case "majMessage":
             // On récupère l'id de la conversation à afficher, dans idConv
             $idBrainsto = $_SESSION["idBrainstoCourant"];
