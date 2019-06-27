@@ -99,7 +99,6 @@ if ($action = valider("action"))
                         if($idBrainsto == -2) // si le brainsto n'existe pas
                             $qs = "?view=join&erreur=absent&code=".$codeBrainsto;
                     }
-//                    createCard($idBrainsto, $idUser); //on crée la card de l'utilisateur seulement quand le brainsto est lancé
                 }
             };
             break;
@@ -109,8 +108,6 @@ if ($action = valider("action"))
                 if ($titreBrainsto = valider("titreBrainsto")) {
                     if ($descriptionBrainsto = valider("descriptionBrainsto")){
                         $idBrainsto = creerBrainsto($idUser, $titreBrainsto, $descriptionBrainsto); //on crée le brainsto
-                        createCard($idBrainsto, $idUser); //on crée la card pour le master
-
                         $qs = "?view=lobby";
                     }
                     else
