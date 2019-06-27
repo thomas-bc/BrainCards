@@ -49,7 +49,9 @@ include("header_brainsto.php");
       text-align: center;
       border-radius: 4px;
       color:white;
-      background-color: blue;
+      background-color: #444444;
+      padding:5px;
+
   }
   .draggable_img
   {
@@ -66,7 +68,9 @@ include("header_brainsto.php");
       border-radius: 4px;
       margin-bottom: 20px;
       color:white;
-      background-color: yellow;
+      background-color: #629dfc;
+      padding:5px;
+
   }
   .draggable_url
   {
@@ -83,7 +87,8 @@ include("header_brainsto.php");
       border-radius: 4px;
       margin-bottom: 20px;
       color:white;
-      background-color: green;
+      background-color: #68768c;
+      padding:5px;
   }
   #container{
       width: 600px;
@@ -96,7 +101,6 @@ include("header_brainsto.php");
   body{
       display: block;
       margin: 0px;
-      background-color:orangered;
   }
   #container_elements{
       height: 300px;
@@ -105,6 +109,7 @@ include("header_brainsto.php");
       margin-left: 30px;
       border-radius: 10px;
       background-color: white;
+
   }
   .wrapper{
       align-items: center;
@@ -117,7 +122,7 @@ include("header_brainsto.php");
       height: 50px;
       width: 80px;
       display:table;
-      vertical-align: middle;
+      line-height: 50px;
       margin-left: auto;
       margin-right: auto;
       text-align: center;
@@ -126,13 +131,13 @@ include("header_brainsto.php");
       color:white;
   }
   #Idée{
-      background-color: blue;
+      background-color: #444444;
   }
   #Image{
-      background-color: yellow;
+      background-color: #629dfc;
   }
   #URL{
-      background-color: green;
+      background-color: #68768c;
   }
   .titre{
       margin-left: auto;
@@ -357,7 +362,7 @@ include("header_brainsto.php");
             <button id="suppress">btn</button>
         </div>
         <div id="container_elements">
-            <div class="titre"><h1>Outils</h1></div>
+            <div class="titre"><h2>Outils</h2></div>
             <div class="menu_item" id="Idée" onclick="create(event)"><p>Idée</p></div>
             <div class="menu_item" id="Image" onclick="create(event)"><p>Image</p></div>
             <div class="menu_item" id="URL" onclick="create(event)"><p>URL</p></div>
