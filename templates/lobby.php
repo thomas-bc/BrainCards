@@ -235,7 +235,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
 </script>
 
 
-<div id="lobby" onclick="goToStep()">
+<div id="lobby" >
 
     <div id="hautLobby">
 

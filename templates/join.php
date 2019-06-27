@@ -131,18 +131,6 @@ $_SESSION["idBrainstoCourant"] = null;
         display:none;
     }
 
-    /*#mauvaisCode{*/
-    /*    color:#444444;*/
-    /*    font-weight: bold;*/
-    /*    display:none;*/
-    /*}*/
-    /*#brainstoArchive{*/
-    /*    color:#444444;*/
-    /*    font-weight: bold;*/
-    /*    display:none;*/
-    /*}*/
-
-
     #formAjoutBrainsto{
         display:none;
     }
