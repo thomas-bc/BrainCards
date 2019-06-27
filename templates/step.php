@@ -390,7 +390,6 @@ include("header_brainsto.php");
 </script>
 
 
-<div id="chrono"></div>
 
 
 <div id="divCard">
