@@ -223,10 +223,14 @@ $isMaster = isMaster($idBrainsto, $idUser);
                 "type":"GET",
                 "success":function(donnees){
                     var oRep = JSON.parse(donnees);
+                    console.log(oRep);
                     $("#participants").html(oRep.recupParticipant);
                     $("#nbTour").val(oRep.nbTour);
                     $("#tpsTour").val(oRep.tpsTour);
                     $("#tpsRelecture").val(oRep.tpsRelecture);
+                    // si le master a appuyé sur Lancer le brainstorm
+                    if(oRep.brainstoLance)
+                        document.getElementById("rejoindreFirstStep").click();
                 },
                 "error":function(){
                     console.log("erreur lors du chargement des infos dans lobby");
@@ -266,6 +270,8 @@ $isMaster = isMaster($idBrainsto, $idUser);
             }
         });
     }
+
+
 </script>
 
 
@@ -333,7 +339,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
                 </div>
 
                 <div id="divLaunchBrainsto">
-                    <input id="launchBrainsto" class="button" type="submit" name="action" value="Lancer le Brainsto" />
+                    <input id="launchBrainsto" class="button" type="button" name="action" value="Lancer le Brainsto" />
                 </div>
 
             </div>

@@ -81,7 +81,9 @@ if ($variable = valider("variable"))
                 $recupParticipant .= "<li><p id='pseudoParticipant'>". $userUsername . "</p><div id='btnViewReady' style='background-color:" . $couleur . "' ></div></li>";
             }
 
-            $retour = array ('recupParticipant' => $recupParticipant, 'nbTour' => intval($nbTourNv), 'tpsTour' => intval($tpsTourNv), 'tpsRelecture' => intval($tpsRelectureNv));
+            $brainstoLance = nbCardBrainsto($idBrainsto);
+
+            $retour = array ('recupParticipant' => $recupParticipant, 'nbTour' => intval($nbTourNv), 'tpsTour' => intval($tpsTourNv), 'tpsRelecture' => intval($tpsRelectureNv), 'brainstoLance' => ($brainstoLance > 0));
             echo json_encode($retour);
             break;
 
