@@ -183,7 +183,8 @@ $isMaster = isMaster($idBrainsto, $idUser);
 
 <script src="js/jquery-3.4.1.js"></script>
 
-<script>
+<script>//on désactive les fonctionnalités du master si on est pas master
+
 
     $(document).ready(function() {
 
@@ -211,7 +212,6 @@ $isMaster = isMaster($idBrainsto, $idUser);
                 $("#contenuMessage").val("");
             }
         );
-
 
 
     });
@@ -339,9 +339,27 @@ $isMaster = isMaster($idBrainsto, $idUser);
                 </div>
 
                 <div id="divLaunchBrainsto">
-                    <input id="launchBrainsto" class="button" type="button" name="action" value="Lancer le Brainsto" />
+                    <input id="launchBrainsto" class="button" value="Lancer le Brainsto !" type="button" />
                 </div>
 
+                  <script>
+                    $("#launchBrainsto").click(function() {
+                            console.log("click");
+                            $.ajax({
+                                "url": "dataProvider.php",
+                                "data": {variable:"lancerBrainsto"},
+                                "type": "GET",
+                                "success": function(){
+                                    console.log("ok j'ai cliqué");
+                                },
+                                "error": function () {
+                                    console.log("erreur lors du lancement");
+                                }
+                            });
+
+                        }
+                    );
+                </script>
             </div>
 
         </form>

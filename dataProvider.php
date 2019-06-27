@@ -41,9 +41,11 @@ if ($variable = valider("variable"))
                 deb("je suis dans ready dans le dataprovider");
                 $ready = getUserReady($idUser);
                 if($ready["user_ready"]==1) {
-                    setUserReady($idUser, $ready["user_ready"]-1);
+                    setUserReady($idUser, 0);
                 }
-                else { setUserReady($idUser, $ready["user_ready "]+1); }
+                else {
+                    setUserReady($idUser, 1);
+                }
             }
             break;
 
@@ -127,7 +129,19 @@ if ($variable = valider("variable"))
                 }
             }
             echo "";
+            break;
 
+
+        case "lancerBrainsto": //ne va en fait que créer les cards du brainsto, le chargement de la page se fait par requête asynchrone
+            if($idBrainsto = valider("idBrainstoCourant","SESSION")){
+                if ($idUser = valider("idUser", "SESSION")) {
+                    $lesParticipants = getListUser($idBrainsto);
+                    foreach ($lesParticipants as $participant){
+                        createCard($idBrainsto, $participant["user_id"]);
+                    }
+                }
+            }
+            break;
     }
 }
 

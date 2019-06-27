@@ -10,7 +10,7 @@ include_once "libs/modele.php";
 if ($action = valider("action"))
 {
     ob_start();
-    deb("controleur : " . $action);
+
     switch($action) {
         case "versStep":
             $qs = "?view=step";
@@ -108,6 +108,7 @@ if ($action = valider("action"))
                 if ($titreBrainsto = valider("titreBrainsto")) {
                     if ($descriptionBrainsto = valider("descriptionBrainsto")){
                         $idBrainsto = creerBrainsto($idUser, $titreBrainsto, $descriptionBrainsto); //on crée le brainsto
+
                         $qs = "?view=lobby";
                     }
                     else
@@ -116,10 +117,6 @@ if ($action = valider("action"))
                 else
                     $qs = "?view=join&erreur=titre";
             }
-            break;
-
-
-        case "Lancer le Brainsto":
             break;
 
         case "goToStep":

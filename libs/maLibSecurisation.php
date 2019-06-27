@@ -69,7 +69,10 @@ function estConnecte(){
  * Deconnecte l'utilisateur
  */
 function deconnexion(){
-    unset($_SESSION["idUser"]);
+    if($idUser = valider("idUser")){
+        setUserReady($idUser, 0);
+        unset($_SESSION["idUser"]);
+    }
 }
 
 
