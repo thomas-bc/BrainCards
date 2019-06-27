@@ -78,6 +78,7 @@ if( !($idUser = estConnecte()) ){
         border:1px solid white;
         padding:10px;
         margin-left:20px;
+
     }
 
 
@@ -170,40 +171,37 @@ $titreBrainsto = getChamp('br_titre', 'brainstorm', 'br_id', $idBrainsto);
 $descriptionBrainsto = getChamp('br_description', 'brainstorm', 'br_id', $idBrainsto);
 $idMasterBrainsto = getChamp('br_master_id', 'brainstorm', 'br_id', $idBrainsto);
 $nomMaster = getChamp('user_username', 'user', 'user_id', $idMasterBrainsto);
+$isMaster = isMaster($idBrainsto, $idUser);
 ?>
 <!-- ------------ FIN --------- -->
-<script>
+
+
+    <!-- A FINIR ######## Desactivation des submit pour un non master ## A FINIR ##-->
+<script src="js/jquery-3.4.1.js"></script>
+
+<script>//on désactive les fonctionnalités du master si on est pas master
 
 
 
+    $(document).ready(function() {
 
-    //$(document).ready(function(){
-    //
-    //
-    //
-    //})
-    //
-    //
-    //function getBrainsto(idBrainstorm){
-    //    $.ajax({"url":"dataProvider.php",
-    //            "data" :
-    //            {
-    //                idBrainsto : idBrainstorm
-    //            }
-    //            "callback":integrer2
-    //    });
-    //}
-    //
-    //
-    //function afficherBrainsto(){
-    //    var idBrainsto = "<?php //echo $idBrainstoCourant; ?>//";
-    //
-    //
-    //}
+        var isMaster = <?php echo $isMaster ?>;
+        console.log("is master : " + isMaster);
+        if(!<?php echo $isMaster ?>){
+            $("#launchBrainsto").css('display', 'none');
+            $(".selectList").prop('disabled', true);
+        }
+
+
+
+    });
 
 
 
 </script>
+<!-- A FINIR ######## Desactivation des submit pour un non master ## A FINIR ##-->
+
+
 
 
 <div id="lobby">
@@ -227,16 +225,6 @@ $nomMaster = getChamp('user_username', 'user', 'user_id', $idMasterBrainsto);
             </p>
 
         </div>
-
-        <!-- A FINIR ######## Desactivation des submit pour un non master ## A FINIR ##-->
-        <script src="js/jquery-3.4.1.js"></script>
-        <script>//on désactive les fonctionnalités du master si on est pas master
-            $(document).ready(function() {
-                $("#launchBrainsto").prop('disabled', true);
-                $(".selectList").prop('disabled', true);
-            });
-        </script>
-        <!-- A FINIR ######## Desactivation des submit pour un non master ## A FINIR ##-->
 
 
         <form action="controleur.php" method="GET">
