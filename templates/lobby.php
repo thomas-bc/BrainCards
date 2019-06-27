@@ -172,6 +172,7 @@ $descriptionBrainsto = getChamp('br_description', 'brainstorm', 'br_id', $idBrai
 $idMasterBrainsto = getChamp('br_master_id', 'brainstorm', 'br_id', $idBrainsto);
 $nomMaster = getChamp('user_username', 'user', 'user_id', $idMasterBrainsto);
 $isMaster = isMaster($idBrainsto, $idUser);
+
 ?>
 <!-- ------------ FIN --------- -->
 
@@ -181,7 +182,21 @@ $isMaster = isMaster($idBrainsto, $idUser);
 
 <script>//on désactive les fonctionnalités du master si on est pas master
 
-
+    function timeout(){
+        setTimeout(function (){
+            $.ajax({"url":"dataProvider.php",
+                "data":{variable:"majLobby"},
+                "type":"GET",
+                "success":function(donnees){
+                    $("#participants").replaceWith(JSON.parse(donnees));
+                },
+                "error":function(){
+                    console.log("erreur lors du chargement des infos dans lobby");
+                }
+            });
+            timeout();
+        },1000);
+    }
 
     $(document).ready(function() {
 
@@ -191,6 +206,9 @@ $isMaster = isMaster($idBrainsto, $idUser);
             $("#launchBrainsto").css('display', 'none');
             $(".selectList").prop('disabled', true);
         }
+
+        timeout();
+
 
 
 
@@ -283,11 +301,6 @@ $isMaster = isMaster($idBrainsto, $idUser);
         <h3>Participants</h3>
 
         <ul id="participants">
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
             <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
 
         </ul>
