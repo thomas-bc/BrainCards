@@ -301,8 +301,6 @@ $isMaster = isMaster($idBrainsto, $idUser);
         <h3>Participants</h3>
 
         <ul id="participants">
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-
         </ul>
 
     </div>

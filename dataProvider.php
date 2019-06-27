@@ -46,7 +46,12 @@ if ($variable = valider("variable"))
                 $userUsername=$user["user_username"];
                 $userReady=$user["user_ready"];
 
-                $recupParticipant .= "<li><p id='pseudoParticipant'>". $userUsername . "</p><div id='btnViewReady'></div></li>";
+                if($userReady){
+                    $couleur="green";
+                }
+                else{ $couleur="darkred"; }
+
+                $recupParticipant .= "<li><p id='pseudoParticipant'>". $userUsername . "</p><div id='btnViewReady' style='background-color:'" . $couleur . " ></div></li>";
             }
 
             echo json_encode($recupParticipant);
