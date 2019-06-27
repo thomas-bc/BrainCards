@@ -105,7 +105,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
     <?php
         if ($view = valider("view")){
             if ($view!="lobby"){
-                echo "<div id='tempoStep'>tempo</div>";
+                echo "<div id='chrono'>tempo</div>";
 
             }
         };
