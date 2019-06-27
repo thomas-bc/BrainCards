@@ -96,6 +96,15 @@ function setUserReady($userId, $ready){ //pb on utilise 0 et 1 au lieu de true f
 }
 
 /**
+ * renvoie la valeur pour savoir si l'utilisateur est déjà ready ou pas
+ * @param $userId
+ */
+function getUserReady($userId){
+    $SQL = "SELECT user_ready FROM user WHERE user_id='$userId'";
+    return parcoursRs(SQLSelect($SQL));
+}
+
+/**
  * Met à jour l'id du brainsto courant à $idBrainsto de l'utilisateur $idUser.
  * @param $idBrainsto
  * @param $userId
@@ -159,6 +168,16 @@ function setParametres($idBrainsto, $parametre, $valeur){
     };
     $SQL .= " WHERE br_id = '$idBrainsto'";
     SQLUpdate($SQL);
+}
+
+/**
+ * récupere le paramètre $parametre du brainsto d'id $idBrainsto
+ * @param $idBrainsto
+ * @param $parametre (etat, titre, description, nb_tours, timer_tour, relecture_timer)
+ */
+function getParametres($idBrainsto,$parametre){
+    $SQL="SELECT $parametre FROM brainstorm WHERE br_id='$idBrainsto'";
+    return parcoursRs(SQLSelect($SQL));
 }
 
 /**

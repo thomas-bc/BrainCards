@@ -136,7 +136,7 @@ function tprint($tab)
 {
 	echo "<pre>\n";
 	print_r($tab);
-	echo "</pre>\n";	
+	echo "</pre>\n";
 }
 
 

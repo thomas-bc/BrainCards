@@ -175,6 +175,7 @@ $descriptionBrainsto = getChamp('br_description', 'brainstorm', 'br_id', $idBrai
 $idMasterBrainsto = getChamp('br_master_id', 'brainstorm', 'br_id', $idBrainsto);
 $nomMaster = getChamp('user_username', 'user', 'user_id', $idMasterBrainsto);
 $isMaster = isMaster($idBrainsto, $idUser);
+
 ?>
 <!-- ------------ FIN --------- -->
 
@@ -184,21 +185,60 @@ $isMaster = isMaster($idBrainsto, $idUser);
 
 <script>
 
-
-
     $(document).ready(function() {
 
-        if(!<?php echo $isMaster ?>){
+        if(!<?php echo $isMaster; ?>){
             $("#launchBrainsto").css('display', 'none');
             $(".selectList").prop('disabled', true);
         }
 
-        // goToStep();
+        timeoutLobby();
+
+
+        $("#btnReady").click(function() {
+                console.log("click");
+                $.ajax({
+                    "url": "dataProvider.php",
+                    "data": {variable:"ready"},
+                    "type": "GET",
+                    "success": function(){
+                        console.log("ok j'ai cliqué sur ready");
+                    },
+                    "error": function () {
+                        console.log("erreur lors de la maj de ready");
+                    }
+                });
+                $("#contenuMessage").val("");
+            }
+        );
+
+
 
     });
 
+    function timeoutLobby(){
+        setTimeout(function (){
+            $.ajax({"url":"dataProvider.php",
+                "data":{variable:"majLobby",isMaster:<?php echo $isMaster;?>,nbTour:$("#nbTour").val(),tpsTour:$("#tpsTour").val(),tpsRelecture:$("#tpsRelecture").val()},
+                "type":"GET",
+                "success":function(donnees){
+                    var oRep = JSON.parse(donnees);
+                    $("#participants").html(oRep.recupParticipant);
+                    $("#nbTour").val(oRep.nbTour);
+                    $("#tpsTour").val(oRep.tpsTour);
+                    $("#tpsRelecture").val(oRep.tpsRelecture);
+                },
+                "error":function(){
+                    console.log("erreur lors du chargement des infos dans lobby");
+                    }
+                });
+            timeoutLobby();
+        },2000);
+    }
 
-    function goToStep(){
+
+
+    function goToStep() {
 
         // $("#rejoindreFirstStep").click();
 
@@ -217,32 +257,26 @@ $isMaster = isMaster($idBrainsto, $idUser);
 
         $.ajax({
             "url": "dataProvider.php",
-            "data": {variable2:"goToStep"},
+            "data": {variable2: "goToStep"},
             "type": "GET",
-            "success": function(chaineJson){
+            "success": function (chaineJson) {
                 var objetJson = JSON.parse(chaineJson);
                 console.log(objetJson);
                 console.log("ok j'ai cliqué");
             }
         });
-
-        // $.ajax({"url":"controleur.php",
-        //         "data" : { "action": "goToStep" } ,
-        //          "async" : false});
-
     }
-
 </script>
 
 
-<div id="lobby" >
+<div id="lobby">
 
     <div id="hautLobby">
 
         <div id="infoBrainsto" class="column">
 
             <h3> Nom du Master : </h3>
-            <p id="nomMaster" ><?php echo $nomMaster ?></p>
+            <p id="nomMaster"><?php echo $nomMaster ?></p>
 
             <br>
 
@@ -265,7 +299,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
                 <div id="formMaster" >
 
                     <h3>Nombre de tours :</h3>
-                    <select class="selectList" size="1" name="nbTours" >
+                    <select id="nbTour" class="selectList" size="1" name="nbTours" >
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -274,7 +308,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
                     <br />
 
                     <h3>Temps par tour (min):</h3>
-                    <select class="selectList" size="1" name="tpsTour" >
+                    <select id="tpsTour" class="selectList" size="1" name="tpsTour" >
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -285,7 +319,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
                     <br />
 
                     <h3>Temps de relecture (min):</h3>
-                    <select class="selectList " size="1" name="tpsRelecture">
+                    <select id="tpsRelecture" class="selectList " size="1" name="tpsRelecture">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -314,22 +348,12 @@ $isMaster = isMaster($idBrainsto, $idUser);
         <h3>Participants</h3>
 
         <ul id="participants">
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-            <li><p id="pseudoParticipant">Participant 1</p><div id="btnViewReady"></div></li>
-
         </ul>
 
     </div>
 
     <div id="ready">
-        <form action="controleur.php" method="GET">
-
-            <input id="btnReady" class="button" type="submit" name="action" value="I'm Ready !"  />
-        </form>
+            <button id="btnReady" class="button">I'm Ready !</button>
     </div>
 
 
