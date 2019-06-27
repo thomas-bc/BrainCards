@@ -35,6 +35,19 @@ if ($variable = valider("variable"))
     ob_start();
 
     switch($variable) {
+
+        case "ready":
+            if($idUser=valider("idUser", "SESSION")) {
+                deb("je suis dans ready dans le dataprovider");
+                $ready = getUserReady($idUser);
+                if($ready["user_ready"]==1) {
+                    setUserReady($idUser, $ready["user_ready"]-1);
+                }
+                else { setUserReady($idUser, $ready["user_ready "]+1); }
+            }
+            break;
+
+
         case "majLobby":
             $idBrainsto = $_SESSION["idBrainstoCourant"];
             $lesParticipants=getListUser($idBrainsto);

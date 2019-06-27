@@ -195,7 +195,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
                 }
             });
             timeout();
-        },1000);
+        },2000);
     }
 
     $(document).ready(function() {
@@ -208,6 +208,24 @@ $isMaster = isMaster($idBrainsto, $idUser);
         }
 
         timeout();
+
+        $("#btnReady").click(function() {
+                console.log("click");
+                $.ajax({
+                    "url": "dataProvider.php",
+                    "data": {variable:"ready"},
+                    "type": "GET",
+                    "success": function(){
+                        console.log("ok j'ai cliqué sur ready");
+                    },
+                    "error": function () {
+                        console.log("erreur lors de la maj de ready");
+                    }
+                });
+                $("#contenuMessage").val("");
+            }
+        );
+
 
 
 
@@ -306,10 +324,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
     </div>
 
     <div id="ready">
-        <form action="controleur.php" method="GET">
-
-            <input id="btnReady" class="button" type="submit" name="action" value="I'm Ready !" />
-        </form>
+            <button id="btnReady" class="button">I'm Ready !</button>
     </div>
 
 </div>
