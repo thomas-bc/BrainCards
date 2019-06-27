@@ -188,6 +188,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
                 "data":{variable:"majLobby",isMaster:$isMaster,nbTour:$("#nbTour").val(),tpsTour:$("#tpsTour").val(),tpsRelecture:$("#tpsRelecture").val()},
                 "type":"GET",
                 "success":function(donnees){
+                    var oRep = JSON.parse(donnees);
                     $("#participants").html(oRep.recupParticipant);
                     $("#nbTour").val(oRep.nbTour);
                     $("#tpsTour").val(oRep.tpsTour);
