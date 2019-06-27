@@ -160,6 +160,9 @@ if( !($idUser = estConnecte()) ){
         text-align:center;
     }
 
+    #rejoindreFirstStep{
+        display: none;
+    }
 
 </style>
 
@@ -176,42 +179,70 @@ $isMaster = isMaster($idBrainsto, $idUser);
 <!-- ------------ FIN --------- -->
 
 
-    <!-- A FINIR ######## Desactivation des submit pour un non master ## A FINIR ##-->
+
 <script src="js/jquery-3.4.1.js"></script>
 
-<script>//on désactive les fonctionnalités du master si on est pas master
+<script>
 
 
 
     $(document).ready(function() {
 
-        var isMaster = <?php echo $isMaster ?>;
-        console.log("is master : " + isMaster);
         if(!<?php echo $isMaster ?>){
             $("#launchBrainsto").css('display', 'none');
             $(".selectList").prop('disabled', true);
         }
 
-
+        // goToStep();
 
     });
 
 
+    function goToStep(){
+
+        // $("#rejoindreFirstStep").click();
+
+        // go to first step
+        // document.getElementById("rejoindreFirstStep").click();
+
+        console.log("click");
+
+        // $.ajax({"url":"dataProvider.php",
+        //     "data" : { "variable2": "goToStep" } ,
+        // "callback" : function(chaineJson){
+        //     var objetJson = JSON.parse(chaineJson);
+        //     console.log(objetJson);
+        //     console.log("kjvkj");
+        // }});
+
+        $.ajax({
+            "url": "dataProvider.php",
+            "data": {variable2:"goToStep"},
+            "type": "GET",
+            "success": function(chaineJson){
+                var objetJson = JSON.parse(chaineJson);
+                console.log(objetJson);
+                console.log("ok j'ai cliqué");
+            }
+        });
+
+        // $.ajax({"url":"controleur.php",
+        //         "data" : { "action": "goToStep" } ,
+        //          "async" : false});
+
+    }
 
 </script>
-<!-- A FINIR ######## Desactivation des submit pour un non master ## A FINIR ##-->
 
 
-
-
-<div id="lobby">
+<div id="lobby" onclick="goToStep()">
 
     <div id="hautLobby">
 
         <div id="infoBrainsto" class="column">
 
             <h3> Nom du Master : </h3>
-            <p id="nomMaster"><?php echo $nomMaster ?></p>
+            <p id="nomMaster" ><?php echo $nomMaster ?></p>
 
             <br>
 
@@ -297,9 +328,14 @@ $isMaster = isMaster($idBrainsto, $idUser);
     <div id="ready">
         <form action="controleur.php" method="GET">
 
-            <input id="btnReady" class="button" type="submit" name="action" value="I'm Ready !" />
+            <input id="btnReady" class="button" type="submit" name="action" value="I'm Ready !"  />
         </form>
     </div>
+
+
+    <form action="controleur.php" method="GET">
+        <input id="rejoindreFirstStep" type="submit" name="action" value="goToStep"  />
+    </form>
 
 </div>
 

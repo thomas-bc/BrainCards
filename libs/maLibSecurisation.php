@@ -74,15 +74,29 @@ function deconnexion(){
 
 
 /** Crée une variable de session idBrainstoCourant ainsi que master=0
+ * Renvoie l'id du brainsto si le brainsto de code $codeBrainstoCourant existe, false sinon
  * @param $idUser
  * @param $codeBrainstoCourant
+ * @return false|string
  */
 function rejoindreBrainsto($idUser, $codeBrainstoCourant){
     $idBrainstoCourant=getChamp('br_id','brainstorm','br_code', $codeBrainstoCourant);
-
-    $_SESSION["idBrainstoCourant"] = $idBrainstoCourant;
-    $_SESSION["master"]=0;
-    setUserBrainsto($idBrainstoCourant, $idUser);
+    $nbCards = nbCardBrainsto($idBrainstoCourant);
+    deb("nb card : " . $nbCards);
+    deb("id braisnto : " . $idBrainstoCourant);
+    //on vérifie que le brainsto avec ce code existe et qu'il n'est pas archivé
+    if($idBrainstoCourant != 0){
+        if($nbCards == 0){
+            $_SESSION["idBrainstoCourant"] = $idBrainstoCourant;
+            $_SESSION["master"]=0;
+            setUserBrainsto($idBrainstoCourant, $idUser);
+            return $idBrainstoCourant;
+        }
+        else
+            return -1; // archive
+    }
+    else
+        return -2; // absent
 }
 
 /** Créé un brainsto dans la base ainsi qu'affecte une variable de session idBrainstoCourant et master=1

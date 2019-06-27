@@ -10,7 +10,7 @@ include_once "libs/modele.php";
 if ($action = valider("action"))
 {
     ob_start();
-
+    deb("controleur : " . $action);
     switch($action) {
         case "versStep":
             $qs = "?view=step";
@@ -88,12 +88,17 @@ if ($action = valider("action"))
 
         case "Rejoindre":
             if($idUser=valider("idUser","SESSION")){
-                if ($codeBrainstoCourant = valider("codeBrainsto")) {
-                    rejoindreBrainsto($idUser, $codeBrainstoCourant); //on crée le brainsto
-                    $idBrainsto = getChamp('br_id', 'brainstorm', 'br_code', $codeBrainstoCourant);
-                    createCard($idBrainsto, $idUser); //on crée la card de l'utilisateur
-
-                    $qs = "?view=lobby";
+                if ($codeBrainsto = valider("codeBrainsto")) {
+                    $idBrainsto = rejoindreBrainsto($idUser, $codeBrainsto); //on rejoint le brainsto
+                    if($idBrainsto > 0){ // si le brainsto existe
+                        $qs = "?view=lobby";
+                    }
+                    else{
+                        if($idBrainsto == -1) // si le brainsto est archivé
+                            $qs = "?view=join&erreur=archive&code=".$codeBrainsto;
+                        if($idBrainsto == -2) // si le brainsto n'existe pas
+                            $qs = "?view=join&erreur=absent&code=".$codeBrainsto;
+                    }
                 }
             };
             break;
@@ -103,11 +108,13 @@ if ($action = valider("action"))
                 if ($titreBrainsto = valider("titreBrainsto")) {
                     if ($descriptionBrainsto = valider("descriptionBrainsto")){
                         $idBrainsto = creerBrainsto($idUser, $titreBrainsto, $descriptionBrainsto); //on crée le brainsto
-                        createCard($idBrainsto, $idUser); //on crée la card pour le master
-
                         $qs = "?view=lobby";
                     }
+                    else
+                        $qs = "?view=join&erreur=description&titre=".$titreBrainsto;
                 }
+                else
+                    $qs = "?view=join&erreur=titre";
             }
             break;
 
@@ -119,7 +126,10 @@ if ($action = valider("action"))
         case "Lancer le Brainsto":
             break;
 
-
+        case "goToStep":
+            deb("step");
+            $qs = "?view=step";
+            break;
 
     }
 
