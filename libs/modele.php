@@ -52,7 +52,7 @@ function createBrainstorm($idUserMaster, $titre, $description){
  * @return false|string
  */
 function getChamp($champ, $table, $champ_val, $val){
-    $SQL = "SELECT $champ from $table where $champ_val = $val";
+    $SQL = "SELECT $champ from $table where $champ_val = '$val'";
     return SQLGetChamp($SQL);
 }
 /**
@@ -194,6 +194,17 @@ function majHtmlCard($idCard, $codeHtml){
 function getCardAndPseudo($idBrainstorm){
     $SQL = "SELECT user_username, card_objet_html FROM user JOIN card ON CARD_auteur_id=user_id WHERE CARD_brainsto_id='$idBrainstorm'";
     return parcoursRs(SQLSelect($SQL));
+}
+
+/**
+ * Compte le nombre de card associé à un brainsto
+ * Renvoie le nombre de card
+ * @param $idBrainsto
+ * @return int
+ */
+function nbCardBrainsto($idBrainsto){
+    $SQL = "SELECT COUNT(*) FROM card WHERE CARD_brainsto_id='$idBrainsto'";
+    return SQLGetChamp($SQL);
 }
 
 /**

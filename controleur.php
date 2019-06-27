@@ -88,12 +88,18 @@ if ($action = valider("action"))
 
         case "Rejoindre":
             if($idUser=valider("idUser","SESSION")){
-                if ($codeBrainstoCourant = valider("codeBrainsto")) {
-                    rejoindreBrainsto($idUser, $codeBrainstoCourant); //on crée le brainsto
-                    $idBrainsto = getChamp('br_id', 'brainstorm', 'br_code', $codeBrainstoCourant);
-                    createCard($idBrainsto, $idUser); //on crée la card de l'utilisateur
-
-                    $qs = "?view=lobby";
+                if ($codeBrainsto = valider("codeBrainsto")) {
+                    $idBrainsto = rejoindreBrainsto($idUser, $codeBrainsto); //on rejoint le brainsto
+                    if($idBrainsto > 0){ // si le brainsto existe
+                        $qs = "?view=lobby";
+                    }
+                    else{
+                        if($idBrainsto == -1) // si le brainsto est archivé
+                            $qs = "?view=join&erreur=archive&code=".$codeBrainsto;
+                        if($idBrainsto == -2) // si le brainsto n'existe pas
+                            $qs = "?view=join&erreur=absent&code=".$codeBrainsto;
+                    }
+//                    createCard($idBrainsto, $idUser); //on crée la card de l'utilisateur seulement quand le brainsto est lancé
                 }
             };
             break;
@@ -107,7 +113,11 @@ if ($action = valider("action"))
 
                         $qs = "?view=lobby";
                     }
+                    else
+                        $qs = "?view=join&erreur=description&titre=".$titreBrainsto;
                 }
+                else
+                    $qs = "?view=join&erreur=titre";
             }
             break;
 

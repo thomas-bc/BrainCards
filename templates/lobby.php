@@ -185,8 +185,6 @@ $isMaster = isMaster($idBrainsto, $idUser);
 
     $(document).ready(function() {
 
-        var isMaster = <?php echo $isMaster ?>;
-        console.log("is master : " + isMaster);
         if(!<?php echo $isMaster ?>){
             $("#launchBrainsto").css('display', 'none');
             $(".selectList").prop('disabled', true);

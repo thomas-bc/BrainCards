@@ -16,6 +16,7 @@ if( !($idUser = estConnecte()) ){
     die("");
 }
 
+
 //on clean les dernières sessions de brainsto
 $_SESSION["idBrainstoCourant"] = null;
 
@@ -123,11 +124,23 @@ $_SESSION["idBrainstoCourant"] = null;
         background-color:#e5e5e5;
     }
 
-    #mauvaisCode{
+
+    .erreur{
         color:#444444;
         font-weight: bold;
         display:none;
     }
+
+    /*#mauvaisCode{*/
+    /*    color:#444444;*/
+    /*    font-weight: bold;*/
+    /*    display:none;*/
+    /*}*/
+    /*#brainstoArchive{*/
+    /*    color:#444444;*/
+    /*    font-weight: bold;*/
+    /*    display:none;*/
+    /*}*/
 
 
     #formAjoutBrainsto{
@@ -156,6 +169,7 @@ $_SESSION["idBrainstoCourant"] = null;
 </style>
 
 <script src="js/jquery-3.4.1.js"></script>
+
 
 <script>
 
@@ -186,6 +200,32 @@ $_SESSION["idBrainstoCourant"] = null;
 
             }
         });
+
+
+        // on affiche un message d'erreur si nécessaire lorsqu'on clique sur rejoindre ou creer le brainsto
+        var erreur = "<?php echo $erreur=valider("erreur"); ?>";
+        var code = "<?php echo $erreur=valider("code"); ?>";
+        console.log("erreur : " + erreur);
+        if(erreur == "absent"){
+            $("#mauvaisCode").css('display', 'block');
+            $("#textInputCodeBrainsto").val(code);
+        }
+        if(erreur == "archive"){
+            $("#brainstoArchive").css('display', 'block');
+            $("#textInputCodeBrainsto").val(code);
+        }
+        if(erreur == "titre"){
+            $("#titreAbsent").css('display', 'block');
+            $("#formAjoutBrainsto").fadeIn(500);
+
+        }
+        if(erreur == "description"){
+            $("#descriptionAbsente").css('display', 'block');
+            $("#formAjoutBrainsto").fadeIn(500);
+            $("input[name=titreBrainsto]").val("<?php echo $titre=valider("titre"); ?>");
+        }
+
+
     })
 
 
@@ -240,7 +280,8 @@ $_SESSION["idBrainstoCourant"] = null;
     </form>
 </div>
 
-<p id="mauvaisCode"> Veuillez rentrer un code Brainsto valide</p>
+<p class="erreur" id="mauvaisCode"> Veuillez rentrer un code Brainsto valide</p>
+<p class="erreur" id="brainstoArchive"> Le brainsto que vous essayer de joindre est archivé</p>
 
 <!-- FIN PARTIE REJOINDRE UN BRAINSTO GRACE AU CODE -->
 
@@ -268,6 +309,10 @@ $_SESSION["idBrainstoCourant"] = null;
         <input class="button" type="submit" name="action" value="Creer le Brainsto" />
 
     </form>
+
+    <p class="erreur" id="titreAbsent">Veuillez rentrer un titre</p>
+    <p class="erreur" id="descriptionAbsente">Veuillez rentrer une description</p>
+
 </div>
 
 <!-- FIN PARTIE CREER UN BRAINSTO -->
