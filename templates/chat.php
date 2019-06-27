@@ -62,6 +62,13 @@ foreach($messages as $dataMessage) {
         right:40px;
     }
 
+    #chat button{
+        position:absolute;
+        bottom:5px;
+        right:40px;
+    }
+
+
 
 
     #chat .button {
@@ -99,13 +106,15 @@ foreach($messages as $dataMessage) {
     function timeout(){
         setTimeout(function (){
             $.ajax({"url":"dataProvider.php",
-                "data":{"variable":"majMessage"},
+                "data":{variable:"majMessage"},
                 "type":"GET",
                 "success":function(donnees){
-                console.log("successs");
-                console.log(JSON.parse(donnees));
                 $("#affichageChat").html(JSON.parse(donnees));
-                }});
+                },
+                "error":function(){
+                console.log("erreur lors du chargement des messages");
+                }
+            });
             timeout();
         },1000);
     }
@@ -124,17 +133,20 @@ foreach($messages as $dataMessage) {
         timeout();
 
         $("#btnPoster").click(function() {
-            console.log("click");
-            $.ajax({
-                "url": "dataProvider.php",
-                "data": {"variable": "posterMessage"},
-                "type": "GET",
-                "callback": function (donnee) {
-                    console.log("click2");
-                }
-            });
-        }
-    );
+                console.log("click");
+                $.ajax({
+                    "url": "dataProvider.php",
+                    "data": {variable:"posterMessage",message:$("#contenuMessage").val()},
+                    "type": "GET",
+                    "success": function(donnee){
+                        console.log("ok j'ai cliqué");
+                    },
+                    "error": function () {
+                        console.log("erreur lors du poste du message");
+                    }
+                });
+            }
+        );
 
     })
 
@@ -151,11 +163,8 @@ foreach($messages as $dataMessage) {
     <h2>Chat</h2>
 
     <div id="affichageChat"></div>
-
-        <input class="textInput" type="text" name="majMessage">
-        <input id="btnPoster" class="button" type="submit" name="nouveauMessage" value="Poster" >
-
-
+    <input id="contenuMessage" class="textInput" type="text">
+    <button id="btnPoster" class="button">Poster</button>
 
 </div>
 
