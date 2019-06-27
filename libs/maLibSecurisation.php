@@ -118,7 +118,13 @@ function creerBrainsto($idMaster, $titre, $description){
     return $idBrainstoCourant;
 }
 
-
+/**
+ * Renvoie la card que verra l'user $idUser dans le brainsto $idBrainsto à l'étape $numEtape
+ * @param $idBrainsto
+ * @param $idUser
+ * @param $numEtape
+ * @return false|string
+ */
 function giveNewCard($idBrainsto, $idUser, $numEtape){
     $users = getListUser($idBrainsto);
     $nb_user = count($users);

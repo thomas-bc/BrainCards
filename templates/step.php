@@ -381,19 +381,6 @@ $card = json_encode(giveNewCard($idBrainsto, $idUser, 3));
 
 
 
-    $(document).ready(function() {
-
-
-
-    });
-
-
-    function actualiserStep(){
-
-
-
-    }
-
 
 </script>
 
