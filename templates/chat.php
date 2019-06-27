@@ -145,6 +145,7 @@ foreach($messages as $dataMessage) {
                         console.log("erreur lors du poste du message");
                     }
                 });
+                $("#contenuMessage").val("");
             }
         );
 
