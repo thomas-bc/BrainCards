@@ -119,6 +119,20 @@ function creerBrainsto($idMaster, $titre, $description){
 }
 
 
+function giveNewCard($idBrainsto, $idUser, $numEtape){
+    $users = getListUser($idBrainsto);
+    $nb_user = count($users);
+    $indexUser = -1;
+    for ($i=0; $i<$nb_user ; $i++) {
+        $user = $users[$i];
+        if($user["user_id"] == $idUser){
+            $indexUser = $i;
+        }
+    }
+    $indAutre = ($indexUser + $numEtape - 1)%$nb_user;
 
+    $card = getCardFromUser($idBrainsto, $users[$indAutre]["user_id"]);
+    return $card;
+}
 
 

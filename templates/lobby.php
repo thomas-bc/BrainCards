@@ -176,6 +176,7 @@ $idMasterBrainsto = getChamp('br_master_id', 'brainstorm', 'br_id', $idBrainsto)
 $nomMaster = getChamp('user_username', 'user', 'user_id', $idMasterBrainsto);
 $isMaster = isMaster($idBrainsto, $idUser);
 
+
 ?>
 <!-- ------------ FIN --------- -->
 

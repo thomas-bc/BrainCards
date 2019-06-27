@@ -370,6 +370,10 @@ $nbTours = getChamp('br_nb_tours', 'brainstorm', 'br_id', $idBrainsto);
 $timeByStep = getChamp('br_timer_tour', 'brainstorm', 'br_id', $idBrainsto);
 
 
+
+
+$card = json_encode(giveNewCard($idBrainsto, $idUser, 3));
+
 ?>
 
 
@@ -385,6 +389,7 @@ $timeByStep = getChamp('br_timer_tour', 'brainstorm', 'br_id', $idBrainsto);
 
 
     function actualiserStep(){
+
 
 
     }

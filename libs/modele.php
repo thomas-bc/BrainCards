@@ -216,6 +216,27 @@ function getCardAndPseudo($idBrainstorm){
 }
 
 /**
+ * Renvoie l'id de la card d'user $idUser correspondant au brainsto $idBrainsto
+ * @param $idBrainsto
+ * @param $idUser
+ * @return false|string
+ */
+function getCardFromUser($idBrainsto, $idUser){
+    $SQL = "SELECT * FROM card WHERE CARD_brainsto_id='$idBrainsto' AND CARD_auteur_id='$idUser'";
+    return parcoursRs(SQLSelect($SQL));
+}
+
+/** Renvoie la card d'id $idCard sous la forme d'un tableau associatif
+ * @param $idCard
+ * @return false|string
+ */
+function getCardFromId($idCard){
+    $SQL = "SELECT * FROM card WHERE CARD_id='$idCard'";
+    return parcoursRs(SQLSelect($SQL));
+}
+
+
+/**
  * Compte le nombre de card associé à un brainsto
  * Renvoie le nombre de card
  * @param $idBrainsto
