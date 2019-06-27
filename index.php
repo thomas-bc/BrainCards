@@ -29,5 +29,4 @@ switch($view)
 }
 
 // si besoin on met un footer
-include("templates/z_footer_provisoire.php");
 include("templates/footer_debug_php.php");

@@ -10,7 +10,7 @@ include_once "libs/modele.php";
 if ($action = valider("action"))
 {
     ob_start();
-
+    deb("controleur : " . $action);
     switch($action) {
         case "versStep":
             $qs = "?view=step";
@@ -126,7 +126,10 @@ if ($action = valider("action"))
         case "Lancer le Brainsto":
             break;
 
-
+        case "goToStep":
+            deb("step");
+            $qs = "?view=step";
+            break;
 
     }
 

@@ -77,6 +77,32 @@ if ($variable = valider("variable"))
 
     }
 }
+
+
+
+// surveiller le lancement du brainsto
+if ($variable2 = valider("variable2"))
+{
+
+    $idBrainsto = $_SESSION["idBrainstoCourant"];
+    $brainstoLance = nbCardBrainsto($idBrainsto);
+
+    $data["goToStep"] = ($brainstoLance > 0);
+
+    echo json_encode($data);
+
+}
+
+
+
+
+
+
+
+
+
+
+
 // On écrit seulement après cette entête
 ob_end_flush();
 ?>
