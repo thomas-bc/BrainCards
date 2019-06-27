@@ -50,29 +50,20 @@ foreach($messages as $dataMessage) {
         color:#ED7D31;
     }
 
-    #chat form{
+    #chat #formPoster{
         position:absolute;
         bottom:5px;
         right:40px;
     }
 
-    #chat input{
-        position:absolute;
-        bottom:5px;
-        right:40px;
-    }
 
-    #chat button{
-        position:absolute;
-        bottom:5px;
-        right:40px;
-    }
 
 
 
 
     #chat .button {
-        color: #ED7D31;
+        color: white;
+        background-color: #ED7D31;
     }
 
     #chat .textInput{
@@ -178,8 +169,10 @@ foreach($messages as $dataMessage) {
     <h2>Chat</h2>
 
     <div id="affichageChat"></div>
+    <div id="formPoster">
     <input id="contenuMessage" class="textInput" type="text" onkeyup="posterMessage(event);">
     <button id="btnPoster" class="button">Poster</button>
+    </div>
 
 </div>
 
