@@ -188,13 +188,15 @@ $isMaster = isMaster($idBrainsto, $idUser);
                 "data":{variable:"majLobby"},
                 "type":"GET",
                 "success":function(donnees){
-                    $("#participants").replaceWith(JSON.parse(donnees));
+                    console.log(JSON.parse(donnees));
+
+                    $("#participants").html(JSON.parse(donnees));
                 },
                 "error":function(){
                     console.log("erreur lors du chargement des infos dans lobby");
                 }
             });
-            timeout();
+            timeoutLobby();
         },2000);
     }
 
