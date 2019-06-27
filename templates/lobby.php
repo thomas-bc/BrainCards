@@ -182,7 +182,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
 
 <script>//on désactive les fonctionnalités du master si on est pas master
 
-    function timeout(){
+    function timeoutLobby(){
         setTimeout(function (){
             $.ajax({"url":"dataProvider.php",
                 "data":{variable:"majLobby"},
@@ -207,7 +207,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
             $(".selectList").prop('disabled', true);
         }
 
-        timeout();
+        timeoutLobby();
 
         $("#btnReady").click(function() {
                 console.log("click");
@@ -225,11 +225,6 @@ $isMaster = isMaster($idBrainsto, $idUser);
                 $("#contenuMessage").val("");
             }
         );
-
-
-
-
-
     });
 
 
