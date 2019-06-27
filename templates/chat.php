@@ -119,16 +119,30 @@ foreach($messages as $dataMessage) {
         },1000);
     }
 
+    function posterMessage(e){
+        if ( e.keyCode == 13 ){
+            $.ajax({
+                "url": "dataProvider.php",
+                "data": {variable:"posterMessage",message:$("#contenuMessage").val()},
+                "type": "GET",
+                "success": function(){
+                    console.log("ok j'ai cliqué");
+                },
+                "error": function () {
+                    console.log("erreur lors du poste du message");
+                }
+            });
+            $("#contenuMessage").val("");
+        }
+    }
+
 
     $(document).ready(function(){
 
         var recupChat= "<?php echo $recupChat; ?>";
 
+
         $("#affichageChat").append(recupChat);
-
-
-        // toutes les 10 SECONDES, Raffraichir le div avec les messages
-
 
         timeout();
 
@@ -138,7 +152,7 @@ foreach($messages as $dataMessage) {
                     "url": "dataProvider.php",
                     "data": {variable:"posterMessage",message:$("#contenuMessage").val()},
                     "type": "GET",
-                    "success": function(donnee){
+                    "success": function(){
                         console.log("ok j'ai cliqué");
                     },
                     "error": function () {
@@ -164,7 +178,7 @@ foreach($messages as $dataMessage) {
     <h2>Chat</h2>
 
     <div id="affichageChat"></div>
-    <input id="contenuMessage" class="textInput" type="text">
+    <input id="contenuMessage" class="textInput" type="text" onkeyup="posterMessage(event);">
     <button id="btnPoster" class="button">Poster</button>
 
 </div>
