@@ -10,8 +10,7 @@ include_once("libs/modele.php");
 include_once("libs/maLibUtils.php");
 
 // On récupère l'id de la conversation à afficher, dans idConv
-$idBrainsto = getValue("BR_id");
-$idBrainsto = 1;
+$idBrainsto = $_SESSION["idBrainstoCourant"];
 
 if (!$idBrainsto)
 {
@@ -20,13 +19,12 @@ if (!$idBrainsto)
 
 // Les messages
 $messages = getMessages($idBrainsto);
+$recupChat = " ";
 
-
-$recupChat = "";
 
 foreach($messages as $dataMessage) {
-    $recupChat.='<li>';
-    $recupChat.="[" . $dataMessage["user_username"] . "] " ;
+    $recupChat.="<li> [";
+    $recupChat.= $dataMessage["user_username"] . "] " ;
     $recupChat.=$dataMessage["msg_contenu"];
     $recupChat.="</li>";
 }
@@ -46,7 +44,7 @@ foreach($messages as $dataMessage) {
     #chat{
         position:fixed;
         background-color: white ;
-        width:25%;
+        width:300px;
         right:0;
         height:100%;
         color:#ED7D31;
@@ -55,23 +53,31 @@ foreach($messages as $dataMessage) {
     #chat form{
         position:absolute;
         bottom:5px;
-        width:100%;
-        margin-left:5%;
+        right:40px;
+    }
+
+    #chat input{
+        position:absolute;
+        bottom:5px;
+        right:40px;
+    }
+
+    #chat button{
+        position:absolute;
+        bottom:5px;
+        right:40px;
     }
 
 
-    #chat .button {
-        color: white;
-        background-color: #ED7D31;
-        margin-top:10px;
 
+
+    #chat .button {
+        color: #ED7D31;
     }
 
     #chat .textInput{
         border-bottom:1px solid #ED7D31;
         color:#ED7D31;
-        width:60%;
-
     }
 
     #chat #affichageChat{
@@ -95,6 +101,42 @@ foreach($messages as $dataMessage) {
 
 <script>
 
+
+
+    function timeout(){
+        setTimeout(function (){
+            $.ajax({"url":"dataProvider.php",
+                "data":{variable:"majMessage"},
+                "type":"GET",
+                "success":function(donnees){
+                $("#affichageChat").html(JSON.parse(donnees));
+                },
+                "error":function(){
+                console.log("erreur lors du chargement des messages");
+                }
+            });
+            timeout();
+        },1000);
+    }
+
+    function posterMessage(e){
+        if ( e.keyCode == 13 ){
+            $.ajax({
+                "url": "dataProvider.php",
+                "data": {variable:"posterMessage",message:$("#contenuMessage").val()},
+                "type": "GET",
+                "success": function(){
+                    console.log("ok j'ai cliqué");
+                },
+                "error": function () {
+                    console.log("erreur lors du poste du message");
+                }
+            });
+            $("#contenuMessage").val("");
+        }
+    }
+
+
     $(document).ready(function(){
 
         var recupChat= "<?php echo $recupChat; ?>";
@@ -102,36 +144,42 @@ foreach($messages as $dataMessage) {
 
         $("#affichageChat").append(recupChat);
 
+        timeout();
+
+        $("#btnPoster").click(function() {
+                console.log("click");
+                $.ajax({
+                    "url": "dataProvider.php",
+                    "data": {variable:"posterMessage",message:$("#contenuMessage").val()},
+                    "type": "GET",
+                    "success": function(){
+                        console.log("ok j'ai cliqué");
+                    },
+                    "error": function () {
+                        console.log("erreur lors du poste du message");
+                    }
+                });
+                $("#contenuMessage").val("");
+            }
+        );
 
     })
 
 
-
-
-
-
-    // DANS 10 SECONDES, Raffraichir la page
-        window.setTimeout(fnReload,10000);
-
-        function fnReload(){
-            document.location.reload();
-        }
 </script>
+
+
+
+
+
 
 
 <div id="chat">
     <h2>Chat</h2>
 
     <div id="affichageChat"></div>
-
-    <form action="controleur.php" method="GET" >
-
-        <input class="textInput" type="text" name="message" >
-        <input type="hidden" name="idBrainsto" value="$idBrainsto" >
-        <input class="button" type="submit" name="action" value="Poster" >
-
-        </form>
-
+    <input id="contenuMessage" class="textInput" type="text" onkeyup="posterMessage(event);">
+    <button id="btnPoster" class="button">Poster</button>
 
 </div>
 

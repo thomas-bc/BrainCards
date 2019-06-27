@@ -11,11 +11,9 @@ if ($action = valider("action"))
 {
     ob_start();
 
-
-    switch($action)
-    {
+    switch($action) {
         case "versStep":
-            $qs= "?view=step";
+            $qs = "?view=step";
             break;
         case "accueil" :
             $qs = "?view=accueil";
@@ -48,16 +46,15 @@ if ($action = valider("action"))
         case "Connexion":
             $qs = "?view=accueil";
             if ($login = valider("login"))
-                if ($passe = valider("passe"))
-                {
+                if ($passe = valider("passe")) {
                     // On verifie l'utilisateur, et on crée des variables de session si tout est OK
                     // Cf. maLibSecurisation
-                    if(verifUser($login,$passe))
+                    if (verifUser($login, $passe))
                         $qs = "?view=join";
                     else
                         $qs .= "&tentative=wrongUserPass";
                 }
-        break;
+            break;
 
         case "Inscription":
             deb("inscription");
@@ -85,6 +82,9 @@ if ($action = valider("action"))
             }
 
         break;
+
+        case "Mes Brainsto's":
+            break;
 
         case "Rejoindre":
             if($idUser=valider("idUser","SESSION")){
@@ -120,13 +120,7 @@ if ($action = valider("action"))
             break;
 
 
-        case "Poster":
-            if($idBrainsto=valider($idBrainsto
-                && $idUser = valider("idUser","SESSION")
-                    && $message = valider("message"))){
-                envoyerMessage($idBrainsto, $idUser, $message);
-            }
-            break;
+
     }
 
 }
