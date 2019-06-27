@@ -35,7 +35,10 @@ include("header_brainsto.php");
                 "type":"POST",
                 "success":function(donnees){
                     //var oRep = JSON.parse(donnees);
+                    console.log('après requête :')
                     console.log(donnees);
+                    $("#container").html(donnees);
+                    start(30);
                 },
                 "error":function(){
                     console.log("erreur lors du chargement des infos dans lobby");
@@ -45,8 +48,9 @@ include("header_brainsto.php");
 
         }
     }
+
     $(document).ready(function() {
-        start(5);
+        start(30);
     });
 </script>
 

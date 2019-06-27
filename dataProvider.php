@@ -150,6 +150,10 @@ if ($variable = valider("variable"))
                 if($idCardCourant = valider("idCardCourant", "SESSION")) {
                     //echo valider("cardHTML");
                     majHtmlCard($idCardCourant, valider("cardHTML"));
+                    sleep(5);
+                    $_SESSION["idCardCourant"]=$_SESSION["idCardCourant"] + 1; //à changer avec la fonction de Nathan
+                    $nvCardHTML = getChamp('card_objet_html', 'card', 'card_id', $_SESSION["idCardCourant"]);
+                    echo $nvCardHTML;
                 }
             }
         }
