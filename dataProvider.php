@@ -136,8 +136,11 @@ if ($variable = valider("variable"))
             if($idBrainsto = valider("idBrainstoCourant","SESSION")){
                 if ($idUser = valider("idUser", "SESSION")) {
                     $lesParticipants = getListUser($idBrainsto);
-                    foreach ($lesParticipants as $participant){
-                        createCard($idBrainsto, $participant["user_id"]);
+                    $usersReady = everybodyIsReady($idBrainsto);
+                    if($usersReady){
+                        foreach ($lesParticipants as $participant){
+                            createCard($idBrainsto, $participant["user_id"]);
+                        }
                     }
                 }
             }

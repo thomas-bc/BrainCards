@@ -5,6 +5,14 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
     header("Location:../index.php?view=step");
     die("");
 }
+// seul les utilisateurs connectés peuvent se rendre sur join
+if( !($idUser = estConnecte()) ){
+    header("Location:".dirname($_SERVER[PHP_SELF])."/index.php?view=accueil");
+    die("");
+}
+
+
+
 include("header_brainsto.php");
 ?>
 
@@ -353,6 +361,36 @@ include("header_brainsto.php");
     }
 </script>
 
+<script src="js/jquery-3.4.1.js"></script>
+
+<?php //on récupère les infos du brainsto par la session
+$idBrainsto = $_SESSION["idBrainstoCourant"];
+
+$nbTours = getChamp('br_nb_tours', 'brainstorm', 'br_id', $idBrainsto);
+$timeByStep = getChamp('br_timer_tour', 'brainstorm', 'br_id', $idBrainsto);
+
+
+?>
+
+
+<script>
+
+
+
+    $(document).ready(function() {
+
+
+
+    });
+
+
+    function actualiserStep(){
+
+
+    }
+
+
+</script>
 
 
 <div id="divCard">

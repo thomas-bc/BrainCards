@@ -223,7 +223,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
                 "type":"GET",
                 "success":function(donnees){
                     var oRep = JSON.parse(donnees);
-                    console.log(oRep);
+                    // console.log(oRep);
                     $("#participants").html(oRep.recupParticipant);
                     $("#nbTour").val(oRep.nbTour);
                     $("#tpsTour").val(oRep.tpsTour);
@@ -241,35 +241,6 @@ $isMaster = isMaster($idBrainsto, $idUser);
     }
 
 
-
-    function goToStep() {
-
-        // $("#rejoindreFirstStep").click();
-
-        // go to first step
-        // document.getElementById("rejoindreFirstStep").click();
-
-        console.log("click");
-
-        // $.ajax({"url":"dataProvider.php",
-        //     "data" : { "variable2": "goToStep" } ,
-        // "callback" : function(chaineJson){
-        //     var objetJson = JSON.parse(chaineJson);
-        //     console.log(objetJson);
-        //     console.log("kjvkj");
-        // }});
-
-        $.ajax({
-            "url": "dataProvider.php",
-            "data": {variable2: "goToStep"},
-            "type": "GET",
-            "success": function (chaineJson) {
-                var objetJson = JSON.parse(chaineJson);
-                console.log(objetJson);
-                console.log("ok j'ai cliqué");
-            }
-        });
-    }
 
 
 </script>

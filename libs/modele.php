@@ -249,3 +249,17 @@ function getMessages($idBrainsto){
     $SQL = "SELECT user_username, msg_contenu FROM message JOIN user ON msg_auteur_id=user_id WHERE msg_brainsto_id='$idBrainsto'";
     return parcoursRs(SQLSelect($SQL));
 }
+
+/**
+ * Indique si tous les utilisateurs sont prêts.
+ * Renvoie true si c'est le cas
+ * @param $idBrainsto
+ * @return bool
+ */
+function everybodyIsReady($idBrainsto){
+    $SQL = "SELECT COUNT(*) FROM user WHERE USER_brainsto_courant_id='$idBrainsto'";
+    $nbUser = SQLGetChamp($SQL);
+    $SQL = "SELECT COUNT(*) FROM user WHERE USER_brainsto_courant_id='$idBrainsto' AND user_ready = 1";
+    $nbUserReady = SQLGetChamp($SQL);
+    return ($nbUser==$nbUserReady);
+}
