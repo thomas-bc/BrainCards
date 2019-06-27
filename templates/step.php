@@ -12,7 +12,53 @@ include("header_brainsto.php");
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+<!----------- CYCLE FIN STEP  ---------------->
+<script src="js/jquery-3.4.1.js"></script>
+
+<script>
+
+
+    function start(counter){
+        if(counter > 0){
+            setTimeout(function(){
+                counter--;
+                $("#chrono").html(counter);
+                start(counter);
+            }, 1000);
+        }
+        else {
+
+            console.log($("#container").html());
+            $.ajax({"url":"dataProvider.php",
+                "data":{variable:"cycleStep", cardHTML: $("#container").html() },
+                "type":"POST",
+                "success":function(donnees){
+                    //var oRep = JSON.parse(donnees);
+                    console.log(donnees);
+                },
+                "error":function(){
+                    console.log("erreur lors du chargement des infos dans lobby");
+                }
+            });
+
+
+        }
+    }
+    $(document).ready(function() {
+        start(5);
+    });
+</script>
+
+
+
+
+<!--       FIN CYCLE        -->
+
+
+
 <style>
+
 
   /***************** HEADER ***********************/
   #headerBrainsto{
@@ -162,37 +208,6 @@ include("header_brainsto.php");
       bottom: 10px;
   }
 </style>
-
-
-<script src="js/jquery-3.4.1.js"></script>
-
-<script>
-
-    function timeoutStep(){
-        setTimeout(function (){
-            if($("#chrono").val()>0){
-                $("#chrono").html(temp-1);
-                timeoutStep();
-            }
-        },1000);
-    }
-
-    function start(counter){
-        if(counter > 0){
-            setTimeout(function(){
-                counter--;
-                $("#chrono").html(counter);
-                start(counter);
-            }, 1000);
-        }
-        else {
-            //mettre l'ajax
-        }
-    }
-    $(document).ready(function() {
-        start(11);
-    });
-</script>
 
 
 

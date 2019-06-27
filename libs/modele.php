@@ -249,3 +249,13 @@ function getMessages($idBrainsto){
     $SQL = "SELECT user_username, msg_contenu FROM message JOIN user ON msg_auteur_id=user_id WHERE msg_brainsto_id='$idBrainsto'";
     return parcoursRs(SQLSelect($SQL));
 }
+
+/** Renvoie l'id de la card associé à l'utilisateur $idUser sur $idBrainsto
+ * @param $idUser
+ * @param $idBrainsto
+ * @return false|string
+ */
+function getCardFromUB($idUser, $idBrainsto){
+    $SQL = "SELECT card_id FROM card where card_auteur_id=$idUser AND card_brainsto_id=$idBrainsto";
+    return SQLGetChamp($SQL);
+}

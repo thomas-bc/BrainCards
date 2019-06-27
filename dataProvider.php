@@ -142,23 +142,22 @@ if ($variable = valider("variable"))
                 }
             }
             break;
+
+
+        case "cycleStep": //
+        if($idBrainsto = valider("idBrainstoCourant","SESSION")) {
+            if($idUser = valider("idUser", "SESSION")) {
+                if($idCardCourant = valider("idCardCourant", "SESSION")) {
+                    //echo valider("cardHTML");
+                    majHtmlCard($idCardCourant, valider("cardHTML"));
+                }
+            }
+        }
+
+            break;
     }
 }
 
-
-
-// surveiller le lancement du brainsto
-if ($variable2 = valider("variable2"))
-{
-
-    $idBrainsto = $_SESSION["idBrainstoCourant"];
-    $brainstoLance = nbCardBrainsto($idBrainsto);
-
-    $data["goToStep"] = ($brainstoLance > 0);
-
-    echo json_encode($data);
-
-}
 
 
 

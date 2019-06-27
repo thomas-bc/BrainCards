@@ -119,9 +119,14 @@ if ($action = valider("action"))
             }
             break;
 
-        case "goToStep":
-            deb("step");
-            $qs = "?view=step";
+        case "goToFirstStep":
+            if($idUser=valider("idUser","SESSION")) {
+                if ($idBrainsto = valider("idBrainstoCourant", "SESSION")) {
+                    setUserReady($idUser, 0);
+                    $_SESSION["idCardCourant"]=getCardFromUB($idUser, $idBrainsto);
+                    $qs = "?view=step";
+                    }
+            }
             break;
 
     }
