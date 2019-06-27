@@ -268,9 +268,27 @@ $isMaster = isMaster($idBrainsto, $idUser);
                 </div>
 
                 <div id="divLaunchBrainsto">
-                    <input id="launchBrainsto" class="button" type="submit" name="action" value="Lancer le Brainsto" />
+                    <input id="launchBrainsto" class="button" value="Lancer le Brainsto !" type="button" />
                 </div>
 
+                  <script>
+                    $("#launchBrainsto").click(function() {
+                            console.log("click");
+                            $.ajax({
+                                "url": "dataProvider.php",
+                                "data": {variable:"lancerBrainsto"},
+                                "type": "GET",
+                                "success": function(){
+                                    console.log("ok j'ai cliqué");
+                                },
+                                "error": function () {
+                                    console.log("erreur lors du lancement");
+                                }
+                            });
+
+                        }
+                    );
+                </script>
             </div>
 
         </form>
@@ -300,6 +318,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
             <input id="btnReady" class="button" type="submit" name="action" value="I'm Ready !" />
         </form>
     </div>
+
 
 </div>
 

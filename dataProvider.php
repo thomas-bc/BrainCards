@@ -74,7 +74,19 @@ if ($variable = valider("variable"))
                 }
             }
             echo "";
+            break;
 
+
+        case "lancerBrainsto": //ne va en fait que créer les cards du brainsto, le chargement de la page se fait par requête asynchrone
+            if($idBrainsto = valider("idBrainstoCourant","SESSION")){
+                if ($idUser = valider("idUser", "SESSION")) {
+                    $lesParticipants = getListUser($idBrainsto);
+                    foreach ($lesParticipants as $participant){
+                        createCard($idBrainsto, $participant["user_id"]);
+                    }
+                }
+            }
+            break;
     }
 }
 // On écrit seulement après cette entête
