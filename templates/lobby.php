@@ -354,7 +354,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
 
 
     <form action="controleur.php" method="GET">
-        <input id="rejoindreFirstStep" type="submit" name="action" value="goToStep"  />
+        <input id="rejoindreFirstStep" type="submit" name="action" value="goToFirstStep"  />
     </form>
 
 </div>

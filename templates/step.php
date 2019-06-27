@@ -20,7 +20,109 @@ include("header_brainsto.php");
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+<!----------- CYCLE FIN STEP  ---------------->
+<script src="js/jquery-3.4.1.js"></script>
+
+
+<?php //on récupère les infos du brainsto par la session
+$idBrainsto = $_SESSION["idBrainstoCourant"];
+
+$nbTours = getChamp('br_nb_tours', 'brainstorm', 'br_id', $idBrainsto);
+$timeByStep = getChamp('br_timer_tour', 'brainstorm', 'br_id', $idBrainsto);
+$numEtape = valider("numEtape");
+
+?>
+<script>
+
+    var nbTours = <?php echo $nbTours;?>;
+    var timeByStep = <?php echo $timeByStep;?>;
+    var numEtape = <?php echo $timeByStep;?>;
+
+    function start(counter){
+        if(counter > 0){
+            setTimeout(function(){
+                counter--;
+                $("#chrono").html(counter);
+                start(counter);
+            }, 1000);
+        }
+        else {
+            // console.log($("#container").html());
+            verifToutLeMondeEstPret();
+        }
+    }
+
+    function verifToutLeMondeEstPret(){
+        console.log("veriftoutlemondeenplace");
+        $.ajax({"url":"dataProvider.php",
+            "data":{variable:"userIsReady"},
+            "type":"GET",
+            "success":function(rep){
+                console.log("reponse verif users ready : " + rep);
+                var data = JSON.parse(rep);
+                var usersReady = data["usersReady"];
+                if(usersReady){
+                    console.log("on recharge la page step");
+                    MAJ_STEP();
+                }
+                else{
+                    console.log("on verifie que tout le monde est ready dans 1s");
+                    start(1);
+                }
+            },
+            "error":function(){
+                console.log("erreur lors du chargement des infos dans lobby");
+            }
+        });
+
+    }
+
+    function MAJ_STEP(){
+        console.log("MAJ_STEP");
+        $.ajax({"url":"dataProvider.php",
+            "data":{variable:"cycleStep",
+                cardHTML: $("#container").html()},
+            "type":"POST",
+            "success":function(rep){
+                // console.log('après requête : ' + rep);
+                var data = JSON.parse(rep);
+                console.log("numEtape + 1 : " + (parseInt(numEtape) + 1) );
+                console.log("nbTours : " + parseInt(nbTours) );
+
+                if( (parseInt(numEtape) + 1 >= parseInt(nbTours) )){
+                    console.log("go to final step");
+                }
+                else{
+                    console.log("nouvelle étape");
+                    $("#container").html(data["html"]);
+                    numEtape = numEtape + 1;
+                    start(20);
+                }
+            },
+            "error":function(){
+                console.log("erreur lors du chargement des infos dans lobby");
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        // start(timeByStep*60);
+        console.log("ON READY");
+        start(20);
+    });
+
+</script>
+
+
+
+
+<!--       FIN CYCLE        -->
+
+
+
 <style>
+
 
   /***************** HEADER ***********************/
   #headerBrainsto{
@@ -170,6 +272,10 @@ include("header_brainsto.php");
       bottom: 10px;
   }
 </style>
+
+
+
+
 <script>
     var container;
     var nb_elements = 0;
@@ -358,31 +464,11 @@ include("header_brainsto.php");
         container.appendChild(g);
         nb_elements++;
 
+
     }
 </script>
 
 <script src="js/jquery-3.4.1.js"></script>
-
-<?php //on récupère les infos du brainsto par la session
-$idBrainsto = $_SESSION["idBrainstoCourant"];
-
-$nbTours = getChamp('br_nb_tours', 'brainstorm', 'br_id', $idBrainsto);
-$timeByStep = getChamp('br_timer_tour', 'brainstorm', 'br_id', $idBrainsto);
-
-
-
-
-$card = json_encode(giveNewCard($idBrainsto, $idUser, 3));
-
-?>
-
-
-<script>
-
-
-
-
-</script>
 
 
 <div id="divCard">

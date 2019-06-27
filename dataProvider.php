@@ -5,7 +5,7 @@ session_start();
 include_once("libs/maLibUtils.php");
 include_once("libs/maLibSQL.pdo.php");
 include_once("libs/modele.php");
-
+include_once("libs/maLibSecurisation.php");
 
 
 // faire des if pour chaque requete AJAX
@@ -145,23 +145,54 @@ if ($variable = valider("variable"))
                 }
             }
             break;
+
+
+        case "cycleStep": //
+        if($idBrainsto = valider("idBrainstoCourant","SESSION")) {
+            if($idUser = valider("idUser", "SESSION")) {
+                if($idCardCourant = valider("idCardCourant", "SESSION")) {
+
+                    majHtmlCard($idCardCourant, valider("cardHTML", "POST"));
+
+                    $numEtape = valider("numEtape");
+                    $card = giveNewCard($idBrainsto, $idUser, $numEtape); // on récupère la nouvelle card
+                    $_SESSION["idCardCourant"] = $card["card_id"]; // on sauvegarde son id
+
+//                    $data["html"] = $card;
+//                    $data["numEtape"] = $numEtape;
+
+//                    echo json_encode($data);
+
+                    echo $card["card_objet_html"];
+
+                    $_SESSION["numEtape"] = $numEtape + 1;
+
+                    sleep(5);
+                    setUserReady($idUser, 0);
+                }
+            }
+        }
+            break;
+
+        case "userIsReady": // set l'user à ready et indique si tout le monde est prêt
+            if($idBrainsto = valider("idBrainstoCourant","SESSION"))
+                if ($idUser = valider("idUser", "SESSION")) {
+                    $data["usersReady"] = false;
+                    $usersReady = everybodyIsReady($idBrainsto);
+                    if($usersReady){
+                        $data["usersReady"] = true;
+                    }
+                    else{
+                        setUserReady($idUser, 1);
+                    }
+                    echo json_encode($data);
+                }
+
+
+            break;
     }
 }
 
-
-
-// surveiller le lancement du brainsto
-if ($variable2 = valider("variable2"))
-{
-
-    $idBrainsto = $_SESSION["idBrainstoCourant"];
-    $brainstoLance = nbCardBrainsto($idBrainsto);
-
-    $data["goToStep"] = ($brainstoLance > 0);
-
-    echo json_encode($data);
-
-}
 
 
 

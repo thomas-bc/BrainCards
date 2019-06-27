@@ -216,7 +216,7 @@ function getCardAndPseudo($idBrainstorm){
 }
 
 /**
- * Renvoie l'id de la card d'user $idUser correspondant au brainsto $idBrainsto
+ * Renvoie la card d'user $idUser correspondant au brainsto $idBrainsto
  * @param $idBrainsto
  * @param $idUser
  * @return false|string
@@ -283,4 +283,14 @@ function everybodyIsReady($idBrainsto){
     $SQL = "SELECT COUNT(*) FROM user WHERE USER_brainsto_courant_id='$idBrainsto' AND user_ready = 1";
     $nbUserReady = SQLGetChamp($SQL);
     return ($nbUser==$nbUserReady);
+}
+
+/** Renvoie l'id de la card associé à l'utilisateur $idUser sur $idBrainsto
+ * @param $idUser
+ * @param $idBrainsto
+ * @return false|string
+ */
+function getCardFromUB($idUser, $idBrainsto){
+    $SQL = "SELECT card_id FROM card where card_auteur_id=$idUser AND card_brainsto_id=$idBrainsto";
+    return SQLGetChamp($SQL);
 }

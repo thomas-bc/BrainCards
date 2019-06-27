@@ -49,6 +49,21 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         width:50px;
                     }
 
+    #headerBrainsto #chrono{
+        position:absolute;
+        top:10px;
+        right:10px;
+
+        color: #ED7D31;
+        padding:5px 10px;
+        background-color: white;
+        border:none;
+        border-radius: 5px;
+        font-weight: bold;
+        display:block;
+
+        width:50px;
+    }
 
 </style>
 
@@ -67,7 +82,36 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 <h2 id="titreBrainsto"><?php echo $titre?></h2>
 
 
-<h3 id="sousTitreBrainsto">Accueil du Brainstorm</h3>
+<h3 id="sousTitreBrainsto">
+    <?php
+    if ($view = valider("view")){
+
+        switch($view){
+            case "lobby":
+                echo "Salle d'attente du Brainstorming";
+                break;
+            case "step":
+                echo "Salle d'attente du Step";
+                break;
+            case "step_final":
+                echo "Salle d'attente du Step Final";
+                break;
+        }
+    }
+    ?>
+</h3>
+
+
+    <?php
+        if ($view = valider("view")){
+            if ($view!="lobby"){
+                echo "<div id='chrono'></div>";
+
+            }
+        };
+
+    ?>
+
 
 </div>
 
