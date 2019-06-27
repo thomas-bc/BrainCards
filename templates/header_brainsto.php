@@ -49,7 +49,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         width:50px;
                     }
 
-    #headerBrainsto #tempoStep{
+    #headerBrainsto #chrono{
         position:absolute;
         top:10px;
         right:10px;
