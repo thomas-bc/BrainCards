@@ -74,9 +74,23 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 <script src="js/jquery-3.4.1.js"></script>
 
+<?php //on récupère les infos du brainsto par la session
+
+$idBrainsto = $_SESSION["idBrainstoCourant"];
+
+$cards = getCardAndPseudo($idBrainsto);
+
+?>
+
 <script>
 
+    var cards = <?php echo json_encode($cards); ?> ;
+    var jCard = $("<li>");
+
     $(document).ready(function() {
+
+        setCards();
+
 
         $("li").click(function(){
             $("#bigView").css("display","block");
@@ -91,6 +105,21 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
     });
 
 
+    function setCards(){
+        for(var k = 0 ; k < cards.length ; k++){
+
+            var jCardObject = jCard.clone();
+            jCardObject.text(cards[k].user_username);
+            jCardObject.data("html", cards[k].card_objet_html);
+            jCardObject.on("click", )
+            $("#listeCards").append(jCardObject);
+
+            // console.log("k : " + k);
+            // console.log(jCardObject.data("html"));
+        }
+    }
+
+
 </script>
 
 <div id="stepFinal">
@@ -98,12 +127,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 
     <div id="listCards">
-    <ul>
-        <li>Card de Participant1</li>
-        <li>Card de Participant1</li>
-        <li>Card de Participant1</li>
-        <li>Card de Participant1</li>
-        <li>Card de Participant1</li>
+    <ul id="listeCards">
 
     </ul>
     </div>

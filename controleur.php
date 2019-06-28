@@ -133,7 +133,11 @@ deb("controleur");
                     }
             }
             break;
+        case "goToStepFinal":
 
+            $qs = "?view=step_final";
+
+            break;
     }
 
 }

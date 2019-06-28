@@ -36,6 +36,12 @@ $numEtape = valider("numEtape", "SESSION");
 
 ?>
 
+<style>
+    #rejoindreStepFinal{
+        display: none;
+    }
+</style>
+
 <script>
 
     // TODO rendre le temps d'une step variable avec entrée master (au lieu de 15 s)
@@ -102,12 +108,14 @@ $numEtape = valider("numEtape", "SESSION");
                 console.log('après requête : ' + rep);
                 if( (parseInt(numEtape) >= parseInt(nbTours) )){
                     console.log("go to final step");
+                    document.getElementById("rejoindreStepFinal").click();
+                    // TODO
                 }
                 else{
                     console.log("nouvelle étape");
                     $("#container").html(rep);
                     numEtape = numEtape + 1;
-                    start(15);
+                    start(temp);
                 }
             },
         });
@@ -116,13 +124,11 @@ $numEtape = valider("numEtape", "SESSION");
     $(document).ready(function() {
         // start(timeByStep*60);
         console.log("ON READY");
-        start(15);
+        var temp = 15;
+        start(temp);
     });
 
 </script>
-
-
-
 
 <!--       FIN CYCLE        -->
 
@@ -493,7 +499,16 @@ $numEtape = valider("numEtape", "SESSION");
     </div>
 </div>
 
+<form action="controleur.php" method="GET">
+    <input id="rejoindreStepFinal" type="submit" name="action" value="goToStepFinal"  />
+</form>
 
 <script type="application/javascript">
   init();
 </script>
+
+
+
+
+<!--<canvas width="600" height="400" id="canvas"></canvas> <button id="suppress">btn</button> <div class="draggable_idee" id="0" style="top: 40px; left: 40px; width: 80px; height: 50px;" draggable="true"><p>master</p><button style="position: absolute; left: -10px; bottom: -10px; display: inline-block; border-radius: 50%;">--</button><button style="position: absolute; left: -10px; top: -10px; display: inline-block; border-radius: 50%;"><i class="fa fa-pencil"></i></button><button style="position: absolute; right: -10px; top: -10px; display: inline-block; border-radius: 50%;">X</button></div>-->
+
