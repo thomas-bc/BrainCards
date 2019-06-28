@@ -44,7 +44,7 @@ foreach($messages as $dataMessage) {
     #chat{
         position:fixed;
         background-color: white ;
-        width:300px;
+        width:250px;
         right:0;
         height:100%;
         color:#ED7D31;

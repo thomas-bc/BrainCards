@@ -238,7 +238,7 @@ $isMaster = isMaster($idBrainsto, $idUser);
                     }
                 });
             timeoutLobby();
-        },2000);
+        },1000);
     }
 
 
@@ -285,12 +285,12 @@ $isMaster = isMaster($idBrainsto, $idUser);
 
                     <br />
 
-                    <h3>Temps par tour (min):</h3>
+                    <h3>Temps par tour (s):</h3>
                     <select id="tpsTour" class="selectList" size="1" name="tpsTour" >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>10</option>
+                        <option>20</option>
+                        <option>30</option>
+                        <option>60</option>
+                        <option>120</option>
 
                     </select>
 

@@ -91,7 +91,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
         switch($view){
             case "lobby":
-                echo "Salle d'attente du Brainstorming";
+                echo "Salle d'attente";
                 break;
             case "step":
                 echo "Salle d'attente du Step";

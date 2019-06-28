@@ -104,7 +104,7 @@ $numEtape = valider("numEtape", "SESSION");
                     numEtape = numEtape + 1;
                     // setEtape();
                     console.log("nouvelle étape");
-                    start(20);
+                    start(timeByStep);
                 }
             },
         });
@@ -113,7 +113,7 @@ $numEtape = valider("numEtape", "SESSION");
         // start(timeByStep*60);
         console.log("ON READY");
         var temp = 15;
-        start(20);
+        start(timeByStep);
     });
 
     function afficheLoader(vu){
