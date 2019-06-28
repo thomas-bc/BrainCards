@@ -95,7 +95,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
                 break;
             case "step_final":
                 echo "Salle d'attente du Step Final";
-                echo "<br><a href='/BrainCards/index.php?view=join'>Retourner à l'écran d'accueil</a>";
+                echo "<br><a href='/Projet_final/index.php?view=join'>Retourner à l'écran d'accueil</a>";
                 break;
         }
     }
