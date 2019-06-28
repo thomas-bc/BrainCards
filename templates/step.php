@@ -73,9 +73,8 @@ $numEtape = valider("numEtape", "SESSION");
                         var data = JSON.parse(rep);
                         var usersReady = data["usersReady"];
                         if(usersReady){
-                            console.log("on recharge la page step");
+                            console.log("on actualise la page step");
                             MAJ_STEP();
-                            init();
                         }
                         else{
                             console.log("on verifie que tout le monde est ready dans 1s");
@@ -101,6 +100,7 @@ $numEtape = valider("numEtape", "SESSION");
                     console.log("HTML : "  + rep);
                     $("#container").html(rep);
                     numEtape = numEtape + 1;
+                    // setEtape();
                     console.log("nouvelle étape");
                     start(15);
                 }
@@ -113,6 +113,8 @@ $numEtape = valider("numEtape", "SESSION");
         var temp = 15;
         start(15);
     });
+
+
 </script>
 
 <!--       FIN CYCLE        -->
@@ -442,6 +444,14 @@ $numEtape = valider("numEtape", "SESSION");
         container.appendChild(g);
         nb_elements++;
     }
+
+
+    function getNb(){
+        return parseInt($("#nbElement").text());
+    }
+    function setNb(){
+        $("#nbElement").text( String( getNb() +1) );
+    }
 </script>
 
 <!--<script src="js/jquery-3.4.1.js"></script>-->
@@ -471,6 +481,7 @@ $numEtape = valider("numEtape", "SESSION");
 <form action="controleur.php" method="GET">
     <input id="rejoindreStepFinal" type="submit" name="action" value="goToStepFinal"  />
 </form>
+
 
 <script type="application/javascript">
     init();
