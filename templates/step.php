@@ -34,25 +34,12 @@ $nbTours = getChamp('br_nb_tours', 'brainstorm', 'br_id', $idBrainsto);
 $timeByStep = getChamp('br_timer_tour', 'brainstorm', 'br_id', $idBrainsto);
 $numEtape = valider("numEtape", "SESSION");
 
-//echo "lhvjvkuqzrrrrrrrrrrrrrrrrrrrgvk :  " . giveNewCard($idBrainsto, $idUser, 1);
-//echo getChamp('card_objet_html', 'card', 'card_id', 36);
-//echo "numetape : " . $numEtape;
-//echo "idcard courante : " . valider("idCardCourant");
-//echo "nbTours : " . $nbTours;
-//echo "id b : " . $idBrainsto;
-
-echo json_encode(getListUser($idBrainsto));
-echo "id User : " . $idUser;
-//echo "id ma card :  " . giveNewCard($idBrainsto, $idUser, 1);
-
-echo "card : " . json_encode(giveNewCard($idBrainsto, $idUser, 1));
-
-echo "id card : " .getIdCardFromUser($idBrainsto, 17);
-
-echo print_r(getChamp('card_objet_html', 'card', 'card_id', 65));
 ?>
 
 <script>
+
+    // TODO rendre le temps d'une step variable avec entrée master (au lieu de 15 s)
+
     var nbTours = <?php echo $nbTours;?>;
     var timeByStep = <?php echo $timeByStep;?>;
     var numEtape = <?php echo $numEtape;?>;
@@ -65,61 +52,67 @@ echo print_r(getChamp('card_objet_html', 'card', 'card_id', 65));
             }, 1000);
         }
         else {
-            // console.log($("#container").html());
-            postHTML_verifToutLeMondeReady();
+            finDuTemps();
         }
     }
-    function postHTML_verifToutLeMondeReady(){
-        console.log("veriftoutlemondeenplace");
+
+    function finDuTemps(){
+
         $.ajax({"url":"dataProvider.php",
-            "data":{variable:"userIsReady",
+            "data":{variable:"postHTML",
                 cardHTML: $("#container").html()},
             "type":"POST",
-            "success":function(rep){
-                console.log("reponse verif users ready : " + rep);
-                var data = JSON.parse(rep);
-                var usersReady = data["usersReady"];
-                if(usersReady){
-                    console.log("on recharge la page step");
-                    MAJ_STEP();
-                }
-                else{
-                    console.log("on verifie que tout le monde est ready dans 1s");
-                    start(1);
-                }
+            "success":function(){
+                console.log("postHTML");
+                verifUsers();
             },
-            "error":function(){
-                console.log("erreur lors du chargement des infos dans lobby");
-            }
         });
+
     }
+
+    function verifUsers(){
+        setTimeout(function(){
+            $.ajax({"url":"dataProvider.php",
+                "data":{variable:"userReady"},
+                "type":"GET",
+                "success":function(rep){
+                    console.log("reponse verif users ready : " + rep);
+                    var data = JSON.parse(rep);
+                    var usersReady = data["usersReady"];
+                    if(usersReady){
+                        console.log("on recharge la page step");
+                        MAJ_STEP();
+                    }
+                    else{
+                        console.log("on verifie que tout le monde est ready dans 1s");
+                        verifUsers();
+                    }
+                }
+                }
+            );
+        }, 1000);
+    }
+
     function MAJ_STEP(){
         console.log("MAJ_STEP");
         $.ajax({"url":"dataProvider.php",
-            "data":{variable:"cycleStep",
-                cardHTML: $("#container").html()},
-            "type":"POST",
+            "data":{variable:"majStep"},
+            "type":"GET",
             "success":function(rep){
                 console.log('après requête : ' + rep);
-                // var data = JSON.parse(rep);
-                // console.log("numEtape + 1 : " + (parseInt(numEtape) + 1) );
-                // console.log("nbTours : " + parseInt(nbTours) );
-                if( (parseInt(numEtape) > parseInt(nbTours) )){
+                if( (parseInt(numEtape) >= parseInt(nbTours) )){
                     console.log("go to final step");
                 }
                 else{
                     console.log("nouvelle étape");
                     $("#container").html(rep);
-                    // $("#container").html(data["html"]);
                     numEtape = numEtape + 1;
                     start(15);
                 }
             },
-            "error":function(){
-                console.log("erreur lors du chargement des infos dans lobby");
-            }
         });
     }
+
     $(document).ready(function() {
         // start(timeByStep*60);
         console.log("ON READY");
