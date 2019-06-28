@@ -181,7 +181,14 @@ $_SESSION["idBrainstoCourant"] = null;
     #btnDeconnexion:hover{
         cursor:pointer;
     }
+    #logo{
+        max-height: 105px;
+        width: auto;
 
+        position:absolute;
+        top:20px;
+        right:50px;
+    }
 </style>
 
 <script src="js/jquery-3.4.1.js"></script>
@@ -266,6 +273,7 @@ $_SESSION["idBrainstoCourant"] = null;
 <!-- FIN PARTIE HEADER -->
 
 
+<img id = "logo" src = "res/logo_sans_fond.png">
 
 <!-- PARTIE "MES BRAINSTOS" -->
 

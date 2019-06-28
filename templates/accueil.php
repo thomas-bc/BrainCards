@@ -115,6 +115,14 @@ $tentative = valider("tentative");
         display:none;
     }
 
+    #logo{
+        max-height: 105px;
+        width: auto;
+
+        position:absolute;
+        top:20px;
+        left:50px;
+    }
 
 </style>
 
@@ -158,6 +166,7 @@ $tentative = valider("tentative");
 
 <h1 id="tite">BrainCards</h1>
 
+<img id = "logo" src = "res/logo_sans_fond.png">
 
 <div id="hautPage">
 
