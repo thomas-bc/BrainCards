@@ -12,8 +12,8 @@ if ($action = valider("action"))
     ob_start();
 deb("controleur");
     switch($action) {
-        case "versStep":
-            $qs = "?view=step";
+        case "versStep_final":
+            $qs = "?view=step_final";
             break;
         case "accueil" :
             $qs = "?view=accueil";
@@ -83,8 +83,14 @@ deb("controleur");
 
         break;
 
-        case "Mes Brainsto's":
-            break;
+        case "MesBrainstos":
+            if($idUser=valider("idUser","SESSION")) {
+                if ($codeMesBrainstos = valider("codeMesBrainstos")) {
+                    rejoindreMesBraintos($idUser, $codeMesBrainstos);
+                    $qs = "?view=step_final";
+                }
+            }
+                break;
 
         case "Rejoindre":
             if($idUser=valider("idUser","SESSION")){

@@ -40,3 +40,7 @@ h2{
     cursor:pointer;
     background-color:#e5e5e5;
 }
+
+.hover:hover{
+    cursor:pointer;
+}

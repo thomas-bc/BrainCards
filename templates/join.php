@@ -90,6 +90,14 @@ $_SESSION["idBrainstoCourant"] = null;
 
     }
 
+    #mesBrainstos ul li:hover{
+        cursor:pointer;
+    }
+
+    #mesBrainstos ul li p{
+        display:inline;
+    }
+
     #formJoin{
         margin-top:0;
     }
@@ -214,6 +222,15 @@ $_SESSION["idBrainstoCourant"] = null;
         }
 
 
+
+        $("#mesBrainstos li").click(function(){
+            $("#btnMesBrainstos").val($(this).attr("id"));
+
+            // console.log($(this).attr("id"));
+
+            $("#formMesBrainstos").submit();
+        });
+
     })
 
 
@@ -236,19 +253,29 @@ $_SESSION["idBrainstoCourant"] = null;
 
 <div id="mesBrainstos">
 
-    <p id="aucunBrainsto">Désolé, pour le moment
-        vous n'avez participé à aucun brainsto</p>
+    <form  id="formMesBrainstos" action="controleur.php?" method="GET">
 
-    <ul id="listeMesBrainstos">
+        <input id="btnMesBrainstos" type="hidden"  name="codeMesBrainstos"/>
+        <input id="btnMesBrainstos" type="hidden"  name="action" value="MesBrainstos"/>
+
+
+        <ul id="listeMesBrainstos">
+
         <?php
-        $tab_brainsto = getMesBrainstorms($_SESSION["idUser"]); //On récupère les brainstorms de l'user courant dans une table $tab_brainsto
-        foreach ($tab_brainsto as $brainsto){
-                echo "<li> <a href='controleur.php?action=versStep'>" . $brainsto["br_titre"] . "</a>
-                <p>" . "code (" . $brainsto["br_code"] . ")" . "</p></li>"; //on affiche les brainsto de l'utilisateur
+            $tab_brainsto = getMesBrainstorms($_SESSION["idUser"]); //On récupère les brainstorms de l'user courant dans une table $tab_brainsto
+            if (sizeof($tab_brainsto)==0){
+                echo "<p>Désolé, pour le moment vous n'avez participé à aucun brainsto</p>";
             }
+            else {
+                foreach ($tab_brainsto as $brainsto){
+                    echo "<li id='".$brainsto['br_code']."'>".$brainsto['br_titre']." (#".$brainsto['br_code'].")</li>";
+                }
+            }
+
         ?>
 
-    </ul>
+        </ul>
+    </form>
     <!-- Ici on a ajouté tous les brainstormings liés à un utilisateur -->
 
 </div>

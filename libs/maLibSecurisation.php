@@ -118,6 +118,16 @@ function creerBrainsto($idMaster, $titre, $description){
     return $idBrainstoCourant;
 }
 
+/** Crée une variable de session avec l'$idBrainstoCourant du $codeBrainstoCourant pour le user d'id $idUser
+ * @param $idUser
+ * @param $codeBrainstoCourant
+ */
+function rejoindreMesBraintos($idUser, $codeBrainstoCourant){
+    $idBrainstoCourant=getChamp('br_id','brainstorm','br_code', $codeBrainstoCourant);
+
+    $_SESSION["idBrainstoCourant"] = $idBrainstoCourant;
+    setUserBrainsto($idBrainstoCourant, $idUser);
+}
 
 /**
  * Renvoie la card que verra l'user $idUser dans le brainsto $idBrainsto à l'étape $numEtape
