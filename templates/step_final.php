@@ -82,6 +82,7 @@ $cards = getCardAndPseudo($idBrainsto);
 
 ?>
 
+
 <script>
 
     var cards = <?php echo json_encode($cards); ?> ;
@@ -111,7 +112,10 @@ $cards = getCardAndPseudo($idBrainsto);
             var jCardObject = jCard.clone();
             jCardObject.text(cards[k].user_username);
             jCardObject.data("html", cards[k].card_objet_html);
-            jCardObject.on("click", )
+            jCardObject.on("click", function(){
+                console.log("on clique sur card");
+                $("cardView").html("<p>svqvr</p>");
+            });
             $("#listeCards").append(jCardObject);
 
             // console.log("k : " + k);
@@ -121,6 +125,161 @@ $cards = getCardAndPseudo($idBrainsto);
 
 
 </script>
+
+
+
+<style>
+
+
+    /***************** HEADER ***********************/
+    #headerBrainsto{
+        right:0;
+    }
+    /*****************STEP ***************************/
+    body{
+        overflow:hidden;
+    }
+    #divCard{
+        position:absolute;
+        top:120px;
+        width:99%;
+    }
+    #divCard h2{
+        margin:0;
+        color:#ED7D31;
+        font-size:1.75em;
+        margin-top:20px;
+        margin-bottom:20px;
+    }
+    /*************** INTERIEUR CARD *******************/
+    .draggable_idee
+    {
+        position:  absolute;
+        height: 50px;
+        left : 40px;
+        top : 40px;
+        width: 80px;
+        display:table;
+        vertical-align: middle;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        border-radius: 4px;
+        color:white;
+        background-color: #444444;
+        padding:5px;
+
+    }
+    .draggable_img
+    {
+        left : 40px;
+        top : 40px;
+        position:  absolute;
+        height: 50px;
+        width: 80px;
+        display:table;
+        vertical-align: middle;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        color:white;
+        background-color: #629dfc;
+        padding:5px;
+
+    }
+    .draggable_url
+    {
+        left : 40px;
+        top : 40px;
+        position:  absolute;
+        height: 50px;
+        width: 80px;
+        display:table;
+        vertical-align: middle;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        color:white;
+        background-color: #68768c;
+        padding:5px;
+    }
+    #container{
+        width: 600px;
+        height: 400px;
+        border-radius: 30px;
+        display:inline-block;
+        background-color: white;
+
+    }
+    body{
+        display: block;
+        margin: 0px;
+    }
+    #container_elements{
+        height: 300px;
+        width: 120px;
+        display: table;
+        margin-left: 30px;
+        border-radius: 10px;
+        background-color: white;
+
+    }
+    .wrapper{
+        align-items: center;
+        display: flex;
+        height: 100%;
+        width: 100%;
+        margin: 30px;
+    }
+    .menu_item{
+        height: 50px;
+        width: 80px;
+        display:table;
+        line-height: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        color:white;
+    }
+    #Idée{
+        background-color: #444444;
+    }
+    #Image{
+        background-color: #629dfc;
+    }
+    #URL{
+        background-color: #68768c;
+    }
+    .titre{
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        color: orangered;
+    }
+    #canvas{
+        border-radius: inherit;
+        background-color: white;
+    }
+    #suppress{
+        display:none;
+        position: absolute;
+
+    }
+    .image{
+        position:absolute;
+        width: 150px;
+        height: 100px;
+        left:10px;
+        bottom: 10px;
+    }
+</style>
+
 
 <div id="stepFinal">
 

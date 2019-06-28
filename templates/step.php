@@ -66,7 +66,7 @@ $numEtape = valider("numEtape", "SESSION");
 
         $.ajax({"url":"dataProvider.php",
             "data":{variable:"postHTML",
-                cardHTML: $("#container").html()},
+                cardHTML: $("#superContainer").html()},
             "type":"POST",
             "success":function(){
                 console.log("postHTML");
@@ -109,13 +109,13 @@ $numEtape = valider("numEtape", "SESSION");
                 if( (parseInt(numEtape) >= parseInt(nbTours) )){
                     console.log("go to final step");
                     document.getElementById("rejoindreStepFinal").click();
-                    // TODO
                 }
                 else{
-                    console.log("nouvelle étape");
-                    $("#container").html(rep);
+                    console.log("HTML : "  + rep);
+                    $("#superContainer").html(rep);
                     numEtape = numEtape + 1;
-                    start(temp);
+                    console.log("nouvelle étape");
+                    start(15);
                 }
             },
         });
@@ -125,7 +125,7 @@ $numEtape = valider("numEtape", "SESSION");
         // start(timeByStep*60);
         console.log("ON READY");
         var temp = 15;
-        start(temp);
+        start(15);
     });
 
 </script>
@@ -486,10 +486,14 @@ $numEtape = valider("numEtape", "SESSION");
 
 <div id="divCard">
     <div class="wrapper">
-        <div id="container" ondragover="drag_over(event)" ondrop="drop(event)" onclick="click_canvas(event)">
-            <canvas id="canvas" width="600" height="400"></canvas>
-            <button id="suppress">btn</button>
+
+        <div id="superContainer">
+            <div id="container" ondragover="drag_over(event)" ondrop="drop(event)" onclick="click_canvas(event)">
+                <canvas id="canvas" width="600" height="400"></canvas>
+                <button id="suppress">btn</button>
+            </div>
         </div>
+
         <div id="container_elements">
             <div class="titre"><h2>Outils</h2></div>
             <div class="menu_item" id="Idée" onclick="create(event)"><p>Idée</p></div>
