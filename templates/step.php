@@ -10,11 +10,7 @@ if( !($idUser = estConnecte()) ){
     header("Location:".dirname($_SERVER[PHP_SELF])."/index.php?view=accueil");
     die("");
 }
-
-
-
 include("header_brainsto.php");
-
 ?>
 
 <link rel="stylesheet" href="css/cssCommun.css">
@@ -27,13 +23,10 @@ include("header_brainsto.php");
 
 
 <?php //on récupère les infos du brainsto par la session
-
 $idBrainsto = $_SESSION["idBrainstoCourant"];
-
 $nbTours = getChamp('br_nb_tours', 'brainstorm', 'br_id', $idBrainsto);
 $timeByStep = getChamp('br_timer_tour', 'brainstorm', 'br_id', $idBrainsto);
 $numEtape = valider("numEtape", "SESSION");
-
 ?>
 
 <style>
@@ -43,9 +36,7 @@ $numEtape = valider("numEtape", "SESSION");
 </style>
 
 <script>
-
     // TODO rendre le temps d'une step variable avec entrée master (au lieu de 15 s)
-
     var nbTours = <?php echo $nbTours;?>;
     var timeByStep = <?php echo $timeByStep;?>;
     var numEtape = <?php echo $numEtape;?>;
@@ -61,44 +52,40 @@ $numEtape = valider("numEtape", "SESSION");
             finDuTemps();
         }
     }
-
     function finDuTemps(){
-
         $.ajax({"url":"dataProvider.php",
             "data":{variable:"postHTML",
-                cardHTML: $("#superContainer").html()},
+                cardHTML: $("#container").html()},
             "type":"POST",
             "success":function(){
                 console.log("postHTML");
                 verifUsers();
             },
         });
-
     }
-
     function verifUsers(){
         setTimeout(function(){
             $.ajax({"url":"dataProvider.php",
-                "data":{variable:"userReady"},
-                "type":"GET",
-                "success":function(rep){
-                    console.log("reponse verif users ready : " + rep);
-                    var data = JSON.parse(rep);
-                    var usersReady = data["usersReady"];
-                    if(usersReady){
-                        console.log("on recharge la page step");
-                        MAJ_STEP();
+                    "data":{variable:"userReady"},
+                    "type":"GET",
+                    "success":function(rep){
+                        console.log("reponse verif users ready : " + rep);
+                        var data = JSON.parse(rep);
+                        var usersReady = data["usersReady"];
+                        if(usersReady){
+                            console.log("on recharge la page step");
+                            MAJ_STEP();
+                            init();
+                        }
+                        else{
+                            console.log("on verifie que tout le monde est ready dans 1s");
+                            verifUsers();
+                        }
                     }
-                    else{
-                        console.log("on verifie que tout le monde est ready dans 1s");
-                        verifUsers();
-                    }
-                }
                 }
             );
         }, 1000);
     }
-
     function MAJ_STEP(){
         console.log("MAJ_STEP");
         $.ajax({"url":"dataProvider.php",
@@ -112,7 +99,7 @@ $numEtape = valider("numEtape", "SESSION");
                 }
                 else{
                     console.log("HTML : "  + rep);
-                    $("#superContainer").html(rep);
+                    $("#container").html(rep);
                     numEtape = numEtape + 1;
                     console.log("nouvelle étape");
                     start(15);
@@ -120,14 +107,12 @@ $numEtape = valider("numEtape", "SESSION");
             },
         });
     }
-
     $(document).ready(function() {
         // start(timeByStep*60);
         console.log("ON READY");
         var temp = 15;
         start(15);
     });
-
 </script>
 
 <!--       FIN CYCLE        -->
@@ -135,155 +120,148 @@ $numEtape = valider("numEtape", "SESSION");
 
 
 <style>
-
-
-  /***************** HEADER ***********************/
-  #headerBrainsto{
-      right:0;
-  }
-  /*****************STEP ***************************/
-  body{
-      overflow:hidden;
-  }
-  #divCard{
-      position:absolute;
-      top:120px;
-      width:99%;
-  }
-  #divCard h2{
-      margin:0;
-      color:#ED7D31;
-      font-size:1.75em;
-      margin-top:20px;
-      margin-bottom:20px;
-  }
-  /*************** INTERIEUR CARD *******************/
-  .draggable_idee
-  {
-      position:  absolute;
-      height: 50px;
-      left : 40px;
-      top : 40px;
-      width: 80px;
-      display:table;
-      vertical-align: middle;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-      border-radius: 4px;
-      color:white;
-      background-color: #444444;
-      padding:5px;
-
-  }
-  .draggable_img
-  {
-      left : 40px;
-      top : 40px;
-      position:  absolute;
-      height: 50px;
-      width: 80px;
-      display:table;
-      vertical-align: middle;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-      border-radius: 4px;
-      margin-bottom: 20px;
-      color:white;
-      background-color: #629dfc;
-      padding:5px;
-
-  }
-  .draggable_url
-  {
-      left : 40px;
-      top : 40px;
-      position:  absolute;
-      height: 50px;
-      width: 80px;
-      display:table;
-      vertical-align: middle;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-      border-radius: 4px;
-      margin-bottom: 20px;
-      color:white;
-      background-color: #68768c;
-      padding:5px;
-  }
-  #container{
-      width: 600px;
-      height: 400px;
-      border-radius: 30px;
-      display:inline-block;
-      background-color: white;
-
-  }
-  body{
-      display: block;
-      margin: 0px;
-  }
-  #container_elements{
-      height: 300px;
-      width: 120px;
-      display: table;
-      margin-left: 30px;
-      border-radius: 10px;
-      background-color: white;
-
-  }
-  .wrapper{
-      align-items: center;
-      display: flex;
-      height: 100%;
-      width: 100%;
-      margin: 30px;
-  }
-  .menu_item{
-      height: 50px;
-      width: 80px;
-      display:table;
-      line-height: 50px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-      border-radius: 4px;
-      margin-bottom: 20px;
-      color:white;
-  }
-  #Idée{
-      background-color: #444444;
-  }
-  #Image{
-      background-color: #629dfc;
-  }
-  #URL{
-      background-color: #68768c;
-  }
-  .titre{
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-      color: orangered;
-  }
-  #canvas{
-      border-radius: inherit;
-      background-color: white;
-  }
-  #suppress{
-      display:none;
-      position: absolute;
-
-  }
-  .image{
-      position:absolute;
-      width: 150px;
-      height: 100px;
-      left:10px;
-      bottom: 10px;
-  }
+    /***************** HEADER ***********************/
+    #headerBrainsto{
+        right:0;
+    }
+    /*****************STEP ***************************/
+    body{
+        overflow:hidden;
+    }
+    #divCard{
+        position:absolute;
+        top:120px;
+        width:99%;
+    }
+    #divCard h2{
+        margin:0;
+        color:#ED7D31;
+        font-size:1.75em;
+        margin-top:20px;
+        margin-bottom:20px;
+    }
+    /*************** INTERIEUR CARD *******************/
+    .draggable_idee
+    {
+        position:  absolute;
+        height: 50px;
+        left : 40px;
+        top : 40px;
+        width: 80px;
+        display:table;
+        vertical-align: middle;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        border-radius: 4px;
+        color:white;
+        background-color: #444444;
+        padding:5px;
+    }
+    .draggable_img
+    {
+        left : 40px;
+        top : 40px;
+        position:  absolute;
+        height: 50px;
+        width: 80px;
+        display:table;
+        vertical-align: middle;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        color:white;
+        background-color: #629dfc;
+        padding:5px;
+    }
+    .draggable_url
+    {
+        left : 40px;
+        top : 40px;
+        position:  absolute;
+        height: 50px;
+        width: 80px;
+        display:table;
+        vertical-align: middle;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        color:white;
+        background-color: #68768c;
+        padding:5px;
+    }
+    #container{
+        width: 600px;
+        height: 400px;
+        border-radius: 30px;
+        display:inline-block;
+        background-color: white;
+    }
+    body{
+        display: block;
+        margin: 0px;
+    }
+    #container_elements{
+        height: 300px;
+        width: 120px;
+        display: table;
+        margin-left: 30px;
+        border-radius: 10px;
+        background-color: white;
+    }
+    .wrapper{
+        align-items: center;
+        display: flex;
+        height: 100%;
+        width: 100%;
+        margin: 30px;
+    }
+    .menu_item{
+        height: 50px;
+        width: 80px;
+        display:table;
+        line-height: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        color:white;
+    }
+    #Idée{
+        background-color: #444444;
+    }
+    #Image{
+        background-color: #629dfc;
+    }
+    #URL{
+        background-color: #68768c;
+    }
+    .titre{
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        color: orangered;
+    }
+    #canvas{
+        border-radius: inherit;
+        background-color: white;
+    }
+    #suppress{
+        display:none;
+        position: absolute;
+    }
+    .image{
+        position:absolute;
+        width: 150px;
+        height: 100px;
+        left:10px;
+        bottom: 10px;
+    }
 </style>
 
 
@@ -305,9 +283,7 @@ $numEtape = valider("numEtape", "SESSION");
         ctx = canvas.getContext("2d");
     }
     function maj(){
-
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
         tableLink.forEach(function(item){
             ctx.beginPath();
             ctx.moveTo(parseInt(document.getElementById(item[0]).style.left,10),
@@ -328,16 +304,12 @@ $numEtape = valider("numEtape", "SESSION");
             console.log("click");
             if(link!=-1){link=-1;container.style.cursor="auto";}
         }
-
     }
-
     function drag_start(event) {
         var style = window.getComputedStyle(event.target, null);
         var str = (parseInt(style.getPropertyValue("left")) - event.clientX) + ',' + (parseInt(style.getPropertyValue("top")) - event.clientY) + ',' + event.target.id;
-
         event.dataTransfer.setData("Text", str);
     }
-
     function drop(event) {
         var offset = event.dataTransfer.getData("Text").split(',');
         var dm = document.getElementById(offset[2]);
@@ -356,7 +328,6 @@ $numEtape = valider("numEtape", "SESSION");
             if(selected!=-1){document.getElementById(""+selected).children[1].style.display="none";
                 document.getElementById(""+selected).children[2].style.display="none";
                 document.getElementById(""+selected).children[3].style.display="none";}
-
             selected = this.id;
             if(state_suppress){
                 selected = -1;
@@ -375,7 +346,6 @@ $numEtape = valider("numEtape", "SESSION");
             }
             else{
                 state_link = false;
-
             }
         }
     }
@@ -390,7 +360,6 @@ $numEtape = valider("numEtape", "SESSION");
                 temp.push(tableLink[i]);
         }
         tableLink = temp;
-
     }
     function del(){
         var parent = this.parentElement;
@@ -443,7 +412,6 @@ $numEtape = valider("numEtape", "SESSION");
         g.draggable=true;
         g.ondragstart=drag_start;
         g.onclick=select;
-
         b = document.createElement('button');
         b.style.position="absolute";
         b.style.right="-10px";
@@ -452,7 +420,6 @@ $numEtape = valider("numEtape", "SESSION");
         b.onclick=del;
         b.innerHTML="X";
         b.style.borderRadius="50%";
-
         be = document.createElement('button');
         be.style.position="absolute";
         be.style.left="-10px";
@@ -461,7 +428,6 @@ $numEtape = valider("numEtape", "SESSION");
         be.onclick=edit;
         be.innerHTML="<i class=\"fa fa-pencil\"></i>";
         be.style.borderRadius="50%";
-
         bl = document.createElement('button');
         bl.style.position="absolute";
         bl.style.left="-10px";
@@ -470,14 +436,11 @@ $numEtape = valider("numEtape", "SESSION");
         bl.onclick=setLink;
         bl.innerHTML="--";
         bl.style.borderRadius="50%";
-
         g.appendChild(bl);
         g.appendChild(be);
         g.appendChild(b);
         container.appendChild(g);
         nb_elements++;
-
-
     }
 </script>
 
@@ -488,10 +451,12 @@ $numEtape = valider("numEtape", "SESSION");
     <div class="wrapper">
 
         <div id="superContainer">
+
             <div id="container" ondragover="drag_over(event)" ondrop="drop(event)" onclick="click_canvas(event)">
                 <canvas id="canvas" width="600" height="400"></canvas>
                 <button id="suppress">btn</button>
             </div>
+
         </div>
 
         <div id="container_elements">
@@ -508,11 +473,6 @@ $numEtape = valider("numEtape", "SESSION");
 </form>
 
 <script type="application/javascript">
-  init();
+    init();
 </script>
-
-
-
-
-<!--<canvas width="600" height="400" id="canvas"></canvas> <button id="suppress">btn</button> <div class="draggable_idee" id="0" style="top: 40px; left: 40px; width: 80px; height: 50px;" draggable="true"><p>master</p><button style="position: absolute; left: -10px; bottom: -10px; display: inline-block; border-radius: 50%;">--</button><button style="position: absolute; left: -10px; top: -10px; display: inline-block; border-radius: 50%;"><i class="fa fa-pencil"></i></button><button style="position: absolute; right: -10px; top: -10px; display: inline-block; border-radius: 50%;">X</button></div>-->
 

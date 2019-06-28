@@ -72,7 +72,18 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 </style>
 
+<style>
+    #cardView{
+        padding-top:10px;
+        padding-left:10px;
+    }
+
+</style>
+
+
 <script src="js/jquery-3.4.1.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <?php //on récupère les infos du brainsto par la session
 
@@ -114,9 +125,14 @@ $cards = getCardAndPseudo($idBrainsto);
             jCardObject.data("html", cards[k].card_objet_html);
             jCardObject.on("click", function(){
                 console.log("on clique sur card");
-                $("cardView").html("<p>svqvr</p>");
+                console.log("html : " + $(this).data("html"));
+
+                $("#cardView").html($(this).data("html"));
+                console.log("cardView : " + $("#cardView").html());
             });
             $("#listeCards").append(jCardObject);
+
+
 
             // console.log("k : " + k);
             // console.log(jCardObject.data("html"));
@@ -286,17 +302,20 @@ $cards = getCardAndPseudo($idBrainsto);
 
 
     <div id="listCards">
-    <ul id="listeCards">
+        <ul id="listeCards">
 
-    </ul>
+        </ul>
     </div>
 </div>
 
 
 <div id="bigView">
 
-    <img id="flecheRetour" src="res/flecheRetour.png">
-    <div id="cardView">
+
+    <div id="cardView" >
 
     </div>
+
+    <img id="flecheRetour" src="res/flecheRetour.png">
+
 </div>
