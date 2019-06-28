@@ -118,6 +118,7 @@ function creerBrainsto($idMaster, $titre, $description){
     return $idBrainstoCourant;
 }
 
+
 /**
  * Renvoie la card que verra l'user $idUser dans le brainsto $idBrainsto à l'étape $numEtape
  * @param $idBrainsto
@@ -136,11 +137,11 @@ function giveNewCard($idBrainsto, $idUser, $numEtape){
         }
     }
     $indAutre = ($indexUser + $numEtape )%$nb_user;
-
 //    $card = getCardFromUser($idBrainsto, $users[$indAutre]["user_id"]);
     $card = getIdCardFromUser($idBrainsto, $users[$indAutre]["user_id"]);
     return $card;
 }
+
 
 
 

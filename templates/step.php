@@ -43,16 +43,19 @@ $numEtape = valider("numEtape", "SESSION");
 
 echo json_encode(getListUser($idBrainsto));
 echo "id User : " . $idUser;
-echo "id ma card :  " . giveNewCard($idBrainsto, $idUser, 1);
+//echo "id ma card :  " . giveNewCard($idBrainsto, $idUser, 1);
 
+echo "card : " . json_encode(giveNewCard($idBrainsto, $idUser, 1));
+
+echo "id card : " .getIdCardFromUser($idBrainsto, 17);
+
+echo print_r(getChamp('card_objet_html', 'card', 'card_id', 65));
 ?>
 
 <script>
-
     var nbTours = <?php echo $nbTours;?>;
     var timeByStep = <?php echo $timeByStep;?>;
     var numEtape = <?php echo $numEtape;?>;
-
     function start(counter){
         if(counter > 0){
             setTimeout(function(){
@@ -63,15 +66,15 @@ echo "id ma card :  " . giveNewCard($idBrainsto, $idUser, 1);
         }
         else {
             // console.log($("#container").html());
-            verifToutLeMondeEstPret();
+            postHTML_verifToutLeMondeReady();
         }
     }
-
-    function verifToutLeMondeEstPret(){
+    function postHTML_verifToutLeMondeReady(){
         console.log("veriftoutlemondeenplace");
         $.ajax({"url":"dataProvider.php",
-            "data":{variable:"userIsReady"},
-            "type":"GET",
+            "data":{variable:"userIsReady",
+                cardHTML: $("#container").html()},
+            "type":"POST",
             "success":function(rep){
                 console.log("reponse verif users ready : " + rep);
                 var data = JSON.parse(rep);
@@ -89,9 +92,7 @@ echo "id ma card :  " . giveNewCard($idBrainsto, $idUser, 1);
                 console.log("erreur lors du chargement des infos dans lobby");
             }
         });
-
     }
-
     function MAJ_STEP(){
         console.log("MAJ_STEP");
         $.ajax({"url":"dataProvider.php",
@@ -103,7 +104,6 @@ echo "id ma card :  " . giveNewCard($idBrainsto, $idUser, 1);
                 // var data = JSON.parse(rep);
                 // console.log("numEtape + 1 : " + (parseInt(numEtape) + 1) );
                 // console.log("nbTours : " + parseInt(nbTours) );
-
                 if( (parseInt(numEtape) > parseInt(nbTours) )){
                     console.log("go to final step");
                 }
@@ -112,7 +112,7 @@ echo "id ma card :  " . giveNewCard($idBrainsto, $idUser, 1);
                     $("#container").html(rep);
                     // $("#container").html(data["html"]);
                     numEtape = numEtape + 1;
-                    start(30);
+                    start(15);
                 }
             },
             "error":function(){
@@ -120,11 +120,10 @@ echo "id ma card :  " . giveNewCard($idBrainsto, $idUser, 1);
             }
         });
     }
-
     $(document).ready(function() {
         // start(timeByStep*60);
         console.log("ON READY");
-        start(30);
+        start(15);
     });
 
 </script>

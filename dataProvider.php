@@ -148,40 +148,27 @@ if ($variable = valider("variable"))
 
 
         case "cycleStep": //
-        if($idBrainsto = valider("idBrainstoCourant","SESSION")) {
-            if($idUser = valider("idUser", "SESSION")) {
-                if($idCardCourant = valider("idCardCourant", "SESSION")) {
-
-                    majHtmlCard($idCardCourant, valider("cardHTML", "POST"));
-
-                    $numEtape = valider("numEtape", "SESSION");
-
-
+            if($idBrainsto = valider("idBrainstoCourant","SESSION")) {
+                if($idUser = valider("idUser", "SESSION")) {
+                    if($idCardCourant = valider("idCardCourant", "SESSION")) {
+//                        majHtmlCard($idCardCourant, valider("cardHTML", "POST"));
+                        $numEtape = valider("numEtape", "SESSION");
 //                    $card = giveNewCard($idBrainsto, $idUser, $numEtape); // on récupère la nouvelle card
-
-                    $idCard = giveNewCard($idBrainsto, $idUser, $numEtape); // on récupère la nouvelle card
-                    $nvCardHTML = getChamp('card_objet_html', 'card', 'card_id', $idCard);
-
-                    $_SESSION["idCardCourant"] = $idCard;
-
+                        $idCard = giveNewCard($idBrainsto, $idUser, $numEtape); // on récupère la nouvelle card
+                        $nvCardHTML = getChamp('card_objet_html', 'card', 'card_id', $idCard);
+                        $_SESSION["idCardCourant"] = $idCard;
 //                    $_SESSION["idCardCourant"] = $card["card_id"]; // on sauvegarde son id
-
 //                    $data["html"] = $card;
 //                    $data["numEtape"] = $numEtape;
-
 //                    echo json_encode($data);
-
 //                    echo $card["card_objet_html"];
-
-                    echo $nvCardHTML;
-
-                    $_SESSION["numEtape"] = $numEtape + 1;
-
-                    sleep(3);
-                    setUserReady($idUser, 0);
+                        echo $nvCardHTML;
+                        $_SESSION["numEtape"] = $numEtape + 1;
+                        sleep(3);
+                        setUserReady($idUser, 0);
+                    }
                 }
             }
-        }
             break;
 
         case "userIsReady": // set l'user à ready et indique si tout le monde est prêt
@@ -193,6 +180,8 @@ if ($variable = valider("variable"))
                         $data["usersReady"] = true;
                     }
                     else{
+                        $idCardCourant = valider("idCardCourant", "SESSION");
+                        majHtmlCard($idCardCourant, valider("cardHTML", "POST"));
                         setUserReady($idUser, 1);
                     }
                     echo json_encode($data);
