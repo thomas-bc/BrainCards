@@ -162,6 +162,26 @@ $_SESSION["idBrainstoCourant"] = null;
         margin-top:15px;
     }
 
+    #btnDeconnexion{
+        position:absolute;
+        top:10px;
+        left:10px;
+
+        color: #ED7D31;
+        padding:5px 10px;
+        background-color: white;
+        border:none;
+        border-radius: 5px;
+        font-weight: bold;
+        display:block;
+
+        width:90px;
+    }
+
+    #btnDeconnexion:hover{
+        cursor:pointer;
+    }
+
 </style>
 
 <script src="js/jquery-3.4.1.js"></script>
@@ -283,6 +303,8 @@ $_SESSION["idBrainstoCourant"] = null;
 <!-- FIN PARTIE "MES BRAINSTOS" -->
 
 <p id="bienvenue">Bienvenue !</p>
+
+<a id="btnDeconnexion" href="/BrainCards"> Se déconnecter </a>
 
 
 <!-- PARTIE REJOINDRE UN BRAINSTO GRACE AU CODE BRAINSTO -->
