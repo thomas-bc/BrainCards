@@ -159,7 +159,7 @@ if ($variable = valider("variable"))
 
                         echo $nvCardHTML;
                         $_SESSION["numEtape"] = $numEtape + 1;
-                        sleep(2); // le laisser sinon ça marche pas très bien
+                        sleep(1); // le laisser sinon ça marche pas très bien
                         setUserReady($idUser, 0);
                     }
                 }

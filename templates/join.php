@@ -304,7 +304,7 @@ $_SESSION["idBrainstoCourant"] = null;
 
 <p id="bienvenue">Bienvenue !</p>
 
-<a id="btnDeconnexion" href="/BrainCards"> Se déconnecter </a>
+<a id="btnDeconnexion" href="/Projet_final"> Se déconnecter </a>
 
 
 <!-- PARTIE REJOINDRE UN BRAINSTO GRACE AU CODE BRAINSTO -->
