@@ -226,6 +226,11 @@ function getCardFromUser($idBrainsto, $idUser){
     return parcoursRs(SQLSelect($SQL));
 }
 
+function getIdCardFromUser($idBrainsto, $idUser){
+    $SQL = "SELECT CARD_id FROM card WHERE CARD_brainsto_id='$idBrainsto' AND CARD_auteur_id='$idUser'";
+    return SQLGetChamp($SQL);
+}
+
 /** Renvoie la card d'id $idCard sous la forme d'un tableau associatif
  * @param $idCard
  * @return false|string

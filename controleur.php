@@ -10,7 +10,7 @@ include_once "libs/modele.php";
 if ($action = valider("action"))
 {
     ob_start();
-
+deb("controleur");
     switch($action) {
         case "versStep":
             $qs = "?view=step";
@@ -120,12 +120,16 @@ if ($action = valider("action"))
             break;
 
         case "goToFirstStep":
+            deb("gotofisrstep");
             if($idUser=valider("idUser","SESSION")) {
                 if ($idBrainsto = valider("idBrainstoCourant", "SESSION")) {
                     setUserReady($idUser, 0);
+
                     $_SESSION["idCardCourant"]=getCardFromUB($idUser, $idBrainsto);
                     $_SESSION["numEtape"] = 1;
                     $qs = "?view=step";
+                    deb("in fust");
+
                     }
             }
             break;

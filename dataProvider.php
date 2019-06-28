@@ -154,20 +154,30 @@ if ($variable = valider("variable"))
 
                     majHtmlCard($idCardCourant, valider("cardHTML", "POST"));
 
-                    $numEtape = valider("numEtape");
-                    $card = giveNewCard($idBrainsto, $idUser, $numEtape); // on récupère la nouvelle card
-                    $_SESSION["idCardCourant"] = $card["card_id"]; // on sauvegarde son id
+                    $numEtape = valider("numEtape", "SESSION");
+
+
+//                    $card = giveNewCard($idBrainsto, $idUser, $numEtape); // on récupère la nouvelle card
+
+                    $idCard = giveNewCard($idBrainsto, $idUser, $numEtape); // on récupère la nouvelle card
+                    $nvCardHTML = getChamp('card_objet_html', 'card', 'card_id', $idCard);
+
+                    $_SESSION["idCardCourant"] = $idCard;
+
+//                    $_SESSION["idCardCourant"] = $card["card_id"]; // on sauvegarde son id
 
 //                    $data["html"] = $card;
 //                    $data["numEtape"] = $numEtape;
 
 //                    echo json_encode($data);
 
-                    echo $card["card_objet_html"];
+//                    echo $card["card_objet_html"];
+
+                    echo $nvCardHTML;
 
                     $_SESSION["numEtape"] = $numEtape + 1;
 
-                    sleep(5);
+                    sleep(3);
                     setUserReady($idUser, 0);
                 }
             }

@@ -14,6 +14,7 @@ if( !($idUser = estConnecte()) ){
 
 
 include("header_brainsto.php");
+
 ?>
 
 <link rel="stylesheet" href="css/cssCommun.css">
@@ -26,18 +27,31 @@ include("header_brainsto.php");
 
 
 <?php //on récupère les infos du brainsto par la session
+
 $idBrainsto = $_SESSION["idBrainstoCourant"];
 
 $nbTours = getChamp('br_nb_tours', 'brainstorm', 'br_id', $idBrainsto);
 $timeByStep = getChamp('br_timer_tour', 'brainstorm', 'br_id', $idBrainsto);
-$numEtape = valider("numEtape");
+$numEtape = valider("numEtape", "SESSION");
+
+//echo "lhvjvkuqzrrrrrrrrrrrrrrrrrrrgvk :  " . giveNewCard($idBrainsto, $idUser, 1);
+//echo getChamp('card_objet_html', 'card', 'card_id', 36);
+//echo "numetape : " . $numEtape;
+//echo "idcard courante : " . valider("idCardCourant");
+//echo "nbTours : " . $nbTours;
+//echo "id b : " . $idBrainsto;
+
+echo json_encode(getListUser($idBrainsto));
+echo "id User : " . $idUser;
+echo "id ma card :  " . giveNewCard($idBrainsto, $idUser, 1);
 
 ?>
+
 <script>
 
     var nbTours = <?php echo $nbTours;?>;
     var timeByStep = <?php echo $timeByStep;?>;
-    var numEtape = <?php echo $timeByStep;?>;
+    var numEtape = <?php echo $numEtape;?>;
 
     function start(counter){
         if(counter > 0){
@@ -85,19 +99,20 @@ $numEtape = valider("numEtape");
                 cardHTML: $("#container").html()},
             "type":"POST",
             "success":function(rep){
-                // console.log('après requête : ' + rep);
-                var data = JSON.parse(rep);
-                console.log("numEtape + 1 : " + (parseInt(numEtape) + 1) );
-                console.log("nbTours : " + parseInt(nbTours) );
+                console.log('après requête : ' + rep);
+                // var data = JSON.parse(rep);
+                // console.log("numEtape + 1 : " + (parseInt(numEtape) + 1) );
+                // console.log("nbTours : " + parseInt(nbTours) );
 
-                if( (parseInt(numEtape) + 1 >= parseInt(nbTours) )){
+                if( (parseInt(numEtape) > parseInt(nbTours) )){
                     console.log("go to final step");
                 }
                 else{
                     console.log("nouvelle étape");
-                    $("#container").html(data["html"]);
+                    $("#container").html(rep);
+                    // $("#container").html(data["html"]);
                     numEtape = numEtape + 1;
-                    start(20);
+                    start(30);
                 }
             },
             "error":function(){
@@ -109,7 +124,7 @@ $numEtape = valider("numEtape");
     $(document).ready(function() {
         // start(timeByStep*60);
         console.log("ON READY");
-        start(20);
+        start(30);
     });
 
 </script>
@@ -468,7 +483,7 @@ $numEtape = valider("numEtape");
     }
 </script>
 
-<script src="js/jquery-3.4.1.js"></script>
+<!--<script src="js/jquery-3.4.1.js"></script>-->
 
 
 <div id="divCard">
