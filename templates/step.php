@@ -64,6 +64,7 @@ $numEtape = valider("numEtape", "SESSION");
         });
     }
     function verifUsers(){
+        afficheLoader(true);
         setTimeout(function(){
             $.ajax({"url":"dataProvider.php",
                     "data":{variable:"userReady"},
@@ -92,6 +93,7 @@ $numEtape = valider("numEtape", "SESSION");
             "type":"GET",
             "success":function(rep){
                 console.log('après requête : ' + rep);
+                afficheLoader(false);
                 if( (parseInt(numEtape) >= parseInt(nbTours) )){
                     console.log("go to final step");
                     document.getElementById("rejoindreStepFinal").click();
@@ -114,6 +116,15 @@ $numEtape = valider("numEtape", "SESSION");
         start(15);
     });
 
+    function afficheLoader(vu){
+        console.log("loader");
+        if(vu){
+            $("#loader").css("display", "block");
+        }
+        else{
+            $("#loader").css("display", "none");
+        }
+    }
 
 </script>
 
@@ -264,6 +275,15 @@ $numEtape = valider("numEtape", "SESSION");
         left:10px;
         bottom: 10px;
     }
+    #loader{
+        display:none;
+        width: 100px;
+        height: 100px;
+        position:absolute;
+        bottom: 5px;
+        right:5px;
+    }
+
 </style>
 
 
@@ -482,6 +502,7 @@ $numEtape = valider("numEtape", "SESSION");
     <input id="rejoindreStepFinal" type="submit" name="action" value="goToStepFinal"  />
 </form>
 
+<img id="loader" src="res/ajax-loader.gif">
 
 <script type="application/javascript">
     init();
